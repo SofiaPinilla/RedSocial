@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
+    this.login()
   }
   constructor(private fb: FormBuilder,public userService:UserService, public router: Router,private notificationService: NzNotificationService) {}
 
@@ -33,9 +34,8 @@ export class LoginComponent implements OnInit {
       remember: [true]
     });
   }
-  login(loginForm:NgForm){
-    if(loginForm.valid){
-      const user =loginForm.value;
+  login(){
+      const user =this.validateForm.value;
       this.userService.login(user)
       .subscribe(
         (res:HttpResponse<object>)=>{
@@ -57,5 +57,6 @@ export class LoginComponent implements OnInit {
         console.log(error)
       
       }
-      )}}
+      )
+    }
 }
