@@ -1,22 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const passport = require('passport');
-const {MONGO_URI} =require('../backend/config/keys')
-// const flash = require('connect-flash');
-// const session = require('express-session');
+const { MONGO_URI } = require('../backend/config/keys')
+    // const flash = require('connect-flash');
+    // const session = require('express-session');
 
 const app = express();
 
-// Passport Config
-require('./config/passport')(passport);
+
 
 // DB Config
 const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
-mongoose.connect(MONGO_URI, { useUnifiedTopology: true ,useNewUrlParser: true})
-.then(()=>console.log('conectado a mongoDB con éxito'))
-.catch(err=>console.error(err))
+mongoose.connect(MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+    .then(() => console.log('conectado a mongoDB con éxito'))
+    .catch(err => console.error(err))
 
 
 // Express body parser
@@ -33,9 +31,7 @@ app.use(express.json())
 //   })
 // );
 
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 // Connect flash
 // app.use(flash());
