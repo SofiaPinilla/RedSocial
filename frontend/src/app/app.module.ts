@@ -14,7 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RegisterComponent } from './containers/user/register/register.component';
 import { LoginComponent } from './containers/user/login/login.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 registerLocaleData(en);
 

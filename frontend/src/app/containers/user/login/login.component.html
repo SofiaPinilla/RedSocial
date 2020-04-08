@@ -1,9 +1,9 @@
 <section class="container">
-    <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()" #loginForm="ngForm" (submit)="login(loginForm)">
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input your username!">
                 <nz-input-group nzPrefixIcon="user">
-                    <input formControlName="userName" nz-input placeholder="Username" />
+                    <input formControlName="email" nz-input placeholder="Username" />
                 </nz-input-group>
             </nz-form-control>
         </nz-form-item>
@@ -16,7 +16,7 @@
         </nz-form-item>
         <nz-form-item>
             <nz-form-control>
-                <button nz-button nzType="primary" [disabled]="!validateForm.valid">Log in</button>
+                <button type="submit" nz-button nzType="primary" [disabled]="!validateForm.valid">Log in</button>
             </nz-form-control>
         </nz-form-item>
     </form>

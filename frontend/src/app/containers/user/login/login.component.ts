@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-login',
@@ -7,6 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  public message:string;
+  public successMsg: string;
+  public errorMsg;
 
   validateForm: FormGroup;
 
@@ -16,14 +24,38 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
   }
-
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,public userService:UserService, public router: Router,private notificationService: NzNotificationService) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
+      email: [null, [Validators.required]],
       password: [null, [Validators.required]],
       remember: [true]
     });
   }
+  login(loginForm:NgForm){
+    if(loginForm.valid){
+      const user =loginForm.value;
+      this.userService.login(user)
+      .subscribe(
+        (res:HttpResponse<object>)=>{
+          this.notificationService.success('Conected', res['message'])
+         
+          const admins =['superAdmin','admin','dios'];
+          const redirectRoute = admins.includes(res['user']['role']) ? '/add':'/';
+          this.userService.setUser(res['user']);
+         
+          this.userService.setToken(res['token']);
+        
+          localStorage.setItem('authToken',res['token']);
+          
+          setTimeout(() => this.router.navigate([redirectRoute]) , 1500);
+          console.log(res)
+      },
+      (error: HttpErrorResponse) => {
+       this.notificationService.error( 'Unconnected', error.error.message) ;
+        console.log(error)
+      
+      }
+      )}}
 }
