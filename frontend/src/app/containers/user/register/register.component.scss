@@ -1,0 +1,40 @@
+section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5em;
+    h1 {
+        text-align: center;
+        color: #ea4c89;
+    }
+}
+
+.register {
+    padding: 10px;
+    width: 35%;
+    background-color: #ebe1eb50;
+    border-radius: 0.5em;
+}
+
+.registerContainer {
+    height: 100%;
+    background-image: url('/assets/images/btsdef.jpg');
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.ant-btn-primary {
+    background: #ea4c89;
+    border: none;
+}
+
+img {
+    position: absolute;
+    bottom: 0px;
+}
+
+a {
+    all: unset;
+    color: #ea4c89;
+}
