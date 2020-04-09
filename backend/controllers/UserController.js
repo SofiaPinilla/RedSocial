@@ -1,4 +1,4 @@
-const User = require('../models/user.js');
+const User = require('../models/User.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { jwt_secret } = require('../config/keys.js')
@@ -104,6 +104,7 @@ const UserController = {
     //         res.status(500).send({ message: 'hubo un problema al tratar de desconectarte' })
     //     }
     // }
+
 }
 
 

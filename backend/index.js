@@ -54,6 +54,8 @@ app.use(express.json())
 // Routes
 
 app.use('/users', require('./routes/users.js'));
+app.use('/publications', require('./routes/publications.js'));
+app.use('/comments', require('./routes/comments.js'));
 
 const PORT = process.env.PORT || 3000;
 

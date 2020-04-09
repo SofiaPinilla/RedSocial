@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const ObjectID = require('mongodb').ObjectID
+
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -14,7 +16,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    tokens: []
+    tokens: [],
+
+    PublicationId: ObjectID,
 
 }, { timestamps: true });
 

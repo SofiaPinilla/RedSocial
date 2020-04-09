@@ -15,6 +15,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RegisterComponent } from './containers/user/register/register.component';
 import { LoginComponent } from './containers/user/login/login.component';
 import { HomeComponent } from './containers/home/home.component';
+import { ProfileComponent } from './containers/profile/profile.component';
+import { PublicationsComponent } from './containers/publications/publications.component';
+
 
 
 registerLocaleData(en);
@@ -26,7 +29,10 @@ registerLocaleData(en);
     FooterComponent,
     RegisterComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileComponent,
+    PublicationsComponent,
+   
   ],
   imports: [
     BrowserModule,
