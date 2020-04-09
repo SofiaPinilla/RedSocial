@@ -21,6 +21,11 @@ export class UserService {
       }
     });
   }
+
+  signup(user:object):Observable<any>{
+    return this.httpClient.post('http://localhost:3000/users/register',user);
+  }
+
   logout(token: string){
     return this.httpClient.get('http://localhost:3000/users/logout',{
       headers: {
@@ -28,7 +33,6 @@ export class UserService {
       }
     });
   }
-
   setToken(token: string): void {
     this.token = token;
   }

@@ -6,21 +6,23 @@ section {
     h1 {
         text-align: center;
         color: #ea4c89;
+        padding: 1em;
     }
 }
 
 .register {
     padding: 10px;
-    width: 35%;
-    background-color: #ebe1eb50;
+    width: 40%;
+    height: 65vh;
+    background-color: rgb(245, 245, 245);
     border-radius: 0.5em;
 }
 
 .registerContainer {
     height: 100%;
-    background-image: url('/assets/images/btsdef.jpg');
-    background-size: cover;
-    background-position: bottom;
+    background-image: url('https://i.ya-webdesign.com/images/bts-love-yourself-png-5.png');
+    background-size: contain;
+    background-position: left;
     background-repeat: no-repeat;
 }
 

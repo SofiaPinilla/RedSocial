@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +19,7 @@ export class RegisterComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
+    this.register()
   }
 
   updateConfirmValidator(): void {
@@ -35,16 +40,43 @@ export class RegisterComponent implements OnInit {
     e.preventDefault();
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, public userService: UserService, public router: Router, private notificationService: NzNotificationService) {}
+
+  public message:string;
+  public successMsg: string;
+  public errorMsg;
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       email: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
+      password2: [null, [Validators.required, this.confirmationValidator]],
       name: [null, [Validators.required]],
-      captcha: [null, [Validators.required]],
       agree: [false]
     });
+  }
+  register(){
+    if(this.validateForm.valid){
+      const user =this.validateForm.value;
+      this.userService.signup(user)
+      .subscribe(
+        (res:HttpResponse<object>)=>{
+          this.notificationService.success('Succesfully', res['message'])
+          console.log(res)
+          this.successMsg=res['message'];
+          // setTimeout(() => {
+          //   this.router.navigate(['login'])
+          // }, 2000);
+      },
+      (error: HttpErrorResponse) => {
+        this.notificationService.error( 'Unregistered', error.error.message) ;
+         console.log(error)
+      // (errors: HttpErrorResponse) => {
+      //  this.notificationService.error( 'Unconnected', errors.error.message) ;
+      //   console.log(errors)
+      
+      }
+    )
+    }
   }
 }

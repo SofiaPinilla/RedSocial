@@ -23,18 +23,47 @@ const UserController = {
                 password2
             })
         } else {
-            newUser = new User({...req.body })
-            bcrypt.genSalt(10, (errors, salt) => {
-                bcrypt.hash(newUser.password, salt, (errors, hash) => {
-                    if (errors) throw errors;
-                    newUser.password = hash;
-                    newUser
-                        .save()
-                        .then(user => res.send(user))
-                        .catch(errors => console.log(errors));
-                });
-            })
+            User.findOne({ email: email }).then(user => {
+                if (user) {
+                    res.status(400).send({ message: 'Email already exists' })
+                    res.render('register', {
+                        errors,
+                        name,
+                        email,
+                        password,
+                        password2
+                    });
+                } else {
+                    newUser = new User({...req.body })
+                    bcrypt.genSalt(10, (err, salt) => {
+                        bcrypt.hash(newUser.password, salt, (err, hash) => {
+                            if (err) throw err;
+                            newUser.password = hash;
+                            newUser
+                                .save()
+                                .then(user => res.send({ message: 'Registered ' + user.name }))
+                                .catch(errors => console.log(errors));
+                        });
+                    });
+                }
+            });
         }
+
+
+
+        // else { 
+        //     newUser = new User({...req.body })
+        //     bcrypt.genSalt(10, (errors, salt) => {
+        //         bcrypt.hash(newUser.password, salt, (errors, hash) => {
+        //             if (errors) throw errors;
+        //             newUser.password = hash;
+        //             newUser
+        //                 .save()
+        //                 .then(user => res.send({ message: 'Registered' + user.name }))
+        //                 .catch(errors => console.log(errors));
+        //         });
+        //     })
+        // }
 
     },
     login(req, res) {
@@ -52,7 +81,7 @@ const UserController = {
                     token = jwt.sign({ id: user.id }, jwt_secret);
                     user.tokens.push(token)
                     return user.save()
-                }).then(user => res.send({ message: 'Welcome' + user.name, user, token }))
+                }).then(user => res.send({ message: 'Welcome ' + user.name, user, token }))
             })
 
     },

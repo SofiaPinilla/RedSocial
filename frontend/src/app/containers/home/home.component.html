@@ -1,0 +1,19 @@
+<nz-switch [(ngModel)]="theme">
+    <span checked>Dark</span>
+    <span unchecked>Light</span>
+</nz-switch>
+<br />
+<br />
+<ul nz-menu nzMode="inline" style="width: 240px;" [nzTheme]="theme ? 'dark' : 'light'">
+
+    <li nz-submenu nzTitle="Menu" nzIcon="menu">
+
+        <ul>
+            <li nzIcon="home" nz-menu-item><i nz-icon nzType="home" nzTheme="outline"></i>Home</li>
+            <li nz-menu-item><i nz-icon nzType="profile" nzTheme="outline"></i> Profile</li>
+            <li nz-menu-item><i nz-icon nzType="notification" nzTheme="outline"></i>Notifications</li>
+            <li nz-menu-item><i nz-icon nzType="edit" nzTheme="outline"></i>Write</li>
+
+        </ul>
+    </li>
+</ul>

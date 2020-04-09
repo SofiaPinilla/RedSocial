@@ -42,15 +42,15 @@ export class LoginComponent implements OnInit {
           this.notificationService.success('Conected', res['message'])
          
           const admins =['superAdmin','admin','dios'];
-          const redirectRoute = admins.includes(res['user']['role']) ? '/add':'/';
+      
           this.userService.setUser(res['user']);
          
           this.userService.setToken(res['token']);
         
           localStorage.setItem('authToken',res['token']);
           
-          setTimeout(() => this.router.navigate([redirectRoute]) , 1500);
-          console.log(res)
+          setTimeout(() => this.router.navigate(['home']) , 1500);
+          
       },
       (error: HttpErrorResponse) => {
        this.notificationService.error( 'Unconnected', error.error.message) ;
