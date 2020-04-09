@@ -1,32 +1,56 @@
-<nz-switch [(ngModel)]="theme">
-    <span checked>Dark</span>
-    <span unchecked>Light</span>
-</nz-switch>
-<br />
-<br />
-<ul nz-menu nzMode="inline" style="width: 240px;" [nzTheme]="theme ? 'dark' : 'light'">
+<div class="container">
+    <div class="menu">
+        <ul nz-menu nzMode="inline" style="width: 28vw;" [nzTheme]="theme ? 'light' : 'light'">
 
-    <li nz-submenu nzTitle="Menu" nzIcon="menu">
-
-        <ul>
-            <li nzIcon="home" nz-menu-item><i nz-icon nzType="home" nzTheme="outline"></i>Home</li>
-            <li nz-menu-item [routerLink]="['/profile']" routerLinkActive="router-link-active"><i nz-icon nzType="profile" nzTheme="outline"></i> Profile</li>
-            <li nz-menu-item><i nz-icon nzType="notification" nzTheme="outline"></i>Notifications</li>
-            <button nz-button [nzType]="'default'" (click)="showModal()"><span>Write</span></button>
-
-
-
-            <form #publicForm="ngForm">
-                <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="postPublic(publicForm)">
-
-
-                    <textarea rows="4" nz-input [(ngModel)]="inputValue" name="publication" #publication="ngModel" name="publication" id="publication"> </textarea>
+            <div class="list">
+                <ul>
+                    <div class="texto">
+                        <li nzIcon="home" nz-menu-item><i nz-icon nzType="home" nzTheme="outline"></i>Home</li>
+                    </div>
+                    <div class="texto">
+                        <li nz-menu-item [routerLink]="['/profile']" routerLinkActive="router-link-active"><i nz-icon nzType="profile" nzTheme="outline"></i> Profile</li>
+                    </div>
+                    <div class="texto">
+                        <li nz-menu-item><i nz-icon nzType="notification" nzTheme="outline"></i>Notifications</li>
+                    </div>
+                    <div class="texto">
+                        <button nz-button [nzType]="'default'" (click)="showModal()"><span>Write</span></button>
+                    </div>
+                    <form #publicForm="ngForm">
+                        <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="postPublic(publicForm)">
 
 
-                </nz-modal>
-            </form>
+                            <textarea rows="4" nz-input [(ngModel)]="inputValue" name="publication" #publication="ngModel" name="publication"> </textarea>
+
+
+                        </nz-modal>
+                    </form>
+                </ul>
+            </div>
+
         </ul>
-    </li>
-</ul>
+    </div>
+    <div>
+        <div class="formulario">
+            <nz-card style="width:45vw;" [nzBordered]="false" nzTitle="Inicio">
 
-<app-publications></app-publications>
+                <form #public2Form="ngForm">
+
+                    <textarea class="textarea" rows="4" nz-input [(ngModel)]="inputValue" #publication="ngModel" name="publication"> </textarea>
+                    <input type="file" #imageInput>
+                    <button nz-button [nzType]="'default'" type="submit" on-click="post2Public(imageInput)"><span>Write</span></button>
+                </form>
+
+            </nz-card>
+        </div>
+        <app-publications>
+
+        </app-publications>
+
+    </div>
+
+    <div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga saepe aperiam quos eligendi quam voluptatum deserunt, pariatur earum est animi laboriosam? Tenetur expedita nostrum minima provident optio adipisci, doloribus nulla!</p>
+
+    </div>
+</div>

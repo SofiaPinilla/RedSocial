@@ -1,5 +1,12 @@
-<div class="public" *ngFor="let publication of publicationsService.publications">
-    <!-- <img src="{{book.image_path}}" alt="" routerLink="/book/{{book.id}}"> -->
-    <p>{{publication.publication}}</p>
+<nz-card style="width:40vw;" *ngFor="let publication of publicationsService.publications">
 
-</div>
+    <div class="delete">
+        <i on-click="deletePublic(publication)" nz-icon nzType="close-circle" nzTheme="fill">
+        </i>
+    </div>
+
+    <div>
+        <img  src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
+        <p>{{publication.publication}}</p>
+    </div>
+</nz-card>

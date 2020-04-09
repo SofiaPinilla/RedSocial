@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PublicationsService {
  public publications;
+ public publication;
 
   constructor(public httpClient:HttpClient) { }
 
@@ -17,8 +18,10 @@ export class PublicationsService {
 getAll(): Observable<any> {
   return this.httpClient.get('http://localhost:3000/publications');
 }
+
+deleteOne(id:string): Observable<any> {
+  return this.httpClient.delete(`http://localhost:3000/publications/${id}`);
 }
 
 
-
-
+}

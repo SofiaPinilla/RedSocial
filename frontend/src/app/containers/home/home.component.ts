@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { PublicationsService } from 'src/app/services/publications.service';
 import { NgForm } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   isVisible = false;
   inputValue: string;
   public publications;
+ 
   
   constructor(public publicationsService: PublicationsService, public router: Router) { } 
 
@@ -32,12 +33,13 @@ export class HomeComponent implements OnInit {
     
   }
   
-  postPublic(publicForm:NgForm) {
-    const publication = {
-      publication: this.inputValue
-    }
+  postPublic(imageInput) {
+    const publicationFormData = new FormData();
+    publicationFormData.set('publication',this.inputValue);
+    publicationFormData.set('image',imageInput.files[0]);
+  
     this.isVisible = false;
-    this.publicationsService.post(publication)
+    this.publicationsService.post(publicationFormData)
     .subscribe ((res: HttpResponse<object>) => {
       this.publicationsService.getAll()
               .subscribe (res => {
@@ -47,6 +49,10 @@ export class HomeComponent implements OnInit {
 
           },)
       
+}
+post2Public(public2Form:NgForm) {
+  console.log('hola')
+  this.postPublic(public2Form)
 }
 
 }

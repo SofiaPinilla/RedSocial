@@ -26,30 +26,8 @@ mongoose.connect(MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
 
 // Express body parser
 // app.use(express.urlencoded({ extended: true }));
-app.use(express.json())
-
-
-// Express session
-// app.use(
-//   session({
-//     secret: 'secret',
-//     resave: true,
-//     saveUninitialized: true
-//   })
-// );
-
-
-
-// Connect flash
-// app.use(flash());
-
-// Global variables
-// app.use(function(req, res, next) {
-//   res.locals.success_msg = req.flash('success_msg');
-//   res.locals.error_msg = req.flash('error_msg');
-//   res.locals.error = req.flash('error');
-//   next();
-// });
+app.use(express.json());
+app.use(express.static('./public'));
 
 // Routes
 
