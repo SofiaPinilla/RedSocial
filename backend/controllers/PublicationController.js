@@ -11,6 +11,12 @@ const PublicationController = {
             .then(publication => res.status(201).send(publication))
             .catch(console.error)
     },
+    insert2(req, res) {
+        Publication.create({...req.body })
+            .then(publication => res.status(201).send(publication))
+            .catch(console.error)
+    },
+
 
     delete(req, res) {
         Publication.remove({ _id: req.params.id })

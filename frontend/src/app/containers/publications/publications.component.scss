@@ -12,3 +12,14 @@ p {
 .delete {
     text-align: end;
 }
+
+img {
+    width: 70%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

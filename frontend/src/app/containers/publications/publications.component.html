@@ -5,8 +5,8 @@
         </i>
     </div>
 
-    <div>
-        <img  src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
-        <p>{{publication.publication}}</p>
+    <div class="container">
+        <img *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
+        <p *ngIf="publication.publication !== 'undefined' ">{{publication.publication}}</p>
     </div>
 </nz-card>

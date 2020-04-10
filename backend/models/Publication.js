@@ -6,7 +6,10 @@ const PublicationSchema = new mongoose.Schema({
         required: true,
         maxlength: 200
     },
-    image_path: String,
+    image_path: {
+        type: String,
+        required: false
+    },
     UserId: ObjectID,
 
 }, { timestamps: true });

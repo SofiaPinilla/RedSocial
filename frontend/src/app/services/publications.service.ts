@@ -7,12 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class PublicationsService {
  public publications;
- public publication;
+ public publication ='';
 
   constructor(public httpClient:HttpClient) { }
 
-  post(publication: object): Observable<any> {
+post(publication: object): Observable<any> {
     return this.httpClient.post('http://localhost:3000/publications', publication);
+}
+post2(publication2): Observable<any> {
+  return this.httpClient.post('http://localhost:3000/publications/notimage', publication2);
 }
 
 getAll(): Observable<any> {

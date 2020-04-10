@@ -13,9 +13,8 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   theme = true;
   isVisible = false;
-  inputValue: string;
+  inputValue: any;
   public publications;
- 
   
   constructor(public publicationsService: PublicationsService, public router: Router) { } 
 
@@ -34,24 +33,46 @@ export class HomeComponent implements OnInit {
   }
   
   postPublic(imageInput) {
+   
+    const publication2 = {
+      publication: this.inputValue 
+    }
+    
     const publicationFormData = new FormData();
     publicationFormData.set('publication',this.inputValue);
     publicationFormData.set('image',imageInput.files[0]);
   
     this.isVisible = false;
-    this.publicationsService.post(publicationFormData)
-    .subscribe ((res: HttpResponse<object>) => {
-      this.publicationsService.getAll()
-              .subscribe (res => {
-                console.log(res)
-                this.publicationsService.publications = res},
-                err => console.error(err));
 
-          },)
+    
+    if(!imageInput.files[0]){
+      this.publicationsService.post2( publication2)
+      .subscribe ((res: HttpResponse<object>) => {
+        this.publicationsService.getAll()
+                .subscribe (res => {
+                  
+                  this.publicationsService.publications = res},
+                  err => console.error(err));
+  
+            },) 
+    }else{
       
+      this.publicationsService.post(publicationFormData)
+      .subscribe ((res: HttpResponse<object>) => {
+        console.log(res)
+        this.publicationsService.getAll()
+                .subscribe (res => {
+                  
+                  this.publicationsService.publications = res},
+                  err => console.error(err));
+  
+            },) 
+    }
+
+    
 }
+
 post2Public(public2Form:NgForm) {
-  console.log('hola')
   this.postPublic(public2Form)
 }
 

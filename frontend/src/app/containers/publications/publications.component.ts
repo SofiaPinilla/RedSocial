@@ -8,7 +8,7 @@ import { PublicationsService } from 'src/app/services/publications.service';
 })
 export class PublicationsComponent implements OnInit {
   constructor(public publicationsService: PublicationsService, ) { }
-
+public undefinded;
   ngOnInit(): void {
     this.publicationsService.getAll()
   .subscribe(
