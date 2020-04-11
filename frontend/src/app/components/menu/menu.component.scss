@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.textarea {
+    width: 40vw;
+}
+
+li {
+    font-size: larger !important;
+    padding: 0.5em;
+    // margin: 4em;
+}
+
+.formulario {
+    display: flex;
+    justify-content: center;
+    padding: 1px;
+}
+
+button {
+    background: #ea4c89;
+}
+
+.texto {
+    font-size: 20px;
+    font-weight: bold;
+    width: 60%;
+    padding: 20px;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+}
+
+.list button {
+    text-align: center;
+}

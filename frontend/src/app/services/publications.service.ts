@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Publication } from '../models/publication.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PublicationsService {
+  public isModalVisible: boolean = false;
   public publications;
-  public publication = '';
+  public publication: Publication={
+    publication:''
+  };
 
   constructor(public httpClient: HttpClient) { }
 
@@ -31,5 +35,20 @@ export class PublicationsService {
     });
   }
 
+  editOne(publication: FormData): Observable<any> {
+    const id =publication.get('_id')
+    return this.httpClient.put(`http://localhost:3000/publications/${id}`,publication, {
+      headers: {
+        Authorization: localStorage.getItem('authToken') || ''
+      }
+    });
+  }
+  setPublication(publication: Publication) {
+    this.publication = publication;
+  }
+
+  getPublication(): Publication {
+    return this.publication;
+  }
 
 }

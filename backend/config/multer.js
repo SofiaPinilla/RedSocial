@@ -1,5 +1,5 @@
 const Multer = require('multer');
-const mimetypes = ['image/png', 'image/jpg', 'image/jpeg'];
+const mimetypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'video/mp4'];
 const uploadPublicationsImages = Multer({
     storage: Multer.diskStorage({
         destination: (req, file, callback) => {

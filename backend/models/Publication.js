@@ -3,7 +3,6 @@ const ObjectID = require('mongodb').ObjectID;
 const PublicationSchema = new mongoose.Schema({
     publication: {
         type: String,
-        required: true,
         maxlength: 200
     },
     image_path: {

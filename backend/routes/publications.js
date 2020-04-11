@@ -6,6 +6,6 @@ var { uploadPublicationsImages } = require('../config/multer.js')
 
 router.get('/', PublicationController.getAll);
 router.post('/', authentication, uploadPublicationsImages.single('image'), PublicationController.insert);
-router.put('/:_id', authentication, isAuthor, PublicationController.update);
+router.put('/:_id', authentication, isAuthor, uploadPublicationsImages.single('image'), PublicationController.update);
 router.delete('/:_id', authentication, isAuthor, PublicationController.delete);
 module.exports = router;

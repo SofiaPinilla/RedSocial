@@ -1,0 +1,55 @@
+import { Component, OnInit } from '@angular/core';
+import { PublicationsService } from 'src/app/services/publications.service';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { HttpResponse } from '@angular/common/http';
+
+@Component({
+  selector: 'app-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.scss']
+})
+export class ModalComponent {
+  public publications;
+
+  constructor(public publicationsService: PublicationsService, public userService: UserService) { }
+
+  handleCancel(): void {
+    this.publicationsService.isModalVisible = false;
+  }
+
+  postPublic(imageInput) {
+    const publicationFormData = new FormData();
+    publicationFormData.set('publication', this.publicationsService.publication.publication);
+
+    if (imageInput.files[0]) publicationFormData.set('image', imageInput.files[0]);
+    let httpObservable;
+    
+    if (this.publicationsService.publication?._id) {
+      publicationFormData.set('_id', this.publicationsService.publication?._id);
+      httpObservable = this.publicationsService.editOne(publicationFormData);
+    } else {
+      httpObservable = this.publicationsService.post(publicationFormData);
+    }
+    httpObservable.subscribe((res: HttpResponse<object>) => {
+      this.publicationsService.isModalVisible = false;
+      this.publicationsService.setPublication
+      imageInput.value = '';
+      
+      this.publicationsService.publication={
+        publication: '',
+      }
+      this.publicationsService.getAll()
+        .subscribe(res => {
+          this.publicationsService.publication = res
+    
+           this.publicationsService.getAll()
+           .subscribe(res => {
+             this.publicationsService.publications = res
+           }
+           )},
+          err => console.error(err)); 
+    })
+  }
+}
+

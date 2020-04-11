@@ -16,7 +16,10 @@ import { RegisterComponent } from './containers/user/register/register.component
 import { LoginComponent } from './containers/user/login/login.component';
 import { HomeComponent } from './containers/home/home.component';
 import { ProfileComponent } from './containers/profile/profile.component';
-import { PublicationsComponent } from './containers/publications/publications.component';
+import { PublicationsComponent } from './components/publications/publications.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { ModalComponent } from './components/publications/modal/modal.component';
+import { NotFoundComponent } from './containers/not-found/not-found.component';
 
 
 
@@ -32,6 +35,9 @@ registerLocaleData(en);
     HomeComponent,
     ProfileComponent,
     PublicationsComponent,
+    MenuComponent,
+    ModalComponent,
+    NotFoundComponent,
    
   ],
   imports: [

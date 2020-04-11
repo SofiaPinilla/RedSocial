@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class HomeComponent {
   inputValue: any;
   public publications;
 
-  constructor(public publicationsService: PublicationsService, public router: Router, public userService: UserService) { }
+  constructor(public publicationsService: PublicationsService, public router: Router, public userService: UserService, private notificationService: NzNotificationService) { }
 
   showModal(): void {
     this.isVisible = true;
@@ -30,10 +31,14 @@ export class HomeComponent {
   postPublic(imageInput) {
     const publicationFormData = new FormData();
     publicationFormData.set('publication', this.inputValue);
+
     if (imageInput.files[0]) publicationFormData.set('image', imageInput.files[0]);
     this.isVisible = false;
     this.publicationsService.post(publicationFormData)
       .subscribe((res: HttpResponse<object>) => {
+        imageInput.value = '';
+        this.inputValue = '';
+        this.notificationService.success('Publication successfully added','Thanks for your shitty contribution')
         this.publicationsService.getAll()
           .subscribe(res => {
             this.publicationsService.publications = res

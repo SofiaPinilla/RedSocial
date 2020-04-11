@@ -1,0 +1,23 @@
+<div class="menu">
+    <ul nz-menu nzMode="inline" style="width: 28vw;" [nzTheme]="'light'">
+
+        <div class="list">
+            <ul>
+                <div class="texto">
+                    <li nzIcon="home" nz-menu-item><i nz-icon nzType="home" nzTheme="outline"></i>Home</li>
+                </div>
+                <div class="texto">
+                    <li nz-menu-item [routerLink]="['/profile']" routerLinkActive="router-link-active">
+                        <i nz-icon nzType="profile" nzTheme="outline"></i> Profile</li>
+                </div>
+                <div class="texto">
+                    <li nz-menu-item><i nz-icon nzType="notification" nzTheme="outline"></i>Notifications</li>
+                </div>
+                <div class="texto">
+                    <button nz-button [nzType]="'default'" (click)="showModal()"><span>Write</span></button>
+                </div>
+            </ul>
+        </div>
+
+    </ul>
+</div>
