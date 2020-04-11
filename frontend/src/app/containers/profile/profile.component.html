@@ -1,1 +1,47 @@
-<p>profile works!</p>
+<div class="container">
+    <app-modal></app-modal>
+    <div>
+        <app-menu></app-menu>
+    </div>
+    <div>
+        <nz-card class="card" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+            <nz-card-meta nzTitle="{{userService['user']['name']}}" nzDescription="This is the description" [nzAvatar]="avatarTemplate"></nz-card-meta>
+        </nz-card>
+        <ng-template #avatarTemplate>
+            <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+        </ng-template>
+        <ng-template #coverTemplate>
+            <img alt="example" src="https://www.ecopetit.cat/wpic/mpic/12-121429_bts-boy-with-luv-all-members-4k-bts.jpg" />
+        </ng-template>
+        <ng-template #actionSetting>
+            <i nz-icon nzType="setting"></i>
+        </ng-template>
+        <ng-template #actionEdit>
+            <i nz-icon nzType="edit"></i>
+        </ng-template>
+        <ng-template #actionEllipsis>
+            <i nz-icon nzType="ellipsis"></i>
+        </ng-template>
+        <nz-card style="width:45vw; margin:5px;text-align: center" *ngFor="let publication of userService['user']['publications']">
+            <div class="delete" *ngIf="userService.user['_id'] === publication.UserId">
+                <i on-click="showUpdatePublicationModal(publication)" nz-icon nzType="edit" nzTheme="fill"> </i>
+                <i on-click="deletePublic(publication)" nz-icon nzType="close-circle" nzTheme="fill">
+                </i>
+            </div>
+            p {{userService['user']['email']}}
+            <p> {{publication.publication}}</p>
+
+        </nz-card>
+    </div>
+
+
+
+
+
+    <div>
+        <app-directs></app-directs>
+    </div>
+
+
+
+</div>

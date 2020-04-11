@@ -4,7 +4,7 @@
         <div class="list">
             <ul>
                 <div class="texto">
-                    <li nzIcon="home" nz-menu-item><i nz-icon nzType="home" nzTheme="outline"></i>Home</li>
+                    <li nzIcon="home" nz-menu-item [routerLink]="['/home']" routerLinkActive="router-link-active"><i nz-icon nzType="home" nzTheme="outline"></i>Home</li>
                 </div>
                 <div class="texto">
                     <li nz-menu-item [routerLink]="['/profile']" routerLinkActive="router-link-active">
@@ -12,6 +12,10 @@
                 </div>
                 <div class="texto">
                     <li nz-menu-item><i nz-icon nzType="notification" nzTheme="outline"></i>Notifications</li>
+                </div>
+                <div class="texto">
+                    <li nz-menu-item (click)="logout()"><i nz-icon [nzIconfont]="'icon-tuichu'"></i>Logout</li>
+
                 </div>
                 <div class="texto">
                     <button nz-button [nzType]="'default'" (click)="showModal()"><span>Write</span></button>

@@ -20,6 +20,7 @@ import { PublicationsComponent } from './components/publications/publications.co
 import { MenuComponent } from './components/menu/menu.component';
 import { ModalComponent } from './components/publications/modal/modal.component';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
+import { DirectsComponent } from './components/directs/directs.component';
 
 
 
@@ -38,6 +39,7 @@ registerLocaleData(en);
     MenuComponent,
     ModalComponent,
     NotFoundComponent,
+    DirectsComponent,
    
   ],
   imports: [

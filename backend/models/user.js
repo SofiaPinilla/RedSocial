@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        unique: true,
         required: true
 
     },
@@ -17,8 +18,6 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     tokens: [],
-
-    PublicationId: ObjectID,
 
 }, { timestamps: true });
 

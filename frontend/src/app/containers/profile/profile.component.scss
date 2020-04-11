@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    width: 45vw;
+    img {
+        height: 20vh
+    }
+}
