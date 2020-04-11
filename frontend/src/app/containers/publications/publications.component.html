@@ -1,11 +1,12 @@
 <nz-card style="width:40vw;" *ngFor="let publication of publicationsService.publications">
 
-    <div class="delete">
+    <div class="delete" *ngIf="userService.user?._id === publication.UserId">
         <i on-click="deletePublic(publication)" nz-icon nzType="close-circle" nzTheme="fill">
         </i>
     </div>
 
     <div class="container">
+        <p *ngIf="userService.user as user">{{publication.user?.name}}</p>
         <img *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
         <p *ngIf="publication.publication !== 'undefined' ">{{publication.publication}}</p>
     </div>

@@ -1,7 +1,7 @@
 const User = require('../models/User.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { jwt_secret } = require('../config/keys.js')
+const { jwt_secret } = require('../config/keys.js');
 const UserController = {
     register(req, res) {
         const { name, email, password, password2 } = req.body;

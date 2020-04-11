@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  public user: object = {};
+  public user: object;
   constructor(public httpClient: HttpClient) { }
   public token: string = "";
   login(user: object): Observable<any> {

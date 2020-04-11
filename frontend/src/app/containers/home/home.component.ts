@@ -1,8 +1,9 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PublicationsService } from 'src/app/services/publications.service';
 import { NgForm } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -10,70 +11,35 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   theme = true;
   isVisible = false;
   inputValue: any;
   public publications;
-  
-  constructor(public publicationsService: PublicationsService, public router: Router) { } 
+
+  constructor(public publicationsService: PublicationsService, public router: Router, public userService: UserService) { }
 
   showModal(): void {
     this.isVisible = true;
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisible = false;
   }
- 
 
-  ngOnInit(): void {
-    
-  }
-  
   postPublic(imageInput) {
-   
-    const publication2 = {
-      publication: this.inputValue 
-    }
-    
     const publicationFormData = new FormData();
-    publicationFormData.set('publication',this.inputValue);
-    publicationFormData.set('image',imageInput.files[0]);
-  
+    publicationFormData.set('publication', this.inputValue);
+    if (imageInput.files[0]) publicationFormData.set('image', imageInput.files[0]);
     this.isVisible = false;
-
-    
-    if(!imageInput.files[0]){
-      this.publicationsService.post2( publication2)
-      .subscribe ((res: HttpResponse<object>) => {
+    this.publicationsService.post(publicationFormData)
+      .subscribe((res: HttpResponse<object>) => {
         this.publicationsService.getAll()
-                .subscribe (res => {
-                  
-                  this.publicationsService.publications = res},
-                  err => console.error(err));
-  
-            },) 
-    }else{
-      
-      this.publicationsService.post(publicationFormData)
-      .subscribe ((res: HttpResponse<object>) => {
-        console.log(res)
-        this.publicationsService.getAll()
-                .subscribe (res => {
-                  
-                  this.publicationsService.publications = res},
-                  err => console.error(err));
-  
-            },) 
-    }
-
-    
-}
-
-post2Public(public2Form:NgForm) {
-  this.postPublic(public2Form)
-}
+          .subscribe(res => {
+            this.publicationsService.publications = res
+          },
+            err => console.error(err));
+      })
+  }
 
 }

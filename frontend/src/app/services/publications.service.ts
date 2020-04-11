@@ -6,25 +6,30 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PublicationsService {
- public publications;
- public publication ='';
+  public publications;
+  public publication = '';
 
-  constructor(public httpClient:HttpClient) { }
+  constructor(public httpClient: HttpClient) { }
 
-post(publication: object): Observable<any> {
-    return this.httpClient.post('http://localhost:3000/publications', publication);
-}
-post2(publication2): Observable<any> {
-  return this.httpClient.post('http://localhost:3000/publications/notimage', publication2);
-}
+  post(publication: FormData): Observable<any> {
+    return this.httpClient.post('http://localhost:3000/publications', publication, {
+      headers: {
+        Authorization: localStorage.getItem('authToken') || ''
+      }
+    });
+  }
 
-getAll(): Observable<any> {
-  return this.httpClient.get('http://localhost:3000/publications');
-}
+  getAll(): Observable<any> {
+    return this.httpClient.get('http://localhost:3000/publications');
+  }
 
-deleteOne(id:string): Observable<any> {
-  return this.httpClient.delete(`http://localhost:3000/publications/${id}`);
-}
+  deleteOne(id: string): Observable<any> {
+    return this.httpClient.delete(`http://localhost:3000/publications/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem('authToken') || ''
+      }
+    });
+  }
 
 
 }

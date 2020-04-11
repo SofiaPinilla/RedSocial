@@ -6,11 +6,7 @@ const { authentication } = require('../middleware/authentication');
 
 // const { forwardAuthenticated } = require('../config/auth');
 
-// Login Page
-router.get('/login', (req, res) => res.send('login'));
-
-// Register Page
-router.get('/register', (req, res) => res.send('register'));
+router.get('/info', authentication, UserController.getInfo);
 
 // Register
 router.post('/register', UserController.register);
