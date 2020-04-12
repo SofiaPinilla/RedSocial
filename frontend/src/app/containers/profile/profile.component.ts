@@ -46,23 +46,5 @@ export class ProfileComponent implements OnInit {
     this.publicationsService.isModalVisible = true;
     this.publicationsService.setPublication(publication);
   }
-  postPublic(imageInput) {
-    const publicationFormData = new FormData();
-    publicationFormData.set('publication', this.inputValue);
-
-    if (imageInput.files[0]) publicationFormData.set('image', imageInput.files[0]);
-    this.isVisible = false;
-    this.publicationsService.post(publicationFormData)
-      .subscribe((res: HttpResponse<object>) => {
-        imageInput.value = '';
-        this.inputValue = '';
-        this.notificationService.success('Publication successfully added','Thanks for your contribution')
-        const token:string=localStorage.getItem('authToken')
-        this.userService.getInfo(token)
-         .subscribe( res => this.userService.setUser(res),
-
-          error=>console.log(error)
-    )
-      })
-  }
+ 
 }

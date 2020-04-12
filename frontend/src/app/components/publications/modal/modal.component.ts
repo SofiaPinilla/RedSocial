@@ -46,7 +46,10 @@ export class ModalComponent {
            this.publicationsService.getAll()
            .subscribe(res => {
              this.publicationsService.publications = res
-           }
+             const token:string=localStorage.getItem('authToken')
+        this.userService.getInfo(token)
+         .subscribe( res => this.userService.setUser(res),
+         )}
            )},
           err => console.error(err)); 
     })
