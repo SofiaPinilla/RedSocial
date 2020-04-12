@@ -1,8 +1,74 @@
 .container {
+    // background-image: url('https://i.ya-webdesign.com/images/bts-love-yourself-png-5.png');
+    // background-color: rgb(250, 200, 255);
+    // background-image: url(./assets/images/loveyourself.png);
+    background-image: url('https://wallpaperaccess.com/full/423841.jpg');
+    height: 100%;
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: center;
+    height: 91vh;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30vw;
 }
 
 .ant-btn-primary {
-    background: #ea4c89;
+    color: white;
+    background-color: #9A48E8;
+    width: 25vw;
 }
+
+.ant-btn.disabled,
+.ant-btn[disabled] {
+    cursor: not-allowed;
+    color: rgba(0, 0, 0, 0.25);
+    background-color: #f5f5f5;
+    border-color: #d9d9d9;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+.login-form {
+    max-width: 300px;
+}
+
+.login-form-forgot {
+    float: right;
+}
+
+.login-form-button {
+    width: 100%;
+}
+
+a {
+    all: unset;
+    color: #9A48E8;
+    cursor: pointer;
+}
+
+.ant-form {
+    width: 25vw;
+}
+
+h1 {
+    text-align: center;
+    color: #9A48E8;
+}
+
+p {
+    text-align: center;
+}
+
+// .login {
+//     padding: 10px;
+//     background-color: white;
+//     border-radius: 0.5em;
+// }

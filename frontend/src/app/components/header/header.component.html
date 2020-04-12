@@ -1,8 +1,11 @@
 <header>
     <div class="container">
         <div class="logoTitulo">
-            <img src="assets/images/headerC3.png" alt="">
+            <img src="assets/images/facilito.png" alt="">
         </div>
-        <app-login></app-login>
+        <div class="botones">
+            <button nz-button [nzType]="'default'" [routerLink]="['/login']" routerLinkActive="router-link-active"><span>Login</span></button>
+            <button nz-button [nzType]="'default'" [routerLink]="['/register']" routerLinkActive="router-link-active"><span>Register</span></button>
+        </div>
     </div>
 </header>

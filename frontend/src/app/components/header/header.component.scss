@@ -3,9 +3,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: whitesmoke;
+    background-color: #F5F8FD;
 }
 
 img {
     width: 20vw;
+}
+
+button:hover {
+    color: #9A48E8;
+    border-color: #9A48E8;
+}
+
+button {
+    color: white;
+    background: #9A48E8;
+    margin: 10px;
+    width: 10vw;
+    height: 5vh;
 }

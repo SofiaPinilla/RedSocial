@@ -16,29 +16,23 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     const token:string=localStorage.getItem('authToken')
     this.userService.getInfo(token)
-    .subscribe(
+    .subscribe( 
+      res => console.log(res),
      error=>console.log(error)
     )
   }
-
+  
   theme = true;
   isVisible = false;
   inputValue: any;
   public publications;
   
 
-  deletePublic(publication) {
+  deletePublic2(publication) {
     const id = publication._id
     this.publicationsService.deleteOne(id)
-      .subscribe(publication => {
-        this.publicationsService.getAll()
-          .subscribe(res => {
-            console.log(res)
-            this.publicationsService.publications = res
-          },
-          );
-
-        err => console.error(err)
+      .subscribe(res => {
+    this.userService.setUser(res.user)
       }
       )
   }
@@ -46,5 +40,6 @@ export class ProfileComponent implements OnInit {
     this.publicationsService.isModalVisible = true;
     this.publicationsService.setPublication(publication);
   }
+  
  
 }

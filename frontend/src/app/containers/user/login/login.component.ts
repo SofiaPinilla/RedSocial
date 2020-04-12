@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
        this.notificationService.error( 'Unconnected', error.error.message) ;
-        console.log(error)
+        console.error(error)
       
       }
       )

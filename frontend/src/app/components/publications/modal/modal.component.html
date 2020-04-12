@@ -2,7 +2,9 @@
     <nz-modal [(nzVisible)]="publicationsService.isModalVisible" nzTitle="Publication" (nzOnCancel)="handleCancel()" (nzOnOk)="postPublic(imageInput)">
 
         <textarea rows="4" nz-input [(ngModel)]="publicationsService.publication.publication" name="publication" #publication="ngModel" name="publication"> </textarea>
-        <input type="file" #imageInput>
+        <input type="file" #imageInput id="file">
+
+        <label for="file" class="btn-3"><span>Add Image</span></label>
 
 
     </nz-modal>

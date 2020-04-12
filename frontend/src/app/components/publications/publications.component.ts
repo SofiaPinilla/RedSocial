@@ -30,7 +30,7 @@ export class PublicationsComponent implements OnInit {
     this.publicationsService.deleteOne(id)
       .subscribe(publication => {
         this.publicationsService.getAll()
-          .subscribe(res => {
+        .subscribe(res => {
             console.log(res)
             this.publicationsService.publications = res
           },

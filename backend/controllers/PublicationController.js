@@ -1,4 +1,5 @@
 const Publication = require('../models/Publication.js');
+const { getUserWithPublications } = require('../services/userService.js')
 
 const lookupUsers = {
     $lookup: {
@@ -51,11 +52,18 @@ const PublicationController = {
             .then(publication => res.send({ message: 'publication successfully updated', publication }))
             .catch(console.error)
     },
-    delete(req, res) {
-        Publication.findByIdAndDelete(req.params._id) // mongoose method which uses the findOneAndDelete()
-            // Publication.findOneAndDelete({_id:req.params._id} ) // Mongodb method
-            .then(publication => res.send({ message: 'publication deleted', publication }))
-            .catch(console.error)
+    async delete(req, res) {
+        try {
+            await Publication.findByIdAndDelete(req.params._id) // mongoose method which uses the findOneAndDelete()
+                // Publication.findOneAndDelete({_id:req.params._id} ) // Mongodb method
+            const user = await getUserWithPublications(req.user._id)
+            res.send({ user, message: 'publication deleted' })
+        } catch (error) {
+            console.error(error)
+            res.status(500).send({ message: 'there was a problem trying to remove the publication' })
+        }
+
+
     }
 }
 

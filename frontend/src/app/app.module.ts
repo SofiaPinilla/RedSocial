@@ -21,6 +21,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { ModalComponent } from './components/publications/modal/modal.component';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
 import { DirectsComponent } from './components/directs/directs.component';
+import { BtaComponent } from './containers/bta/bta.component';
 
 
 
@@ -40,6 +41,7 @@ registerLocaleData(en);
     ModalComponent,
     NotFoundComponent,
     DirectsComponent,
+    BtaComponent,
    
   ],
   imports: [

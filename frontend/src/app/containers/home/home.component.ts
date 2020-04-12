@@ -31,20 +31,26 @@ export class HomeComponent {
   postPublic(imageInput) {
     const publicationFormData = new FormData();
     publicationFormData.set('publication', this.inputValue);
-
     if (imageInput.files[0]) publicationFormData.set('image', imageInput.files[0]);
     this.isVisible = false;
     this.publicationsService.post(publicationFormData)
       .subscribe((res: HttpResponse<object>) => {
         imageInput.value = '';
         this.inputValue = '';
-        this.notificationService.success('Publication successfully added','Thanks for your shitty contribution')
+        this.notificationService.success('Publication successfully added','Thanks for your contribution')
         this.publicationsService.getAll()
-          .subscribe(res => {
-            this.publicationsService.publications = res
-          },
-            err => console.error(err));
-      })
+        .subscribe(res => {
+          this.publicationsService.publication = res
+           this.publicationsService.getAll()
+           .subscribe(res => {
+             this.publicationsService.publications = res
+             const token:string=localStorage.getItem('authToken')
+        this.userService.getInfo(token)
+         .subscribe( res => this.userService.setUser(res),
+         )}
+           )},
+          err => console.error(err)); 
+        })
+ 
   }
-
 }

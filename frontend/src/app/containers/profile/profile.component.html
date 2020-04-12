@@ -8,10 +8,10 @@
             <nz-card-meta nzTitle="{{userService['user']['name']}}" nzDescription="This is the description" [nzAvatar]="avatarTemplate"></nz-card-meta>
         </nz-card>
         <ng-template #avatarTemplate>
-            <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+            <nz-avatar nzSrc="https://media.karousell.com/media/photos/products/2018/01/11/bt21_1515660038_bdcf5de3.jpg"></nz-avatar>
         </ng-template>
         <ng-template #coverTemplate>
-            <img alt="example" src="https://www.ecopetit.cat/wpic/mpic/12-121429_bts-boy-with-luv-all-members-4k-bts.jpg" />
+            <img alt="example" src="https://i.ya-webdesign.com/images/bts-love-yourself-png-5.png" />
         </ng-template>
         <ng-template #actionSetting>
             <i nz-icon nzType="setting"></i>
@@ -23,13 +23,26 @@
             <i nz-icon nzType="ellipsis"></i>
         </ng-template>
         <nz-card style="width:45vw; margin:5px;text-align: center" *ngFor="let publication of userService['user']['publications']">
-            <div class="delete" *ngIf="userService.user['_id'] === publication.UserId">
+            <div class="delete">
                 <i on-click="showUpdatePublicationModal(publication)" nz-icon nzType="edit" nzTheme="fill"> </i>
-                <i on-click="deletePublic(publication)" nz-icon nzType="close-circle" nzTheme="fill">
+                <i on-click="deletePublic2(publication)" nz-icon nzType="close-circle" nzTheme="fill">
                 </i>
             </div>
-            p {{userService['user']['email']}}
-            <p> {{publication.publication}}</p>
+            <div class="container2">
+
+                <div class="div">
+                    <h3>{{userService['user']['name']}}</h3>
+                    <p>{{userService['user']['createdAt']}}</p>
+
+                </div>
+
+
+                <img class="imagenes" *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
+                <p>{{publication.publication}}</p>
+            </div>
+
+
+            <!-- <p> {{publication.publication}}</p> -->
 
         </nz-card>
     </div>

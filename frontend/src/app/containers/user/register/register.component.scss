@@ -1,33 +1,33 @@
 section {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     padding: 5em;
     h1 {
         text-align: center;
-        color: #ea4c89;
+        color: #9A48E8;
         padding: 1em;
     }
 }
 
-.register {
-    padding: 10px;
-    width: 40%;
-    height: 65vh;
-    background-color: rgb(245, 245, 245);
-    border-radius: 0.5em;
+form {
+    width: 40vw;
 }
 
 .registerContainer {
+    background-image: url('https://wallpaperaccess.com/full/423841.jpg');
     height: 100%;
-    background-image: url('https://i.ya-webdesign.com/images/bts-love-yourself-png-5.png');
-    background-size: contain;
-    background-position: left;
+    background-size: cover;
+    background-position: bottom;
     background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 91vh;
 }
 
 .ant-btn-primary {
-    background: #ea4c89;
+    background: #9A48E8;
     border: none;
 }
 
@@ -38,5 +38,11 @@ img {
 
 a {
     all: unset;
-    color: #ea4c89;
+    color: #9A48E8;
+}
+
+p {
+    cursor: pointer;
+    font-size: 15px;
+    text-align: center;
 }

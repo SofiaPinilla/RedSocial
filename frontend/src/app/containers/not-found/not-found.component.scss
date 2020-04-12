@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    background-image: url(../../../assets/images/notfound.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    justify-content: space-around;
+    // background-color: #F5F8FD;
+    width: 91vw;
+    height: 91vh;
+}
+
+img {
+    width: 30vw;
+}
+
+.texto {
+    color: #C3B4D6;
+}
+
+p {
+    font-size: 60px;
+    padding: 2em;
+}

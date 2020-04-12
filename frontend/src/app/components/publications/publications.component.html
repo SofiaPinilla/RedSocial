@@ -1,4 +1,4 @@
-<nz-card style="width:40vw;" *ngFor="let publication of publicationsService.publications">
+<nz-card style="width:45vw;" *ngFor="let publication of publicationsService.publications">
 
     <div class="delete" *ngIf="userService.user['_id'] === publication.UserId">
 
@@ -8,8 +8,12 @@
     </div>
 
     <div class="container">
-        <p *ngIf="userService.user as user">{{publication.user?.name}}</p>
+        <div class="div">
+            <h3 *ngIf="userService.user as user">{{publication.user?.name}}</h3>
+            <p *ngIf="userService.user as user">{{publication.user?.createdAt}}</p>
+        </div>
+
         <img *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
-        <p *ngIf="publication.publication !== 'undefined' ">{{publication.publication}}</p>
+        <p *ngIf="publication.publication !== '' ">{{publication.publication}}</p>
     </div>
 </nz-card>

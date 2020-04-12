@@ -15,13 +15,26 @@ li {
 }
 
 button {
-    background: #ea4c89;
+    color: white;
+    background: #9A48E8;
+}
+
+button:hover {
+    color: #9A48E8;
+    border-color: #9A48E8;
+}
+
+li:hover {
+    color: #9A48E8;
+    border-color: #9A48E8;
 }
 
 .texto {
-    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
     font-weight: bold;
-    width: 60%;
+    width: 100%;
     padding: 20px;
 }
 
@@ -35,6 +48,44 @@ button {
 }
 
 .list {
-    width: 30vw;
     position: fixed;
+}
+
+.ant-menu ul,
+.ant-menu ol {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #ea4c8949;
+}
+
+.ant-menu-item-selected {
+    color: #9A48E8;
+}
+
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+    border-right: 3px solid #9A48E8;
+}
+
+.ant-menu-item-selected {
+    color: #9A48E8;
+}
+
+.router-link-active {
+    border-right: 3px solid #9A48E8;
+    color: #9A48E8;
+    background-color: rgba(155, 72, 232, 0.274)
+}
+
+@media(max-width: 700px) {
+    .list {
+        width: 15vw;
+    }
 }

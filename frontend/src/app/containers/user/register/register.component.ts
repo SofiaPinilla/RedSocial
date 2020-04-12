@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         this.notificationService.error( 'Unregistered', error.error.message) ;
-         console.log(error)
+         console.error(error)
       // (errors: HttpErrorResponse) => {
       //  this.notificationService.error( 'Unconnected', errors.error.message) ;
       //   console.log(errors)

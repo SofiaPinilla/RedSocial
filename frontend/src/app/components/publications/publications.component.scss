@@ -2,7 +2,7 @@
     margin: 1em;
     display: flex;
     flex-direction: column;
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 p {
@@ -15,11 +15,26 @@ p {
 
 img {
     width: 70%;
+    margin: auto;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+}
+
+.ant-card {
+    padding: 12px;
+    background-color: #F5F8FD;
+}
+
+.div {
+    display: flex;
+    justify-content: space-between;
+    width: 35vw;
+    p {
+        color: rgb(136, 131, 131);
+        font-size: 12px;
+    }
 }
