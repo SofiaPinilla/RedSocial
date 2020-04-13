@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PublicationsService } from 'src/app/services/publications.service';
-import { NgForm } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -18,7 +17,7 @@ export class HomeComponent {
   inputValue: any;
   public publications;
 
-  constructor(public publicationsService: PublicationsService, public router: Router, public userService: UserService, private notificationService: NzNotificationService) { }
+  constructor(public publicationsService: PublicationsService, public userService: UserService, private notificationService: NzNotificationService) { }
 
   showModal(): void {
     this.isVisible = true;
@@ -28,9 +27,9 @@ export class HomeComponent {
     this.isVisible = false;
   }
 
-  postPublic(imageInput) {
+  postPublic(imageInput) { // publicar desde el input de home
     const publicationFormData = new FormData();
-    publicationFormData.set('publication', this.inputValue);
+   if (this.inputValue) publicationFormData.set('publication', this.inputValue);
     if (imageInput.files[0]) publicationFormData.set('image', imageInput.files[0]);
     this.isVisible = false;
     this.publicationsService.post(publicationFormData)
@@ -53,4 +52,5 @@ export class HomeComponent {
         })
  
   }
+
 }

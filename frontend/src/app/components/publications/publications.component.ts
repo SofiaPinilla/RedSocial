@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PublicationsService } from 'src/app/services/publications.service';
 import { UserService } from 'src/app/services/user.service';
 import { HttpResponse } from '@angular/common/http';
+import * as moment from "moment";
 
 @Component({
   selector: 'app-publications',
@@ -15,14 +16,31 @@ export class PublicationsComponent implements OnInit {
   public publications;
   constructor(public publicationsService: PublicationsService, public userService: UserService) { }
   ngOnInit(): void {
+    this.getAllPublications();
+    setInterval(this.getAllPublications,30000);
+  }
 
+  getAllPublications=()=>{
     this.publicationsService.getAll()
-      .subscribe(
-        res => {
-          this.publicationsService.publications = res;
-        },
-        error => console.error(error)
-      );
+    .subscribe(
+      res => {
+        this.publicationsService.publications = res.map(this.getHaceCuanto);
+        console.log(this.userService.user)
+      },
+      error => console.error(error)
+    );
+  }
+
+  getHaceCuanto = publication => {
+    const creationDate = moment(publication.createdAt);
+    const diffWeeks = moment().diff(creationDate, 'weeks') ? moment().diff(creationDate, 'weeks') + ' weeks ago':'';
+    const diffDays = moment().diff(creationDate, 'days') ? moment().diff(creationDate, 'days') + ' days ago':'';
+    const diffHours = moment().diff(creationDate, 'hours') ? moment().diff(creationDate, 'hours') + ' hours ago':'';
+    const diffMinutes = moment().diff(creationDate, 'minutes') ? moment().diff(creationDate, 'minutes') + ' minutes ago':'';
+    const diffSeconds = moment().diff(creationDate, 'seconds') ? moment().diff(creationDate, 'seconds') + ' seconds ago':'';
+
+    publication['haceCuanto'] = diffWeeks || diffDays || diffHours || diffMinutes || diffSeconds;
+    return publication;
   }
 
   deletePublic(publication) {
@@ -44,37 +62,5 @@ export class PublicationsComponent implements OnInit {
     this.publicationsService.isModalVisible = true;
     this.publicationsService.setPublication(publication);
   }
-  updatePublic(imageInput, publication) {
-    const id = publication._id
 
-    const publicationFormData = new FormData();
-    publicationFormData.set('publication', this.inputValue);
-
-    if (imageInput.files[0]) publicationFormData.set('image', imageInput.files[0]);
-    this.isVisible = false;
-    this.publicationsService.editOne(id)
-      .subscribe((res: HttpResponse<object>) => {
-        imageInput.value = '';
-        this.inputValue = '';
-        this.publicationsService.getAll()
-          .subscribe(res => {
-            this.publicationsService.publications = res
-          },
-            err => console.error(err));
-      })
-  }
-  // updatePublic2(publication) {
-  //   const id = publication._id
-  //   this.publicationsService.editOne(id)
-  //   .subscribe(publication => {
-  //     this.publicationsService.getAll()
-  //     .subscribe (res => {
-  //       console.log(res)
-  //       this.publicationsService.publications = res
-  //     },
-  //     );
-
-  //  err=>console.error(err)
-  // }
-  //   )}
 }
