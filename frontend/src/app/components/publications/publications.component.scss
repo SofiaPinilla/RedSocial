@@ -7,6 +7,7 @@
 
 p {
     text-align: center;
+    margin-left: 8%;
 }
 
 .delete {
@@ -27,6 +28,10 @@ img {
 .ant-card {
     padding: 12px;
     background-color: #F5F8FD;
+    img {
+        display: block;
+        width: 35vw;
+    }
 }
 
 .div {
@@ -37,4 +42,14 @@ img {
         color: rgb(136, 131, 131);
         font-size: 12px;
     }
+}
+
+.div2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+h3 {
+    margin-top: 10px;
+    margin-left: 10px;
 }

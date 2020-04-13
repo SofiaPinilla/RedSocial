@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const PublicationController = require('../controllers/PublicationController');
 const { authentication, isAuthor } = require('../middleware/authentication');
-var express = require('express');
-var { uploadPublicationsImages } = require('../config/multer.js')
+const { uploadPublicationsImages } = require('../middleware/multer.js')
 
 router.get('/', PublicationController.getAll);
 router.post('/', authentication, uploadPublicationsImages.single('image'), PublicationController.insert);

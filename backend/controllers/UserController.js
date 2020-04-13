@@ -50,8 +50,32 @@ const UserController = {
             console.error(error);
             res.status(500).send({ error, message: 'Ha habido un problema tratando de registrar el usuario' })
         }
-
-
+    },
+    async update(req, res) {
+        try {
+            if (req.file) req.body.profile_path = req.file.filename;
+            if (req.body.password) {
+                req.body.password = await bcrypt.hash(req.body.password, 10);
+            }
+            const user = await User.findByIdAndUpdate(req.user._id, req.body, { new: true })
+            res.send({ message: 'User successfully updated', user })
+        } catch (error) {
+            console.error(error)
+            res.status(500).send({ message: 'There was a problem trying to update the header' })
+        }
+    },
+    async updateHeader(req, res) {
+        try {
+            if (req.file) req.body.header_path = req.file.filename;
+            if (req.body.password) {
+                req.body.password = await bcrypt.hash(req.body.password, 10);
+            }
+            const user = await User.findByIdAndUpdate(req.user._id, { header_path: req.body.header_path }, { new: true });
+            res.send({ message: 'header actualizado correctamente', user })
+        } catch (error) {
+            console.error(error)
+            res.status(500).send({ message: 'There was a problem trying to update the header' })
+        }
     },
     async login(req, res) {
         try {
@@ -68,13 +92,23 @@ const UserController = {
                 return res.status(400).send({ message: 'Incorrect User or Password' });
             }
             token = jwt.sign({ id: user.id }, jwt_secret);
-            user.tokens.push(token)
-            await user.save()
-            const userWithPublications = await getUserWithPublications(user._id)
-            res.send({ message: 'Welcome ' + user.name, user: userWithPublications, token })
+            user.tokens.push(token);
+            await user.save();
+            const userWithPublications = await getUserWithPublications(user._id);
+            res.send({ message: 'Welcome ' + user.name, user: userWithPublications, token });
 
         } catch (errror) {
             console.error(error);
+        }
+    },
+    async follow(req, res) {
+        try {
+            const user = await User.findByIdAndUpdate(req.user._id, { $push: { following: req.params.user_id } }, { new: true });
+            await User.findByIdAndUpdate(req.params.user_id, { $push: { followers: req.user._id } });
+            res.send(user);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ message: 'There was a problem trying to follow' })
         }
     },
     getInfo(req, res) {

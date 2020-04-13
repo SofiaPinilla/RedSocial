@@ -24,7 +24,7 @@ export class ModalComponent {
 
     if (imageInput.files[0]) publicationFormData.set('image', imageInput.files[0]);
     let httpObservable;
-    
+
     if (this.publicationsService.publication?._id) {
       publicationFormData.set('_id', this.publicationsService.publication?._id);
       httpObservable = this.publicationsService.editOne(publicationFormData);
@@ -55,5 +55,7 @@ export class ModalComponent {
           err => console.error(err)); 
     })
   }
+
+  
 }
 

@@ -1,19 +1,16 @@
-
 <div class="container">
     <app-menu></app-menu>
     <app-modal></app-modal>
     <div>
         <div class="formulario">
-            <nz-card style="width:45vw;" [nzBordered]="false" nzTitle="Inicio">
+            <nz-card style="width:45vw;" [nzBordered]="false" nzTitle="Home">
 
                 <form #public2Form="ngForm">
 
                     <textarea class="textarea" rows="4" nz-input [(ngModel)]="inputValue" #publication="ngModel" name="publication"> </textarea>
-                    <input type="file" #imageInput id="file">
+                    <input type="file" #imageInput id="file2">
 
-                    <label for="file" class="btn-3"><span>Add Image</span></label>
-            
-
+                    <label for="file2" class="btn-3"><span>Add Image</span></label>
                     <button nz-button [nzType]="'default'" type="submit" on-click="postPublic(imageInput)"><span>Write</span></button>
                 </form>
 

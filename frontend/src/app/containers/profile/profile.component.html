@@ -4,23 +4,32 @@
         <app-menu></app-menu>
     </div>
     <div>
+
         <nz-card class="card" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-            <nz-card-meta nzTitle="{{userService['user']['name']}}" nzDescription="This is the description" [nzAvatar]="avatarTemplate"></nz-card-meta>
+
+
+            <nz-card-meta nzTitle="{{userService['user']['name']}}" nzDescription="{{userService['user']['userInfo']}}" [nzAvatar]="avatarTemplate"></nz-card-meta>
+
         </nz-card>
+
         <ng-template #avatarTemplate>
-            <nz-avatar nzSrc="https://media.karousell.com/media/photos/products/2018/01/11/bt21_1515660038_bdcf5de3.jpg"></nz-avatar>
+            <nz-avatar [nzSize]="100" nzSrc="http://localhost:3000/images/user/profile/{{userService['user']['profile_path']}}"></nz-avatar>
         </ng-template>
         <ng-template #coverTemplate>
-            <img alt="example" src="https://i.ya-webdesign.com/images/bts-love-yourself-png-5.png" />
+            <img alt="example" src="http://localhost:3000/images/user/header/{{userService['user']['header_path']}}" />
+            <input type="file" (change)="editHead(headerInput)" #headerInput id="file3">
+            <label for="file3" class="btn-3"><span>Edit header<i nz-icon nzType="highlight" nzTheme="outline"></i></span></label>
         </ng-template>
+
+
         <ng-template #actionSetting>
-            <i nz-icon nzType="setting"></i>
+            <p>Followers</p> <i nz-icon nzType="team"></i>
         </ng-template>
         <ng-template #actionEdit>
-            <i nz-icon nzType="edit"></i>
+            <span (click)="showModal()"><p>Edit</p> <i nz-icon nzType="edit"></i></span>
         </ng-template>
         <ng-template #actionEllipsis>
-            <i nz-icon nzType="ellipsis"></i>
+            <p>Likes</p> <i nz-icon nzType="heart"></i>
         </ng-template>
         <nz-card style="width:45vw; margin:5px;text-align: center" *ngFor="let publication of userService['user']['publications']">
             <div class="delete">
@@ -31,14 +40,19 @@
             <div class="container2">
 
                 <div class="div">
-                    <h3>{{userService['user']['name']}}</h3>
-                    <p>{{userService['user']['createdAt']}}</p>
+                    <div class="div2">
+
+                        <nz-avatar nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{userService['user']['profile_path']}}"></nz-avatar>
+
+                        <h3>{{userService['user']['name']}}</h3>
+                    </div>
+                    <p>{{userService.user.createdAt | date }}</p>
 
                 </div>
 
-
-                <img class="imagenes" *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
                 <p>{{publication.publication}}</p>
+                <img class="imagenes" *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
+
             </div>
 
 
@@ -54,3 +68,24 @@
 
 
 </div>
+
+<form>
+    <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" (nzOnCancel)="handleCancel()" (nzOnOk)="editProf()">
+        <ng-template #modalTitle>
+            Edit your profile
+        </ng-template>
+
+        <ng-template #modalContent>
+            <input nz-input placeholder=" Name " #name="ngModel" name="name" id="name" [(ngModel)]="userService['user']['name']" />
+            <br />
+            <br />
+            <input nz-input placeholder="Description " #userInfo="ngModel" name="userInfo" id="userInfo" [(ngModel)]="userService['user']['userInfo']" />
+            <br />
+            <br />
+            <label for="file" class="btn-3"><span>Select profile Image</span></label>
+            <br />
+            <input type="file" (change)="avatar=$event.target.files[0]" id="file">
+            <br />
+        </ng-template>
+    </nz-modal>
+</form>

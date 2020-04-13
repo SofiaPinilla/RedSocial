@@ -17,6 +17,7 @@ const UserService = {
             const [user] = await User.aggregate([
                 { $match: { _id } },
                 lookupPublications,
+                { $unset: ["password", "tokens", "__v"] }
             ])
             user.publications.reverse();
             return user;

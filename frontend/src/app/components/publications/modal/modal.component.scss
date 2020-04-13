@@ -1,4 +1,5 @@
 [type="file"]+label {
+    margin: 5px;
     color: white;
     font-weight: 400;
     text-align: center;
@@ -19,7 +20,12 @@
 }
 
 [type="file"] {
+    margin: 5px;
     height: 0;
     overflow: hidden;
     width: 0;
+}
+
+textarea.ant-input {
+    margin: 10px;
 }

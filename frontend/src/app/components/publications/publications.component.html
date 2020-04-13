@@ -29,11 +29,16 @@
 
     <div class="container">
         <div class="div">
-            <h3 *ngIf="userService.user as user">{{publication.user?.name}}</h3>
+            <div class="div2">
+
+                <nz-avatar *ngIf="userService.user as user" nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{publication.user?.profile_path}}"></nz-avatar>
+                <h3 *ngIf="userService.user as user">{{publication.user?.name}}</h3>
+            </div>
+
             <p *ngIf="userService.user as user">{{publication.haceCuanto}}</p>
         </div>
-
-        <img *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
         <p *ngIf="publication.publication !== '' ">{{publication.publication}}</p>
+        <img *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
+
     </div>
 </nz-card>

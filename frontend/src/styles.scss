@@ -32,3 +32,12 @@ p {
     background-color: #9A48E8;
     border-color: #9A48E8;
 }
+
+.ant-card-actions>li>span:hover {
+    color: #9A48E8
+}
+
+.ant-card-cover>* {
+    display: block;
+    width: 43vw;
+}

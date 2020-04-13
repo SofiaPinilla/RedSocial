@@ -17,9 +17,26 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
+    userInfo: String,
+
+    profile_path: String,
+
+    header_path: String,
+
+    followers: [],
+
+    following: [],
+
     tokens: [],
 
 }, { timestamps: true });
+UserSchema.methods.toJSON = function() {
+    const user = this._doc;
+    delete user.tokens;
+    delete user.password;
+    return user;
+}
 
 const User = mongoose.model('User', UserSchema);
 

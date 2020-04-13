@@ -38,6 +38,8 @@
 // }
 p {
     text-align: center;
+    margin-left: 8%;
+   
 }
 
 .delete {
@@ -47,6 +49,10 @@ p {
 .ant-card {
     padding: 12px;
     background-color: #F5F8FD;
+    img {
+        display: block;
+        height: 35vh;
+    }
 }
 
 .div {
@@ -56,5 +62,57 @@ p {
     p {
         color: rgb(136, 131, 131);
         font-size: 12px;
+        max-width: 30vh;
     }
+}
+
+.ant-card-actions>li>span:hover {
+    color: palevioletred
+}
+
+.div2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+h3 {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+[type="file"]+label {
+    margin: 5px;
+    color: #9A48E8;
+    font-weight: 400;
+    text-align: center;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: #F5F8FD;
+    border-color: #d9d9d9;
+}
+
+[type="file"]+label :hover {
+    transition: 1s;
+    color: #9A48E8;
+    background: #F5F8FD;
+}
+
+[type="file"] {
+    margin: 5px;
+    height: 0;
+    overflow: hidden;
+    width: 0;
+}
+
+.icono {
+    margin: bottom 10px;
+}
+
+span:hover {
+    color: #9A48E8;
+    cursor: pointer;
 }

@@ -61,12 +61,11 @@ export class RegisterComponent implements OnInit {
       this.userService.signup(user)
       .subscribe(
         (res:HttpResponse<object>)=>{
-          this.notificationService.success('Succesfully', res['message'])
-          console.log(res)
+          this.notificationService.success('Succesfully', res['message']);
           this.successMsg=res['message'];
-          // setTimeout(() => {
-          //   this.router.navigate(['login'])
-          // }, 2000);
+          setTimeout(() => {
+            this.router.navigate(['login'])
+          }, 2000);
       },
       (error: HttpErrorResponse) => {
         this.notificationService.error( 'Unregistered', error.error.message) ;
