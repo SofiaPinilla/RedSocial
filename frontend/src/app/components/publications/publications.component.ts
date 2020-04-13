@@ -3,7 +3,6 @@ import { PublicationsService } from 'src/app/services/publications.service';
 import { UserService } from 'src/app/services/user.service';
 import { HttpResponse } from '@angular/common/http';
 import * as moment from "moment";
-
 @Component({
   selector: 'app-publications',
   templateUrl: './publications.component.html',
@@ -42,13 +41,13 @@ export class PublicationsComponent implements OnInit {
     publication['haceCuanto'] = diffWeeks || diffDays || diffHours || diffMinutes || diffSeconds;
     return publication;
   }
-
+ 
   deletePublic(publication) {
     const id = publication._id
     this.publicationsService.deleteOne(id)
       .subscribe(publication => {
         this.publicationsService.getAll()
-        .subscribe(res => {
+          .subscribe(res => {
             console.log(res)
             this.publicationsService.publications = res
           },
