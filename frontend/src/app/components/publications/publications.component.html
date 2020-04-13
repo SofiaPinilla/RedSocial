@@ -10,7 +10,7 @@
     <div class="container">
         <div class="div">
             <h3 *ngIf="userService.user as user">{{publication.user?.name}}</h3>
-            <p *ngIf="userService.user as user">{{publication.user?.createdAt}}</p>
+            <p *ngIf="userService.user as user">{{publication.haceCuanto}}</p>
         </div>
 
         <img *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
