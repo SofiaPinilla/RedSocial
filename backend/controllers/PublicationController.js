@@ -1,6 +1,7 @@
 const Publication = require('../models/Publication.js');
+const ObjectID = require('mongodb').ObjectID
 const { getUserWithPublications } = require('../services/userService.js')
-
+    // const Publication = mongoose.model('../models/Publication.js')
 const lookupUsers = {
     $lookup: {
         //agregar datos de la colección users
@@ -15,23 +16,21 @@ const lookupUsers = {
 }
 
 
-// const lookupUsers = {
+// const lookupComments = {
 //     $lookup: {
-//         //agregar datos de la colección users
-//         from: 'comments',
-//         //el campo UserId de Publication
-//         localField: 'UserId',
-//         //debe coincidir con el _id de users
-//         foreignField: '_id',
-//         //creamos una propiedad llamada 'user' que contenga las coincidiencias
-//         as: 'user'
-//     }
+
+//             from: 'comments',
+//             let: 
+//             pipeline: lookup
+//             as: 
+//           }
 // }
+
 
 const PublicationController = {
     getAll(req, res) {
         Publication.aggregate([
-                lookupUsers, { //para evitar user:[{_id:....}] y en su lugar enviar el objeto user:{_id:...}
+                lookupUsers, {
                     $unwind: "$user"
                 },
                 { $sort: { createdAt: -1 } }
@@ -39,11 +38,35 @@ const PublicationController = {
             .then(publications => res.send(publications))
             .catch(console.error)
     },
+
     getId(req, res) {
-        Publication.findById(req.params._id)
-            .then(publication => res.send(publication))
-            .catch(console.error)
+        Publication.aggregate([
+
+
+                {
+                    $match: {
+                        _id: ObjectID(req.params._id),
+
+                    }
+                },
+                lookupUsers, {
+                    $unwind: "$user",
+                },
+
+            ])
+            .then(publication => {
+                res.send(publication)
+
+                console.log(publication)
+            })
+
+        .catch(console.error)
+
+
     },
+
+
+
     search() {
         Publication.aggregate([{
                     $match: {

@@ -1,19 +1,32 @@
-<nz-card style="width:45vw;">
+<div class="container">
+
+    <app-menu></app-menu>
+
+    <nz-card style="width:45vw;">
+        <div class="delete" *ngIf="userService.user['_id'] === publicationsService.publication[0]['UserId']">
 
 
-    <div class="container">
-        <div class="div">
-            <!-- <div class="div2">
-
-                <nz-avatar *ngIf="userService.user as user" nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{userService['user']['profile_path']}}"></nz-avatar>
-                <h3 *ngIf="userService.user as user">{{publication.user?.name}}</h3>
-
-            </div> -->
-
-            <!-- <p *ngIf="userService.user as user">{{publication.haceCuanto}}</p> -->
+            <i on-click="showUpdatePublicationModal(publicationsService.publication)" nz-icon nzType="edit" nzTheme="fill"> </i>
+            <i on-click="deletePublic(publicationsService.publication)" nz-icon nzType="close-circle" nzTheme="fill">
+        </i>
         </div>
-        <p>{{publicationsService.publication.publication}}</p>
-        <img *ngIf="publicationsService.publication['image_path']" src="http://localhost:3000/images/publications/{{publicationsService.publication['image_path']}}" alt="imagen publicación">
+        <div class="container2">
+            <div class="div">
+                <div class="div2">
+                    <nz-avatar nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{publicationsService.publication[0]['user']['profile_path'] }}"></nz-avatar>
+                    <h3>{{publicationsService.publication[0]['user']['name'] }}</h3>
+                </div>
 
-    </div>
-</nz-card>
+                <p>{{publicationsService.publication[0].haceCuanto}}</p>
+
+            </div>
+
+            <p>{{publicationsService.publication[0].publication }}</p>
+            <img *ngIf="publicationsService.publication[0][ 'image_path'] " src="http://localhost:3000/images/publications/{{publicationsService.publication[0][ 'image_path']}} " alt="imagen publicación ">
+
+
+        </div>
+    </nz-card>
+
+    <app-directs></app-directs>
+</div>

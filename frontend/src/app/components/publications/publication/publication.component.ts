@@ -12,30 +12,51 @@ import { Location } from '@angular/common';
   styleUrls: ['./publication.component.scss']
 })
 export class PublicationComponent implements OnInit {
-  
 
+  public publications;
     constructor( public publicationsService: PublicationsService, public userService: UserService, public router: Router, public route: ActivatedRoute, public location: Location) { }
-    
   
     ngOnInit(): void {
       const id = this.route.snapshot.params.id;
-      console.log(id)
       this.publicationsService.getId(id)
-      .subscribe(publication => {this.publicationsService.publication = publication;
-      console.log(publication)
+      .subscribe(publication => {this.publicationsService.publication = publication = publication.map(this.getHaceCuanto);
     })
   
 
-//   getHaceCuanto = publication => {
-//     const creationDate = moment(publication.createdAt);
-//     const diffWeeks = moment().diff(creationDate, 'weeks') ? moment().diff(creationDate, 'weeks') + ' weeks ago':'';
-//     const diffDays = moment().diff(creationDate, 'days') ? moment().diff(creationDate, 'days') + ' days ago':'';
-//     const diffHours = moment().diff(creationDate, 'hours') ? moment().diff(creationDate, 'hours') + ' hours ago':'';
-//     const diffMinutes = moment().diff(creationDate, 'minutes') ? moment().diff(creationDate, 'minutes') + ' minutes ago':'';
-//     const diffSeconds = moment().diff(creationDate, 'seconds') ? moment().diff(creationDate, 'seconds') + ' seconds ago':'';
 
-//     publication['haceCuanto'] = diffWeeks || diffDays || diffHours || diffMinutes || diffSeconds;
-//     return publication;
-//   }
+}
 
-}}
+showUpdatePublicationModal(publication) {
+  this.publicationsService.isModalVisible = true;
+  this.publicationsService.setPublication(publication);
+}
+
+getHaceCuanto = publication => {
+  const creationDate = moment(publication.createdAt);
+  const diffWeeks = moment().diff(creationDate, 'weeks') ? moment().diff(creationDate, 'weeks') + ' weeks ago':'';
+  const diffDays = moment().diff(creationDate, 'days') ? moment().diff(creationDate, 'days') + ' days ago':'';
+  const diffHours = moment().diff(creationDate, 'hours') ? moment().diff(creationDate, 'hours') + ' hours ago':'';
+  const diffMinutes = moment().diff(creationDate, 'minutes') ? moment().diff(creationDate, 'minutes') + ' minutes ago':'';
+  const diffSeconds = moment().diff(creationDate, 'seconds') ? moment().diff(creationDate, 'seconds') + ' seconds ago':'';
+
+  publication['haceCuanto'] = diffWeeks || diffDays || diffHours || diffMinutes || diffSeconds;
+  return publication;
+}
+
+deletePublic(publication) {
+
+  const id = this.publicationsService.publication[0]._id
+  this.publicationsService.deleteOne(id)
+    .subscribe(publication => {
+      this.publicationsService.getAll()
+        .subscribe(res => {
+          console.log(res)
+          this.publicationsService.publications = res
+        },
+        );
+
+      err => console.error(err)
+    }
+    )
+}
+}
