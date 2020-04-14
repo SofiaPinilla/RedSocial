@@ -18,6 +18,10 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
 
+    confirmed: false,
+
+    agree: false,
+
     userInfo: String,
 
     profile_path: String,

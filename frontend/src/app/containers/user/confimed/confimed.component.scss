@@ -1,0 +1,17 @@
+.container {
+    background-image: url('https://wallpaperaccess.com/full/423841.jpg');
+    // background-color: rgb(250, 200, 255);
+    // background-image: url(../../../assets/images/loveyourself2.png);
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+}
+
+.titulo {
+    color: #C3B4D6;
+    font-size: 30px;
+}

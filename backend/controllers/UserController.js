@@ -2,13 +2,17 @@ const User = require('../models/User.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { getUserWithPublications } = require('../services/userService.js')
-const { jwt_secret } = require('../config/keys.js');
+const { jwt_secret, API_URL } = require('../config/keys.js');
+const transporter = require('../config/nodemailer')
 
 const UserController = {
     async register(req, res) {
         try {
-            const { name, email, password, password2 } = req.body;
+            const { name, email, password, password2, confirmed } = req.body;
             let errors = [];
+            // const emailToken = jwt.sign({ email }, jwt_secret, { expiresIn: '48h' });
+            // const url = API_URL + '/users/confirm/' + emailToken;
+
             if (!name || !email || !password || !password2) {
                 errors.push({ msg: 'Please enter all fields' });
             }
@@ -24,6 +28,7 @@ const UserController = {
                     password2
                 })
             } else {
+
                 User.findOne({ email: email }).then(user => {
                     if (user) {
                         res.status(400).send({ message: 'Email already exists' })
@@ -35,6 +40,23 @@ const UserController = {
                             password2
                         });
                     } else {
+                        const email = req.body.email
+                        const emailToken = jwt.sign({ email }, jwt_secret, { expiresIn: '48h' });
+                        const url = API_URL + 'users/confirm/' + emailToken;
+                        transporter.sendMail({
+                            to: email,
+                            subject: 'Validate your account in Beyond the Army',
+                            html: `
+                            <h3>Welcome ${req.body.name} to Beyond the Army, only one more step</h3>
+                            <a href="${url}">Click here and complete your register</a>
+                            This link expire in 48 hours.
+                            `
+                        })
+
+                        .then(res.status(201).send({
+                            user,
+                            message: 'We send you a confirmation email'
+                        }));
                         newUser = new User({...req.body });
                         bcrypt.hash(newUser.password, 10)
                             .then(hash => {
@@ -48,7 +70,28 @@ const UserController = {
             }
         } catch (error) {
             console.error(error);
-            res.status(500).send({ error, message: 'Ha habido un problema tratando de registrar el usuario' })
+            res.status(500).send({ error, message: 'There was a problem trying to register' })
+        }
+    },
+    async confirm(req, res) {
+        try {
+            const emailToken = req.params.emailToken;
+            const payload = jwt.verify(emailToken, jwt_secret);
+            const email = payload.email;
+            // Mongoose findOneAndUpdate
+            const user = await User.findOneAndUpdate({ email }, { confirmed: true })
+            const authToken = jwt.sign({
+                id: user.id
+            }, jwt_secret);
+
+            await user.tokens.push(authToken);
+            await user.save();
+
+            res.redirect('http://localhost:4200/user/confirmado/' + authToken);
+
+        } catch (error) {
+            console.error(error)
+            res.status(500).send({ message: 'Ha habido un problema al confirmar el usuario', error })
         }
     },
     async update(req, res) {
@@ -71,7 +114,7 @@ const UserController = {
                 req.body.password = await bcrypt.hash(req.body.password, 10);
             }
             const user = await User.findByIdAndUpdate(req.user._id, { header_path: req.body.header_path }, { new: true });
-            res.send({ message: 'header actualizado correctamente', user })
+            res.send({ message: 'header was succesfully updated', user })
         } catch (error) {
             console.error(error)
             res.status(500).send({ message: 'There was a problem trying to update the header' })
@@ -90,6 +133,10 @@ const UserController = {
 
             if (!isMatch) {
                 return res.status(400).send({ message: 'Incorrect User or Password' });
+            }
+
+            if (!user.confirmed) {
+                return res.status(400).send({ message: 'You have to validate your email' });
             }
             token = jwt.sign({ id: user.id }, jwt_secret);
             user.tokens.push(token);

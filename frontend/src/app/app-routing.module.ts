@@ -7,6 +7,8 @@ import { ProfileComponent } from './containers/profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
 import { BtaComponent } from './containers/bta/bta.component';
+import { ConfimedComponent } from './containers/user/confimed/confimed.component';
+import { PublicationComponent } from './components/publications/publication/publication.component';
 
 
 const routes: Routes = [
@@ -15,6 +17,8 @@ const routes: Routes = [
   {path:'profile',component:ProfileComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
+  {path:'user/confirmado/:token',component:ConfimedComponent},
+  {path:'publication/:id',component: PublicationComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

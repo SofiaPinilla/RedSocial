@@ -36,14 +36,12 @@ export class ModalComponent {
       this.publicationsService.isModalVisible = false;
       this.publicationsService.setPublication(this.publicationsService.publication)
       imageInput.value = '';
-      
       this.publicationsService.publication={
         publication: '',
       }
       this.publicationsService.getAll()
         .subscribe(res => {
           this.publicationsService.publication = res
-    
            this.publicationsService.getAll()
            .subscribe(res => {
              this.publicationsService.publications = res

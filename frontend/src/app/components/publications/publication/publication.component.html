@@ -1,0 +1,19 @@
+<nz-card style="width:45vw;">
+
+
+    <div class="container">
+        <div class="div">
+            <!-- <div class="div2">
+
+                <nz-avatar *ngIf="userService.user as user" nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{userService['user']['profile_path']}}"></nz-avatar>
+                <h3 *ngIf="userService.user as user">{{publication.user?.name}}</h3>
+
+            </div> -->
+
+            <!-- <p *ngIf="userService.user as user">{{publication.haceCuanto}}</p> -->
+        </div>
+        <p>{{publicationsService.publication.publication}}</p>
+        <img *ngIf="publicationsService.publication['image_path']" src="http://localhost:3000/images/publications/{{publicationsService.publication['image_path']}}" alt="imagen publicación">
+
+    </div>
+</nz-card>

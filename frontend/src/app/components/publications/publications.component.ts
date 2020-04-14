@@ -24,7 +24,6 @@ export class PublicationsComponent implements OnInit {
     .subscribe(
       res => {
         this.publicationsService.publications = res.map(this.getHaceCuanto);
-        console.log(this.userService.user)
       },
       error => console.error(error)
     );

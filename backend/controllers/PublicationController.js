@@ -14,6 +14,20 @@ const lookupUsers = {
     }
 }
 
+
+// const lookupUsers = {
+//     $lookup: {
+//         //agregar datos de la colección users
+//         from: 'comments',
+//         //el campo UserId de Publication
+//         localField: 'UserId',
+//         //debe coincidir con el _id de users
+//         foreignField: '_id',
+//         //creamos una propiedad llamada 'user' que contenga las coincidiencias
+//         as: 'user'
+//     }
+// }
+
 const PublicationController = {
     getAll(req, res) {
         Publication.aggregate([
@@ -23,6 +37,11 @@ const PublicationController = {
                 { $sort: { createdAt: -1 } }
             ])
             .then(publications => res.send(publications))
+            .catch(console.error)
+    },
+    getId(req, res) {
+        Publication.findById(req.params._id)
+            .then(publication => res.send(publication))
             .catch(console.error)
     },
     search() {

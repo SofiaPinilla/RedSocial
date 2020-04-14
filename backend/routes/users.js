@@ -9,6 +9,7 @@ const { uploadUserProfileImages, uploadUserHeaderImages } = require('../middlewa
 // const { forwardAuthenticated } = require('../config/auth');
 
 router.get('/info', authentication, UserController.getInfo);
+router.get('/confirm/:emailToken', UserController.confirm);
 
 // Register
 router.post('/register', UserController.register);

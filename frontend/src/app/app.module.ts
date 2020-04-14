@@ -22,6 +22,9 @@ import { ModalComponent } from './components/publications/modal/modal.component'
 import { NotFoundComponent } from './containers/not-found/not-found.component';
 import { DirectsComponent } from './components/directs/directs.component';
 import { BtaComponent } from './containers/bta/bta.component';
+import { ConfimedComponent } from './containers/user/confimed/confimed.component';
+import { PublicationComponent } from './components/publications/publication/publication.component';
+
 
 
 
@@ -42,6 +45,8 @@ registerLocaleData(en);
     NotFoundComponent,
     DirectsComponent,
     BtaComponent,
+    ConfimedComponent,
+    PublicationComponent
    
   ],
   imports: [
@@ -53,7 +58,8 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     FormsModule,
     NzFormModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
     
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

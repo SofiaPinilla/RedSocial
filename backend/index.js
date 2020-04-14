@@ -19,11 +19,11 @@ app.use((req, res, next) => {
 const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
-mongoose.connect(MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
     .then(() => console.log('conectado a mongoDB con éxito'))
     .catch(err => console.error(err))
 
-
+app.use(express.urlencoded({ extended: true }));
 // Express body parser
 // app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
