@@ -12,7 +12,8 @@ import { Location } from '@angular/common';
   styleUrls: ['./publication.component.scss']
 })
 export class PublicationComponent implements OnInit {
-
+  theme = true;
+  isVisible = false;
   public publications;
     constructor( public publicationsService: PublicationsService, public userService: UserService, public router: Router, public route: ActivatedRoute, public location: Location) { }
   
@@ -21,12 +22,12 @@ export class PublicationComponent implements OnInit {
       this.publicationsService.getId(id)
       .subscribe(publication => {this.publicationsService.publication = publication = publication.map(this.getHaceCuanto);
     })
-  
-
-
+    
 }
 
-showUpdatePublicationModal(publication) {
+
+
+showUpdatePublicationModal(publication) { 
   this.publicationsService.isModalVisible = true;
   this.publicationsService.setPublication(publication);
 }
@@ -44,17 +45,11 @@ getHaceCuanto = publication => {
 }
 
 deletePublic(publication) {
-
   const id = this.publicationsService.publication[0]._id
   this.publicationsService.deleteOne(id)
     .subscribe(publication => {
-      this.publicationsService.getAll()
-        .subscribe(res => {
-          console.log(res)
-          this.publicationsService.publications = res
-        },
-        );
-
+      (publication => {this.publicationsService.publication})
+      this.router.navigate(['home']);
       err => console.error(err)
     }
     )
