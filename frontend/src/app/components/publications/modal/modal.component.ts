@@ -19,7 +19,7 @@ export class ModalComponent {
 
   postPublic(imageInput) {
     const publicationFormData = new FormData();
-    
+
     if (this.publicationsService.publication.publication) publicationFormData.set('publication', this.publicationsService.publication.publication);
 
     if (imageInput.files[0]) publicationFormData.set('image', imageInput.files[0]);
@@ -28,7 +28,7 @@ export class ModalComponent {
     if (this.publicationsService.publication?._id) {
       publicationFormData.set('_id', this.publicationsService.publication?._id);
       httpObservable = this.publicationsService.editOne(publicationFormData);
-      
+
     } else {
       httpObservable = this.publicationsService.post(publicationFormData);
     }
@@ -40,20 +40,18 @@ export class ModalComponent {
         publication: '',
       }
       this.publicationsService.getAll()
-        .subscribe(res => {
-          this.publicationsService.publication = res
-           this.publicationsService.getAll()
-           .subscribe(res => {
-             this.publicationsService.publications = res
-             const token:string=localStorage.getItem('authToken')
+      .subscribe(res => {
+        this.publicationsService.publications = res
+        const token:string=localStorage.getItem('authToken')
         this.userService.getInfo(token)
-         .subscribe( res => this.userService.setUser(res),
-         )}
-           )},
-          err => console.error(err)); 
+        .subscribe(res => {
+          this.userService.user = res
+     
+      })
+    }
+      )
     })
   }
 
-  
 }
 

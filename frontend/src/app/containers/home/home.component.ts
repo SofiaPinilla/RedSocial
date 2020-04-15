@@ -19,6 +19,13 @@ export class HomeComponent {
 
   constructor(public publicationsService: PublicationsService, public userService: UserService, private notificationService: NzNotificationService) { }
 
+  ngOnInit(): void {
+    this.publicationsService.getAll()
+           .subscribe(res => {
+             this.publicationsService.publications = res})
+ 
+  }
+
   showModal(): void {
     this.isVisible = true;
   }
@@ -37,18 +44,18 @@ export class HomeComponent {
         imageInput.value = '';
         this.inputValue = '';
         this.notificationService.success('Publication successfully added','Thanks for your contribution')
+        this.publicationsService.setPublication(this.publicationsService.publication)
+        imageInput.value = '';
+        this.publicationsService.publication={
+          publication: '',
+        }
         this.publicationsService.getAll()
         .subscribe(res => {
-          this.publicationsService.publication = res
-           this.publicationsService.getAll()
-           .subscribe(res => {
-             this.publicationsService.publications = res
-             const token:string=localStorage.getItem('authToken')
-        this.userService.getInfo(token)
-         .subscribe( res => this.userService.setUser(res),
-         )}
-           )},
-          err => console.error(err)); 
+          this.publicationsService.publications = res
+      }
+        )
+
+     err => console.error(err); 
         })
  
   }

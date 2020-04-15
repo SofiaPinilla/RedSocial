@@ -20,12 +20,12 @@
 
 <nz-card style="width:45vw;" *ngFor="let publication of publicationsService.publications">
 
-    <div class="delete" *ngIf="userService.user['_id'] === publication.UserId">
+    <!-- <div class="delete" *ngIf="userService.user['_id'] === publication.UserId">
 
         <i on-click="showUpdatePublicationModal(publication)" nz-icon nzType="edit" nzTheme="fill"> </i>
         <i on-click="deletePublic(publication)" nz-icon nzType="close-circle" nzTheme="fill">
         </i>
-    </div>
+    </div> -->
 
     <div class="container" routerLink="/publication/{{publication['_id']}}" routerLinkActive="router-link-active">
         <div class="div">

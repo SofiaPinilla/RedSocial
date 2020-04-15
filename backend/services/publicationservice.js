@@ -19,7 +19,7 @@ const PublicationService = {
                 },
                 {
                     $lookup: {
-                       
+
                         from: 'users',
                         localField: 'UserId',
                         foreignField: '_id',

@@ -25,14 +25,6 @@ export class PublicationComponent implements OnInit {
     
 }
 
-
-
-showUpdatePublicationModal(publication) { 
-  this.publicationsService.isModalVisible = true;
-  this.publicationsService.setPublication(publication);
-  console.log(publication)
-}
-
 getHaceCuanto = publication => {
   const creationDate = moment(publication.createdAt);
   const diffWeeks = moment().diff(creationDate, 'weeks') ? moment().diff(creationDate, 'weeks') + ' weeks ago':'';
@@ -45,14 +37,4 @@ getHaceCuanto = publication => {
   return publication;
 }
 
-deletePublic(publication) {
-  const id = this.publicationsService.publication._id
-  this.publicationsService.deleteOne(id)
-    .subscribe(publication => {
-      (publication => {this.publicationsService.publication})
-      this.router.navigate(['home']);
-      err => console.error(err)
-    }
-    )
-}
 }

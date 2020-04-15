@@ -3,30 +3,25 @@
     <app-menu></app-menu>
     <app-modal></app-modal>
     <nz-card style="width:45vw;">
-        <div class="delete" *ngIf="userService.user['_id'] === publicationsService.publication['UserId']">
 
-
-            <i on-click="showUpdatePublicationModal(publicationsService.publication)" nz-icon nzType="edit" nzTheme="fill"> </i>
-            <i on-click="deletePublic(publicationsService.publication)" nz-icon nzType="close-circle" nzTheme="fill">
-        </i>
-        </div>
         <div class="container2">
             <div class="div">
                 <div class="div2">
                     <nz-avatar nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{publicationsService.publication['user']['profile_path'] }}"></nz-avatar>
                     <h3>{{publicationsService.publication['user']['name'] }}</h3>
-                </div> 
 
-                <!-- <p>{{publicationsService.publication[0].haceCuanto}}</p>  -->
-
-            </div> 
-
-<p>{{publicationsService.publication.publication}}</p>
- <img *ngIf="publicationsService.publication['image_path'] " src="http://localhost:3000/images/publications/{{publicationsService.publication[ 'image_path']}} " alt="imagen publicación ">
+                </div>
 
 
-         </div>
+
+            </div>
+
+            <p>{{publicationsService.publication.publication}}</p>
+            <img *ngIf="publicationsService.publication['image_path'] " src="http://localhost:3000/images/publications/{{publicationsService.publication[ 'image_path']}} " alt="imagen publicación ">
+            <p style="font-size:12px;">{{userService.user.createdAt | date }}</p>
+
+        </div>
     </nz-card>
 
     <app-directs></app-directs>
-</div>  
+</div>

@@ -41,24 +41,5 @@ export class PublicationsComponent implements OnInit {
     return publication;
   }
  
-  deletePublic(publication) {
-    const id = publication._id
-    this.publicationsService.deleteOne(id)
-      .subscribe(publication => {
-        this.publicationsService.getAll()
-          .subscribe(res => {
-            console.log(res)
-            this.publicationsService.publications = res
-          },
-          );
-
-        err => console.error(err)
-      }
-      )
-  }
-  showUpdatePublicationModal(publication) {
-    this.publicationsService.isModalVisible = true;
-    this.publicationsService.setPublication(publication);
-  }
 
 }

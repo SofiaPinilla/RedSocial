@@ -17,10 +17,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     const token: string = localStorage.getItem('authToken')
     this.userService.getInfo(token)
-      .subscribe(
-        res => console.log(res),
-        error => console.log(error)
-      )
+      .subscribe((res => {
+        this.userService.user = res
+    }))
   }
 
   theme = true;
