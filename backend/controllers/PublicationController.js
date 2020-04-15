@@ -37,9 +37,7 @@ const PublicationController = {
     getPubliId(req, res) {
         getId(req.params._id)
             .then(publication => res.send(publication))
-            
-
-        .catch(console.error);
+            .catch(console.error);
     },
 
 
@@ -93,7 +91,8 @@ const PublicationController = {
         }
 
 
-    }
+    },
+
 }
 
 module.exports = PublicationController
