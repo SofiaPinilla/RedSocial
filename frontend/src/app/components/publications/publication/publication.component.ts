@@ -19,8 +19,8 @@ export class PublicationComponent implements OnInit {
   
     ngOnInit(): void {
       const id = this.route.snapshot.params.id;
-      this.publicationsService.getId(id)
-      .subscribe(publication => {this.publicationsService.publication = publication = publication.map(this.getHaceCuanto);
+      this.publicationsService.getPubliId(id)
+      .subscribe(publication => {this.publicationsService.publication = publication 
     })
     
 }
@@ -30,6 +30,7 @@ export class PublicationComponent implements OnInit {
 showUpdatePublicationModal(publication) { 
   this.publicationsService.isModalVisible = true;
   this.publicationsService.setPublication(publication);
+  console.log(publication)
 }
 
 getHaceCuanto = publication => {
@@ -45,7 +46,7 @@ getHaceCuanto = publication => {
 }
 
 deletePublic(publication) {
-  const id = this.publicationsService.publication[0]._id
+  const id = this.publicationsService.publication._id
   this.publicationsService.deleteOne(id)
     .subscribe(publication => {
       (publication => {this.publicationsService.publication})

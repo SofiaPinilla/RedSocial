@@ -12,6 +12,7 @@ const lookupPublications = {
     }
 }
 const UserService = {
+
     getUserWithPublications: async(_id) => {
         try {
             const [user] = await User.aggregate([

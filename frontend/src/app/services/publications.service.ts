@@ -27,7 +27,7 @@ export class PublicationsService {
     return this.httpClient.get('http://localhost:3000/publications');
   }
 
-  getId(id: string): Observable<any> {
+  getPubliId(id: string): Observable<any> {
     return this.httpClient.get(`http://localhost:3000/publications/${id}`);
   }
 

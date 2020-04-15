@@ -1,7 +1,10 @@
 const Publication = require('../models/Publication.js');
-const ObjectID = require('mongodb').ObjectID
 const { getUserWithPublications } = require('../services/userService.js')
-    // const Publication = mongoose.model('../models/Publication.js')
+const { getId } = require('../services/publicationservice.js')
+
+// const Publication = mongoose.model('../models/Publication.js')
+
+
 const lookupUsers = {
     $lookup: {
         //agregar datos de la colección users
@@ -15,19 +18,31 @@ const lookupUsers = {
     }
 }
 
-
 // const lookupComments = {
 //     $lookup: {
 
 //             from: 'comments',
-//             let: 
+//             let:
 //             pipeline: lookup
-//             as: 
+//             as:
 //           }
 // }
 
-
+// getInfo(req, res) {
+//     getUserWithPublications(req.user._id)
+//         .then(user => res.send(user))
+//         .catch(console.error);
+// }
 const PublicationController = {
+    getPubliId(req, res) {
+        getId(req.params._id)
+            .then(publication => res.send(publication))
+            
+
+        .catch(console.error);
+    },
+
+
     getAll(req, res) {
         Publication.aggregate([
                 lookupUsers, {
@@ -38,34 +53,6 @@ const PublicationController = {
             .then(publications => res.send(publications))
             .catch(console.error)
     },
-
-    getId(req, res) {
-        Publication.aggregate([
-
-
-                {
-                    $match: {
-                        _id: ObjectID(req.params._id),
-
-                    }
-                },
-                lookupUsers, {
-                    $unwind: "$user",
-                },
-
-            ])
-            .then(publication => {
-                res.send(publication)
-
-                console.log(publication)
-            })
-
-        .catch(console.error)
-
-
-    },
-
-
 
     search() {
         Publication.aggregate([{

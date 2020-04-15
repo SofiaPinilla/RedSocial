@@ -12,4 +12,4 @@ const PublicationSchema = new mongoose.Schema({
     UserId: ObjectID,
 
 }, { timestamps: true });
-module.exports = mongoose.model('publication', PublicationSchema);
+module.exports = mongoose.model('Publication', PublicationSchema);
