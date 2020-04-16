@@ -5,6 +5,7 @@ const ObjectID = require('mongodb').ObjectID
 
 
 const unsetUserFields = { $unset: ["user.password", "user.tokens", "user.__v"] }
+
 const PublicationService = {
     getId: async(_id) => {
 
@@ -30,11 +31,12 @@ const PublicationService = {
                 {
                     $lookup: {
                         from: 'comments',
-                        let: { publication_id: "PublicationId" },
+                        let: { id: "$_id"},
                         // xd: console.log(PublicationId),
-                        pipeline: [{
-                                // $match: { $expr: { $eq: ["$_id", "$$publication_id"] } },
-
+                        pipeline: [
+                                {$match: { $expr: { $eq: ["$PublicationId", "$$id" ] } }},
+                            
+                            {
                                 $lookup: {
                                     from: 'users',
                                     localField: 'UserId',
@@ -49,7 +51,8 @@ const PublicationService = {
                             { $unwind: "$user" },
 
                         ],
-                        as: 'comment',
+                        as: 'comments',
+                        
                     }
                 }, {
                     $unwind: "$user"
