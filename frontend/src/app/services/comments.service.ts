@@ -6,14 +6,25 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommentsService {
+  public comments;
+  
+  comment = { };
+  
 
   constructor(public httpClient: HttpClient) { }
+  
+  post(comment: FormData, id:any): Observable<any> {
 
-  post(comment: FormData): Observable<any> {
-    return this.httpClient.post('http://localhost:3000/comments/:PublicationId', comment, {
+    return this.httpClient.post(`http://localhost:3000/comments/${id}`, comment, {
       headers: {
         Authorization: localStorage.getItem('authToken') || ''
       }
     });
   }
+  setComment(comment:object) {
+    this.comment = comment;
+  }
 }
+
+
+

@@ -14,5 +14,7 @@ const generateUploadImageMulter = path => Multer({
 const uploadPublicationsImages = generateUploadImageMulter('./public/images/publications');
 const uploadUserProfileImages = generateUploadImageMulter('./public/images/user/profile');
 const uploadUserHeaderImages = generateUploadImageMulter('./public/images/user/header');
+const uploadCommentImages = generateUploadImageMulter('./public/images/user/comments');
 
-module.exports = { uploadUserProfileImages, uploadPublicationsImages, uploadUserHeaderImages };
+
+module.exports = { uploadUserProfileImages, uploadPublicationsImages, uploadUserHeaderImages, uploadCommentImages };

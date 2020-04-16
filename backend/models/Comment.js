@@ -3,7 +3,11 @@ const ObjectID = require('mongodb').ObjectID;
 const CommentSchema = new mongoose.Schema({
     comment: {
         type: String,
-        required: true
+        required: false
+    },
+    image_path: {
+        type: String,
+        required: false
     },
     PublicationId: ObjectID,
     UserId: ObjectID

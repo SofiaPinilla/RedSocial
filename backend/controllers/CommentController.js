@@ -34,13 +34,15 @@ const CommentController = {
             },
         ])
     },
-
     insert(req, res) {
         if (req.file) req.body.image_path = req.file.filename;
+
         Comment.create({...req.body, UserId: req.user._id, PublicationId: req.params.PublicationId })
             .then(comment => res.status(201).send(comment))
             .catch(console.error)
     },
+
+
     async delete(req, res) {
         try {
             await Comment.findByIdAndDelete(req.params._id) // mongoose method which uses the findOneAndDelete()

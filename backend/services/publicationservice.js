@@ -58,6 +58,7 @@ const PublicationService = {
 
 
             ])
+            publication.comments.reverse();
             return publication;
 
         } catch (error) {
