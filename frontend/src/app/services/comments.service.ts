@@ -19,8 +19,19 @@ export class CommentsService {
       headers: {
         Authorization: localStorage.getItem('authToken') || ''
       }
+
+
     });
   }
+
+  deleteOne(id: string): Observable<any> {
+    return this.httpClient.delete(`http://localhost:3000/comments/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem('authToken') || ''
+      }
+    });
+  }
+  
   setComment(comment:object) {
     this.comment = comment;
   }

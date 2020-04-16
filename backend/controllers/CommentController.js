@@ -47,7 +47,7 @@ const CommentController = {
         try {
             await Comment.findByIdAndDelete(req.params._id) // mongoose method which uses the findOneAndDelete()
                 // Comment.findOneAndDelete({_id:req.params._id} ) // Mongodb method
-                // const publication = await getId(req.PublicationId)
+            const publication = await getId(req.PublicationId)
                 // console.log(Comment.PublicationId)
             res.send({ publication, message: 'comment deleted' })
         } catch (error) {
