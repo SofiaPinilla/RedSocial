@@ -31,11 +31,10 @@ const PublicationService = {
                 {
                     $lookup: {
                         from: 'comments',
-                        let: { id: "$_id"},
-                        // xd: console.log(PublicationId),
+                        let: { id: "$_id" },
                         pipeline: [
-                                {$match: { $expr: { $eq: ["$PublicationId", "$$id" ] } }},
-                            
+                            { $match: { $expr: { $eq: ["$PublicationId", "$$id"] } } },
+
                             {
                                 $lookup: {
                                     from: 'users',
@@ -44,15 +43,13 @@ const PublicationService = {
                                     as: 'user'
                                 },
                             },
-                            // { $match: { "$expr": { "$eq": ["$PublicationId", "$$id"] } } },
-                            // { $match: { $expr: { $eq: ["$bot", false] } } }
 
                             unsetUserFields,
                             { $unwind: "$user" },
 
                         ],
                         as: 'comments',
-                        
+
                     }
                 }, {
                     $unwind: "$user"

@@ -93,6 +93,10 @@ export class ProfileComponent implements OnInit {
     this.isVisible = false;
   }
 
-  
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
 
 }

@@ -40,7 +40,21 @@ const CommentController = {
         Comment.create({...req.body, UserId: req.user._id, PublicationId: req.params.PublicationId })
             .then(comment => res.status(201).send(comment))
             .catch(console.error)
-    }
+    },
+    async delete(req, res) {
+        try {
+            await Comment.findByIdAndDelete(req.params._id) // mongoose method which uses the findOneAndDelete()
+                // Comment.findOneAndDelete({_id:req.params._id} ) // Mongodb method
+                // const publication = await getId(req.PublicationId)
+                // console.log(Comment.PublicationId)
+            res.send({ publication, message: 'comment deleted' })
+        } catch (error) {
+            console.error(error)
+            res.status(500).send({ message: 'there was a problem trying to remove the comment' })
+        }
+
+
+    },
 }
 
 module.exports = CommentController

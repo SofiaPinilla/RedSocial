@@ -18,21 +18,6 @@ const lookupUsers = {
     }
 }
 
-// const lookupComments = {
-//     $lookup: {
-
-//             from: 'comments',
-//             let:
-//             pipeline: lookup
-//             as:
-//           }
-// }
-
-// getInfo(req, res) {
-//     getUserWithPublications(req.user._id)
-//         .then(user => res.send(user))
-//         .catch(console.error);
-// }
 const PublicationController = {
     getPubliId(req, res) {
         getId(req.params._id)

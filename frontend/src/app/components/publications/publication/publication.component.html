@@ -18,10 +18,17 @@
 
             <p>{{publicationsService.publication.publication}}</p>
             <img *ngIf="publicationsService.publication['image_path'] " src="http://localhost:3000/images/publications/{{publicationsService.publication[ 'image_path']}} " alt="imagen publicación ">
-            <p style="font-size:12px;">{{userService.user.createdAt | date }}</p>
+            <div class="div">
+                <p style="font-size:12px;">{{userService.user.createdAt | date }}</p>
+                <i nz-icon nzType="message" nzTheme="outline"></i>
+                <i nz-icon nzType="heart" nzTheme="outline"></i>
+            </div>
+
+
 
         </div>
     </nz-card>
+
 
     <app-directs></app-directs>
 </div>

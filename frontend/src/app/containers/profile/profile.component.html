@@ -33,9 +33,26 @@
         </ng-template>
         <nz-card style="width:45vw; margin:5px;text-align: center" *ngFor="let publication of userService['user']['publications']">
             <div class="delete">
-                <i on-click="showUpdatePublicationModal(publication)" nz-icon nzType="edit" nzTheme="fill"> </i>
-                <i on-click="deletePublic2(publication)" nz-icon nzType="close-circle" nzTheme="fill">
-                </i>
+
+
+
+
+
+                <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+                    <i nz-icon nzType="down"></i>
+                </a>
+                <nz-dropdown-menu #menu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <li nz-menu-item><i on-click="showUpdatePublicationModal(publication)" nz-icon nzType="edit" nzTheme="fill"> </i>Edit</li>
+                        <li nz-menu-item><i on-click="deletePublic2(publication)" nz-icon nzType="delete" nzTheme="fill">
+                            </i>Delete</li>
+                        <li nz-menu-divider></li>
+
+                    </ul>
+                </nz-dropdown-menu>
+
+
+
             </div>
             <div class="container2">
 
