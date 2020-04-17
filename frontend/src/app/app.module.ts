@@ -24,6 +24,7 @@ import { DirectsComponent } from './components/directs/directs.component';
 import { BtaComponent } from './containers/bta/bta.component';
 import { ConfimedComponent } from './containers/user/confimed/confimed.component';
 import { PublicationComponent } from './components/publications/publication/publication.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 
@@ -46,7 +47,8 @@ registerLocaleData(en);
     DirectsComponent,
     BtaComponent,
     ConfimedComponent,
-    PublicationComponent
+    PublicationComponent,
+    SearchComponent
    
   ],
   imports: [

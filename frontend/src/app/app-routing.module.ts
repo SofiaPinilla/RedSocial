@@ -9,6 +9,7 @@ import { NotFoundComponent } from './containers/not-found/not-found.component';
 import { BtaComponent } from './containers/bta/bta.component';
 import { ConfimedComponent } from './containers/user/confimed/confimed.component';
 import { PublicationComponent } from './components/publications/publication/publication.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'user/confirmado/:token',component:ConfimedComponent},
   {path:'publication/:id',component: PublicationComponent},
+  {path: 'search/:search', component: SearchComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

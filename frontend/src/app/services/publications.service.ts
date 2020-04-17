@@ -31,6 +31,10 @@ export class PublicationsService {
     return this.httpClient.get(`http://localhost:3000/publications/${id}`);
   }
 
+  searchPubli(search: string): Observable<any> {
+    return this.httpClient.get(`http://localhost:3000/publications/search/${search}`);
+  }
+
   deleteOne(id: string): Observable<any> {
     return this.httpClient.delete(`http://localhost:3000/publications/${id}`, {
       headers: {

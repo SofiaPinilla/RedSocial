@@ -1,3 +1,10 @@
 <div class="directs">
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga saepe aperiam quos eligendi quam voluptatum deserunt, pariatur earum est animi laboriosam? Tenetur expedita nostrum minima provident optio adipisci, doloribus nulla!</p>
+
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input type="text" [(ngModel)]="inputSearch" nz-input placeholder="input search text" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search" routerLink="/search/{{inputSearch}}" routerLinkActive="router-link-active"></i>
+    </ng-template>
+    <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga saepe aperiam quos eligendi quam voluptatum deserunt, pariatur earum est animi laboriosam? Tenetur expedita nostrum minima provident optio adipisci, doloribus nulla!</p> -->
 </div>

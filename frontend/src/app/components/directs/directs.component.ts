@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { PublicationsService } from 'src/app/services/publications.service';
+import { UserService } from 'src/app/services/user.service';
+import { Router, ActivatedRoute, } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-directs',
@@ -6,10 +10,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./directs.component.scss']
 })
 export class DirectsComponent implements OnInit {
-
-  constructor() { }
+  inputSearch;
+  constructor(public publicationsService: PublicationsService, public router: Router, public route: ActivatedRoute, public location: Location) { }
+  
 
   ngOnInit(): void {
   }
+
 
 }

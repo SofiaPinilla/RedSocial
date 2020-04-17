@@ -3,7 +3,8 @@ const ObjectID = require('mongodb').ObjectID;
 const PublicationSchema = new mongoose.Schema({
     publication: {
         type: String,
-        maxlength: 200
+        maxlength: 200,
+
     },
     image_path: {
         type: String,
@@ -11,5 +12,9 @@ const PublicationSchema = new mongoose.Schema({
     },
     UserId: ObjectID,
 
+
 }, { timestamps: true });
+PublicationSchema.index({
+    publication: 'text'
+});
 module.exports = mongoose.model('Publication', PublicationSchema);

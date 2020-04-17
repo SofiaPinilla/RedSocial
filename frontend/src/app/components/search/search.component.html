@@ -1,0 +1,28 @@
+<div class="container">
+    <app-menu></app-menu>
+    <app-modal></app-modal>
+
+    <div class="container2">
+        <nz-card style="width:45vw;" *ngFor="let publication of publicationsService['publications']">
+
+            <div class="div">
+                <div class="div2">
+                    <nz-avatar nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{publication['user']['profile_path'] }}"></nz-avatar>
+                    <h3>{{publication.user.name}}</h3>
+
+                </div>
+
+            </div>
+
+            <p>{{publication.publication}}</p>
+            <img *ngIf="publication['image_path'] " src="http://localhost:3000/images/publications/{{publication[ 'image_path']}} " alt="imagen publicación ">
+            <div class="div">
+                <p style="font-size:12px;">{{userService.user.createdAt | date }}</p>
+                <i nz-icon nzType="message" nzTheme="outline"></i>
+                <i nz-icon nzType="heart" nzTheme="outline"></i>
+            </div>
+
+        </nz-card>
+    </div>
+    <app-directs></app-directs>
+</div>

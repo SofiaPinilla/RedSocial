@@ -31,7 +31,7 @@
         <ng-template #actionEllipsis>
             <p>Likes</p> <i nz-icon nzType="heart"></i>
         </ng-template>
-        <nz-card style="width:45vw; margin:5px;text-align: center" *ngFor="let publication of userService['user']['publications']">
+        <nz-card routerLink="/publication/{{publication['_id']}}" style="width:45vw; margin:5px;text-align: center" *ngFor="let publication of userService['user']['publications']">
             <div class="delete">
 
 
@@ -43,8 +43,8 @@
                 </a>
                 <nz-dropdown-menu #menu="nzDropdownMenu">
                     <ul nz-menu>
-                        <li nz-menu-item><i on-click="showUpdatePublicationModal(publication)" nz-icon nzType="edit" nzTheme="fill"> </i>Edit</li>
-                        <li nz-menu-item><i on-click="deletePublic2(publication)" nz-icon nzType="delete" nzTheme="fill">
+                        <li nz-menu-item on-click="showUpdatePublicationModal(publication)"><i nz-icon nzType="edit" nzTheme="fill"> </i>Edit</li>
+                        <li nz-menu-item on-click="deletePublic2(publication)"><i nz-icon nzType="delete" nzTheme="fill">
                             </i>Delete</li>
                         <li nz-menu-divider></li>
 

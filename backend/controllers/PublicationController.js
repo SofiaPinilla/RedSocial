@@ -37,13 +37,22 @@ const PublicationController = {
             .catch(console.error)
     },
 
-    search() {
+
+    search(req, res) {
+
         Publication.aggregate([{
+
                     $match: {
-                        $text: { $search: req.params.search }
+
+                        $text: {
+
+                            $search: req.params.search
+                        }
+
                     }
                 },
-                lookupUsers, { //para evitar user:[{_id:....}] y en su lugar enviar el objeto user:{_id:...}
+                lookupUsers,
+                { //para evitar user:[{_id:....}] y en su lugar enviar el objeto user:{_id:...}
                     $unwind: "$user"
                 }
             ])
