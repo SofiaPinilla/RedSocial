@@ -10,6 +10,9 @@ const PublicationSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+
+    likes: [],
+
     UserId: ObjectID,
 
 

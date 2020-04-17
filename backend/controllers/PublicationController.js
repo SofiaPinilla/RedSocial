@@ -1,6 +1,7 @@
 const Publication = require('../models/Publication.js');
 const { getUserWithPublications } = require('../services/userService.js')
-const { getId } = require('../services/publicationservice.js')
+const { getId, getPubliWithAll } = require('../services/publicationservice.js')
+
 
 // const Publication = mongoose.model('../models/Publication.js')
 
@@ -27,13 +28,8 @@ const PublicationController = {
 
 
     getAll(req, res) {
-        Publication.aggregate([
-                lookupUsers, {
-                    $unwind: "$user"
-                },
-                { $sort: { createdAt: -1 } }
-            ])
-            .then(publications => res.send(publications))
+        getPubliWithAll()
+            .then(publications => res.send(publications.reverse()))
             .catch(console.error)
     },
 
@@ -59,6 +55,29 @@ const PublicationController = {
             .then(publications => res.send(publications))
             .catch(console.error)
     },
+
+
+    async like(req, res) {
+        try {
+            // if (publication.likes.includes()) {}
+            const publication =
+                await Publication.findByIdAndUpdate(req.params._id, { $push: { likes: req.user._id } }, { new: true });
+            res.send(publication);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ message: 'There was a problem with your like' })
+        }
+    },
+    async disLike(req, res) {
+        try {
+            const publication = await Publication.findByIdAndUpdate(req.params._id, { $pull: { likes: req.user._id } }, { new: true });
+            res.send(publication);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ message: 'There was a problem with your like' })
+        }
+    },
+
 
     insert(req, res) {
         if (req.file) req.body.image_path = req.file.filename;

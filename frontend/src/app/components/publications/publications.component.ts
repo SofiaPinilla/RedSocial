@@ -13,36 +13,81 @@ export class PublicationsComponent implements OnInit {
   theme = true;
   isVisible = false;
   inputValue: any;
-  public publications;
-  public numberComment = this.publicationsService.publication['comments']
+  // public publications;
+  nzTheme= "outline";
   constructor(public publicationsService: PublicationsService, public userService: UserService, public commentsService: CommentsService) { }
   ngOnInit(): void {
-    console.log(this.numberComment.length)
     this.getAllPublications();
     setInterval(this.getAllPublications,30000);
   }
-
+  
   getAllPublications=()=>{
     this.publicationsService.getAll()
+    .subscribe(
+      res => {
+        this.publicationsService.publications = res.map(this.getHaceCuanto);
+        // this.nzTheme =  this.publicationsService.publications.includes(this.userService.user._id ? 'filled' : 'outline')
+
+      },
+      error => console.error(error)
+      );
+    }
+    
+    getHaceCuanto = publication => {
+      const creationDate = moment(publication.createdAt);
+      const diffWeeks = moment().diff(creationDate, 'weeks') ? moment().diff(creationDate, 'weeks') + ' weeks ago':'';
+      const diffDays = moment().diff(creationDate, 'days') ? moment().diff(creationDate, 'days') + ' days ago':'';
+      const diffHours = moment().diff(creationDate, 'hours') ? moment().diff(creationDate, 'hours') + ' hours ago':'';
+      const diffMinutes = moment().diff(creationDate, 'minutes') ? moment().diff(creationDate, 'minutes') + ' minutes ago':'';
+      const diffSeconds = moment().diff(creationDate, 'seconds') ? moment().diff(creationDate, 'seconds') + ' seconds ago':'';
+      
+      publication['haceCuanto'] = diffWeeks || diffDays || diffHours || diffMinutes || diffSeconds;
+    return publication;
+  }
+  
+  // if(this.heartType == 'heart-empty') {
+    //   this.postReference.update({
+  //     likes: firestore.FieldValue.arrayUnion(this.user.getUID())
+  //   })
+  // } else {
+    //   this.postReference.update({
+      //     likes: firestore.FieldValue.arrayRemove(this.user.getUID())
+      //   })
+      // }
+    GiveLike(publication){
+    
+    this.publicationsService.likes(publication)
+    .subscribe (
+      res => {
+        this.publicationsService.publication = res
+        this.publicationsService.getAll()
     .subscribe(
       res => {
         this.publicationsService.publications = res.map(this.getHaceCuanto);
       },
       error => console.error(error)
     );
-  }
+      },
+      error => console.error(error)
+    )
+  
+}
 
-  getHaceCuanto = publication => {
-    const creationDate = moment(publication.createdAt);
-    const diffWeeks = moment().diff(creationDate, 'weeks') ? moment().diff(creationDate, 'weeks') + ' weeks ago':'';
-    const diffDays = moment().diff(creationDate, 'days') ? moment().diff(creationDate, 'days') + ' days ago':'';
-    const diffHours = moment().diff(creationDate, 'hours') ? moment().diff(creationDate, 'hours') + ' hours ago':'';
-    const diffMinutes = moment().diff(creationDate, 'minutes') ? moment().diff(creationDate, 'minutes') + ' minutes ago':'';
-    const diffSeconds = moment().diff(creationDate, 'seconds') ? moment().diff(creationDate, 'seconds') + ' seconds ago':'';
+NoLike(publication) {  
+  this.publicationsService.dislikes(publication)
+  .subscribe (
+    res => {
+      this.publicationsService.publication = res
+      this.publicationsService.getAll()
+  .subscribe(
+    res => {
+      this.publicationsService.publications = res.map(this.getHaceCuanto);
+    },
+    error => console.error(error)
+  );
+    },
+    error => console.error(error)
+  )
 
-    publication['haceCuanto'] = diffWeeks || diffDays || diffHours || diffMinutes || diffSeconds;
-    return publication;
-  }
- 
-
+}
 }

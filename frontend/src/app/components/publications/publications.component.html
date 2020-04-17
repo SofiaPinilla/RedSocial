@@ -1,22 +1,37 @@
-<nz-card style="width:45vw;" routerLink="/publication/{{publication['_id']}}" routerLinkActive="router-link-active" *ngFor="let publication of publicationsService.publications">
+<nz-card style="width:45vw;" *ngFor="let publication of publicationsService.publications">
 
-    <div class="container">
+    <div routerLink="/publication/{{publication['_id']}}" routerLinkActive="router-link-active" class="container">
         <div class="div">
             <div class="div2">
                 <nz-avatar *ngIf="userService.user as user" nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{publication.user?.profile_path}}"></nz-avatar>
                 <h3 *ngIf="userService.user as user">{{publication.user?.name}}</h3>
             </div>
 
-            <p *ngIf="userService.user as user">{{publication.haceCuanto}}</p>
+            <p *ngIf="userService.user">{{publication.haceCuanto}}</p>
+
         </div>
+
+        <!-- <p>{{(publicationsService['publication']['comments']).length}}</p> -->
         <p *ngIf="publication.publication !== '' ">{{publication.publication}}</p>
         <img *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
     </div>
 
     <div class="icons">
-        <i nz-icon nzType="message" nzTheme="outline"></i>
 
-        <i nz-icon nzType="heart" nzTheme="outline"></i>
+        <div class="comments">
+            <i nz-icon nzType="message" nzTheme="outline"></i>
+            <p>{{(publication['comments']).length}}</p>
+        </div>
+
+        <div class="likes">
+            <i *ngIf="!publication.likes.includes(userService.user._id)" on-click="GiveLike(publication)" nz-icon nzType="heart" nzTheme="outline"></i>
+            <i *ngIf="publication.likes.includes(userService.user._id)" on-click="NoLike(publication)" nz-icon nzType="heart" nzTheme="fill"></i>
+
+
+            <p *ngIf="publication.likes">{{(publication.likes).length}}</p>
+
+        </div>
+
 
     </div>
 

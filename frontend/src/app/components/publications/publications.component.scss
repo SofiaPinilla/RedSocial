@@ -60,3 +60,23 @@ h3 {
     align-items: flex-end;
     height: 5vh;
 }
+
+.comments {
+    display: flex;
+    align-items: center;
+    p {
+        margin: 0.5em;
+        color: #9A48E8;
+        font-size: small;
+    }
+}
+
+.likes {
+    display: flex;
+    align-items: center;
+    p {
+        margin: 0.5em;
+        color: #9A48E8;
+        font-size: small;
+    }
+}

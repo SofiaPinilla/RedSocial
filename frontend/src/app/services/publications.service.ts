@@ -56,6 +56,27 @@ export class PublicationsService {
       }
     });
   }
+
+  likes(publication):Observable<any> {
+    const id =publication._id
+    console.log(id)
+    return this.httpClient.put(`http://localhost:3000/publications/likes/${id}`, publication, {
+      headers: {
+        Authorization: localStorage.getItem('authToken') || ''
+      }
+    });
+  }
+
+  dislikes(publication):Observable<any> {
+    const id =publication._id
+    return this.httpClient.put(`http://localhost:3000/publications/dislikes/${id}`, publication, {
+      headers: {
+        Authorization: localStorage.getItem('authToken') || ''
+      }
+    });
+  }
+
+
   setPublication(publication: Publication) {
     this.publication = publication;
   }

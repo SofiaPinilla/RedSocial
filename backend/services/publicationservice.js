@@ -64,6 +64,59 @@ const PublicationService = {
         } catch (error) {
             console.error(error)
         }
-    }
+    },
+
+    getPubliWithAll: async() => {
+
+        try {
+
+            const publications = Publication.aggregate([
+
+                {
+                    $lookup: {
+
+                        from: 'users',
+                        localField: 'UserId',
+                        foreignField: '_id',
+                        as: 'user'
+                    }
+                },
+
+                {
+                    $lookup: {
+                        from: 'comments',
+                        let: { id: "$_id" },
+                        pipeline: [
+                            { $match: { $expr: { $eq: ["$PublicationId", "$$id"] } } },
+
+                            {
+                                $lookup: {
+                                    from: 'users',
+                                    localField: 'UserId',
+                                    foreignField: '_id',
+                                    as: 'user'
+                                },
+                            },
+
+                            unsetUserFields,
+                            { $unwind: "$user" },
+
+                        ],
+                        as: 'comments',
+
+                    }
+                }, {
+                    $unwind: "$user"
+                },
+                unsetUserFields,
+
+
+            ])
+            return publications;
+
+        } catch (error) {
+            console.error(error)
+        }
+    },
 }
 module.exports = PublicationService;
