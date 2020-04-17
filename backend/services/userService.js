@@ -1,16 +1,25 @@
 const User = require('../models/User.js');
 const lookupPublications = {
+
     $lookup: {
-        //agregar datos de la colección publications
         from: 'publications',
-        //el campo publicationId de User
-        localField: '_id',
-        //debe coincidir con el _id de publications
-        foreignField: 'UserId',
-        //creamos una propiedad llamada 'publication' que contenga las coincidiencias
-        as: 'publications'
+        let: { id: "$_id" },
+        pipeline: [
+            { $match: { $expr: { $eq: ["$UserId", "$$id"] } } },
+
+            {
+                $lookup: {
+                    from: 'comments',
+                    localField: 'PublicationId',
+                    foreignField: '_id',
+                    as: 'comments'
+                },
+            },
+        ],
+        as: 'publications',
     }
 }
+
 const UserService = {
 
     getUserWithPublications: async(_id) => {

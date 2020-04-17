@@ -81,8 +81,6 @@ export class ProfileComponent implements OnInit {
 
  }
 
-
-
   showModal(): void {
     this.isVisible = true;
   }
@@ -98,5 +96,38 @@ export class ProfileComponent implements OnInit {
     console.log('Button ok clicked!');
     this.isVisible = false;
   }
+  GiveLike(publication){
+    
+    this.publicationsService.likes(publication)
+    .subscribe (
+      res => {
+        this.publicationsService.publication = res
+        const token: string = localStorage.getItem('authToken')
+        this.userService.getInfo(token)
+          .subscribe((res => {
+            this.userService.user = res
+        }))
+      },
+      error => console.error(error)
+    )
+  
+}
 
+
+
+NoLike(publication) {  
+  this.publicationsService.dislikes(publication)
+  .subscribe (
+    res => {
+      this.publicationsService.publication = res
+      const token: string = localStorage.getItem('authToken')
+      this.userService.getInfo(token)
+        .subscribe((res => {
+          this.userService.user = res
+      }));
+    },
+    error => console.error(error)
+  )
+
+}
 }

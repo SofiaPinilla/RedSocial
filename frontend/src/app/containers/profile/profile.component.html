@@ -31,12 +31,8 @@
         <ng-template #actionEllipsis>
             <p>Likes</p> <i nz-icon nzType="heart"></i>
         </ng-template>
-        <nz-card routerLink="/publication/{{publication['_id']}}" style="width:45vw; margin:5px;text-align: center" *ngFor="let publication of userService['user']['publications']">
+        <nz-card style="width:45vw; margin:5px;text-align: center" *ngFor="let publication of userService['user']['publications']">
             <div class="delete">
-
-
-
-
 
                 <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
                     <i nz-icon nzType="down"></i>
@@ -54,7 +50,7 @@
 
 
             </div>
-            <div class="container2">
+            <div class="container2" routerLink="/publication/{{publication['_id']}}">
 
                 <div class="div">
                     <div class="div2">
@@ -72,8 +68,28 @@
 
             </div>
 
+            <div class="icons">
 
-            <!-- <p> {{publication.publication}}</p> -->
+                <div class="comments">
+                    <i nz-icon nzType="message" nzTheme="outline"></i>
+                    <p>{{(publication['comments']).length}}</p>
+
+                </div>
+
+
+                <div class="likes">
+                    <i *ngIf="!publication.likes.includes(userService.user._id)" on-click="GiveLike(publication)" nz-icon nzType="heart" nzTheme="outline"></i>
+                    <i *ngIf="publication.likes.includes(userService.user._id)" on-click="NoLike(publication)" nz-icon nzType="heart" nzTheme="fill"></i>
+
+
+                    <p *ngIf="publication.likes">{{(publication.likes).length}}</p>
+
+                </div>
+
+
+            </div>
+
+
 
         </nz-card>
     </div>
