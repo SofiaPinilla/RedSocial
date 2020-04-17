@@ -19,13 +19,37 @@ const lookupUsers = {
     }
 }
 
+const lookupProfile = {
+    $lookup: {
+        from: 'comments',
+        let: { id: "$_id" },
+        pipeline: [
+            { $match: { $expr: { $eq: ["$PublicationId", "$$id"] } } },
+
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'UserId',
+                    foreignField: '_id',
+                    as: 'user'
+                },
+            },
+
+
+            { $unwind: "$user" },
+
+        ],
+        as: 'comments',
+
+    }
+}
+
 const PublicationController = {
     getPubliId(req, res) {
         getId(req.params._id)
             .then(publication => res.send(publication))
             .catch(console.error);
     },
-
 
     getAll(req, res) {
         getPubliWithAll()
@@ -44,10 +68,11 @@ const PublicationController = {
 
                             $search: req.params.search
                         }
-
-                    }
+                    },
                 },
+
                 lookupUsers,
+                lookupProfile,
                 { //para evitar user:[{_id:....}] y en su lugar enviar el objeto user:{_id:...}
                     $unwind: "$user"
                 }

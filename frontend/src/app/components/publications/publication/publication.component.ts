@@ -21,8 +21,7 @@ export class PublicationComponent implements OnInit {
     constructor( public publicationsService: PublicationsService, public commentsService:CommentsService, public userService: UserService, public router: Router, public route: ActivatedRoute, public location: Location) { }
   
     ngOnInit(): void {
-      const id = this.route.snapshot.params.id;
-      // console.log(this.commentsService.prueba)
+      const id = this.route.snapshot.params.id
       this.publicationsService.getPubliId(id)
       .subscribe(publication => {this.publicationsService.publication = publication 
     })
@@ -84,6 +83,38 @@ deleteComment(comment) {
    
     }
     )
+}
+
+GiveLike(publication){
+    
+  this.publicationsService.likes(publication)
+  .subscribe (
+    res => {
+      this.publicationsService.publication = res
+      const id = this.route.snapshot.params.id
+      this.publicationsService.getPubliId(id)
+      .subscribe(publication => {this.publicationsService.publication = publication 
+    })
+    },
+    error => console.error(error)
+  )
+
+}
+
+
+
+NoLike(publication) {  
+this.publicationsService.dislikes(publication)
+.subscribe (
+  res => {
+    const id = this.route.snapshot.params.id
+    this.publicationsService.getPubliId(id)
+    .subscribe(publication => {this.publicationsService.publication = publication 
+  })
+  },
+  error => console.error(error)
+)
+
 }
 
 }

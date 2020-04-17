@@ -22,8 +22,17 @@
                     <i nz-icon nzType="message" nzTheme="outline" (click)="showModal()"> </i>
                     <p>{{(publicationsService['publication']['comments']).length}}</p>
                 </div>
+
+
                 <div class="likes">
-                    <i nz-icon nzType="heart" nzTheme="outline"></i>
+                    <i *ngIf="!(publicationsService['publication']['likes']).includes(userService['user']['_id'])" on-click="GiveLike(publicationsService.publication)" nz-icon nzType="heart" nzTheme="outline"></i>
+                    <!-- <p>{{publicationsService['publication']['likes']}}</p> -->
+                    <!-- <p>{{userService['user']['_id']}}</p> -->
+
+                    <i *ngIf="publicationsService['publication']['likes'].includes(userService['user']['_id'])" on-click="NoLike(publicationsService.publication)" nz-icon nzType="heart" nzTheme="fill"></i>
+
+                    <p *ngIf="publicationsService['publication']['likes']">{{(publicationsService['publication']['likes']).length}}</p>
+
                 </div>
 
             </div>

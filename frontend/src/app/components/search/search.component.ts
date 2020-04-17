@@ -45,6 +45,38 @@ search(publication)  {
     this.publicationsService.publications2 = res})  
 }
 
+GiveLike(publication){
+    
+  this.publicationsService.likes(publication)
+  .subscribe (
+    res => {
+      this.publicationsService.publication = res
+      const search = this.route.snapshot.params.search;
+      this.publicationsService.searchPubli(search)
+               .subscribe(res => {
+                 this.publicationsService.publications2 = res}) 
+    },
+    error => console.error(error)
+  )
+
+}
+
+
+
+NoLike(publication) {  
+this.publicationsService.dislikes(publication)
+.subscribe (
+  res => {
+    this.publicationsService.publication = res
+    const search = this.route.snapshot.params.search;
+  this.publicationsService.searchPubli(search)
+           .subscribe(res => {
+             this.publicationsService.publications2 = res}) 
+  },
+  error => console.error(error)
+)
+
+}
 }
 // ngDoCheck(): void {
 //   console.log('holi')

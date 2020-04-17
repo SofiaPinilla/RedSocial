@@ -146,6 +146,16 @@
         }
     }
     
+    .likes {
+        display: flex;
+        align-items: center;
+        p {
+            margin: 0.5em;
+            color: #9A48E8;
+            font-size: small;
+        }
+    }
+    
     @media(max-width: 700px) {
         .texto[_ngcontent-hlu-c270] {
             display: flex;
