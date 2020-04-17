@@ -1,7 +1,7 @@
 <div class="directs">
 
-    <nz-input-group [nzSuffix]="suffixIconSearch">
-        <input type="text" [(ngModel)]="inputSearch" nz-input placeholder="input search text" />
+    <nz-input-group style="background: #DDC8F8;" [nzSuffix]="suffixIconSearch">
+        <input type="text" [(ngModel)]="inputSearch" nz-input placeholder="search" />
     </nz-input-group>
     <ng-template #suffixIconSearch>
         <i nz-icon nzType="search" routerLink="/search/{{inputSearch}}" routerLinkActive="router-link-active"></i>

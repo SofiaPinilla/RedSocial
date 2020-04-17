@@ -14,7 +14,7 @@ import { CommentsService } from 'src/app/services/comments.service';
 })
 export class PublicationComponent implements OnInit {
   inputValue: string | null;
-  textValue: string | null;
+  textValue
   theme = true;
   isVisible = false;
   public publications;
@@ -68,6 +68,22 @@ postComment(imageInput) { // comentar
    err => console.error(err); 
       })
 
+}
+
+deleteComment(comment) {
+  const id = comment._id
+  this.commentsService.deleteOne(id)
+    .subscribe(res => {
+      this.publicationsService.setPublication(this.publicationsService.publication)
+      const id = this.route.snapshot.params.id;
+      this.publicationsService.getPubliId(id)
+      .subscribe(publication => {
+        this.publicationsService.publication = publication
+    })
+    
+   
+    }
+    )
 }
 
 }

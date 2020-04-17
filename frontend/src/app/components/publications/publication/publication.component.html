@@ -18,8 +18,14 @@
             <img *ngIf="publicationsService.publication['image_path'] " src="http://localhost:3000/images/publications/{{publicationsService.publication[ 'image_path']}} " alt="imagen publicación ">
             <div class="div">
                 <p style="font-size:12px;">{{userService.user.createdAt | date }}</p>
-                <i nz-icon nzType="message" nzTheme="outline" (click)="showModal()"></i>
-                <i nz-icon nzType="heart" nzTheme="outline"></i>
+                <div class="comments">
+                    <i nz-icon nzType="message" nzTheme="outline" (click)="showModal()"> </i>
+                    <p>{{(publicationsService['publication']['comments']).length}}</p>
+                </div>
+                <div class="likes">
+                    <i nz-icon nzType="heart" nzTheme="outline"></i>
+                </div>
+
             </div>
 
             <!-- <textarea rows="4" nz-input [(ngModel)]="publicationsService.publication.publication" name="publication" #publication="ngModel" name="publication"> </textarea> -->
@@ -36,27 +42,34 @@
             </form>
             
         </div>
+       
         <nz-card    *ngFor="let comment of publicationsService['publication']['comments']">
+            <div class="delete" *ngIf="userService.user._id == comment.user._id">
+                <i on-click="deleteComment(comment)" nz-icon nzType="delete" nzTheme="fill">
+                </i>
 
-            <div class="container2" >
-                <div class="div">
-                    
-                    <div class="div2">
-                     <nz-avatar *ngIf="userService.user as user" nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{comment.user?.profile_path}}"></nz-avatar>
+
+        </div>
+
+        <div class="container2">
+            <div class="div">
+
+                <div class="div2">
+                    <nz-avatar *ngIf="userService.user as user" nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{comment.user?.profile_path}}"></nz-avatar>
                     <h3 *ngIf="userService.user as user">{{comment.user?.name}}</h3>
-                        <p *ngIf="userService.user as user">{{comment.createdAt | date}}</p>
-                    </div>
+                    <p *ngIf="userService.user as user">{{comment.createdAt | date}}</p>
                 </div>
-               
-                   
-                    <p >{{comment.comment }}</p>
-                    
-                    <img *ngIf="comment.image_path" src="http://localhost:3000/images/user/comments/{{comment.image_path}}" alt="imagen publicación">
             </div>
-           
-        </nz-card>
+
+
+            <p>{{comment.comment}}</p>
+
+            <img *ngIf="comment.image_path" src="http://localhost:3000/images/user/comments/{{comment.image_path}}" alt="imagen publicación">
+        </div>
+
     </nz-card>
-  
+    </nz-card>
+
 
     <app-directs></app-directs>
 </div>

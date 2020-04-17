@@ -11,6 +11,13 @@
         </div>
         <p *ngIf="publication.publication !== '' ">{{publication.publication}}</p>
         <img *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
+    </div>
+
+    <div class="icons">
+        <i nz-icon nzType="message" nzTheme="outline"></i>
+
+        <i nz-icon nzType="heart" nzTheme="outline"></i>
 
     </div>
+
 </nz-card>

@@ -53,3 +53,10 @@ h3 {
     margin-top: 10px;
     margin-left: 10px;
 }
+
+.icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 5vh;
+}

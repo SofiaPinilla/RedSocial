@@ -3,6 +3,7 @@ import { PublicationsService } from 'src/app/services/publications.service';
 import { UserService } from 'src/app/services/user.service';
 import { HttpResponse } from '@angular/common/http';
 import * as moment from "moment";
+import { CommentsService } from 'src/app/services/comments.service';
 @Component({
   selector: 'app-publications',
   templateUrl: './publications.component.html',
@@ -13,8 +14,10 @@ export class PublicationsComponent implements OnInit {
   isVisible = false;
   inputValue: any;
   public publications;
-  constructor(public publicationsService: PublicationsService, public userService: UserService) { }
+  public numberComment = this.publicationsService.publication['comments']
+  constructor(public publicationsService: PublicationsService, public userService: UserService, public commentsService: CommentsService) { }
   ngOnInit(): void {
+    console.log(this.numberComment.length)
     this.getAllPublications();
     setInterval(this.getAllPublications,30000);
   }

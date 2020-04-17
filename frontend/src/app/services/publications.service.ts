@@ -9,6 +9,7 @@ import { Publication } from '../models/publication.model';
 export class PublicationsService {
   public isModalVisible: boolean = false;
   public publications;
+  public publications2;
   public publication: Publication={
     publication:''
   };
@@ -26,6 +27,10 @@ export class PublicationsService {
   getAll(): Observable<any> {
     return this.httpClient.get('http://localhost:3000/publications');
   }
+  getAll2(): Observable<any> {
+    return this.httpClient.get('http://localhost:3000/publications');
+  }
+
 
   getPubliId(id: string): Observable<any> {
     return this.httpClient.get(`http://localhost:3000/publications/${id}`);
