@@ -22,7 +22,7 @@ const routes: Routes = [
   {path:'user/confirmado/:token',component:ConfimedComponent},
   {path:'publication/:id',component: PublicationComponent},
   {path: 'search/:search', component: SearchComponent},
-  {path:'profiles',component:ProfilesComponent},
+  {path:'profiles/:search',component:ProfilesComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

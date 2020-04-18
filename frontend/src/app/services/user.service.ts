@@ -26,9 +26,9 @@ export class UserService {
       }
     });
   }
-
+  
   searchUser(search: string): Observable<any> {
-    return this.httpClient.get(`http://localhost:3000/users/search/${search}`);
+    return this.httpClient.get(`http://localhost:3000/users/profiles/${search}`);
   }
 
   signup(user:object):Observable<any>{

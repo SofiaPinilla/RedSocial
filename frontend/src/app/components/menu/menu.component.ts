@@ -4,7 +4,8 @@ import { NgForm } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
 import { NzIconService } from 'ng-zorro-antd/icon';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-menu',
@@ -13,13 +14,21 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent  {
   inputSearch;
-  constructor(private iconService: NzIconService,public publicationsService:PublicationsService, public userService: UserService, public router: Router) {
+  publications2
+  constructor(private iconService: NzIconService,public publicationsService:PublicationsService, public userService: UserService, public router: Router, public route: ActivatedRoute, public location: Location) {
     this.iconService.fetchFromIconfont({
       scriptUrl: 'https://at.alicdn.com/t/font_8d5l8fzk5b87iudi.js'
     });
   }
 
-
+  search(users)  {
+    const search = this.route.snapshot.params.search;
+    this.userService.searchUser(search)
+      .subscribe(res => {
+                       this.userService.users = res
+                  
+                      })  
+  }
   showModal(): void {
     this.publicationsService.isModalVisible = true;
   }
