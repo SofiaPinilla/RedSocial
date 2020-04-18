@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent  {
+  inputSearch;
   constructor(private iconService: NzIconService,public publicationsService:PublicationsService, public userService: UserService, public router: Router) {
     this.iconService.fetchFromIconfont({
       scriptUrl: 'https://at.alicdn.com/t/font_8d5l8fzk5b87iudi.js'

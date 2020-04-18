@@ -1,9 +1,67 @@
 const User = require('../models/User.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { getUserWithPublications } = require('../services/userService.js')
+const { getUserWithPublications, getUserWithPublicationsName } = require('../services/userService.js')
 const { jwt_secret, API_URL } = require('../config/keys.js');
 const transporter = require('../config/nodemailer')
+
+const lookupPublications = {
+
+    $lookup: {
+        from: 'publications',
+        let: { id: "$_id" },
+        pipeline: [
+            { $match: { $expr: { $eq: ["$UserId", "$$id"] } } },
+
+            {
+                $lookup: {
+                    from: 'comments',
+                    localField: 'PublicationId',
+                    foreignField: '_id',
+                    as: 'comments'
+                },
+            },
+        ],
+        as: 'publications',
+    }
+}
+
+
+const lookupUsers = {
+    $lookup: {
+        //agregar datos de la colección users
+        from: 'users',
+        //el campo UserId de Publication
+        localField: 'UserId',
+        //debe coincidir con el _id de users
+        foreignField: '_id',
+        //creamos una propiedad llamada 'user' que contenga las coincidiencias
+        as: 'user'
+    }
+}
+
+const lookupProfile = {
+    $lookup: {
+        from: 'comments',
+        let: { id: "$_id" },
+        pipeline: [
+            { $match: { $expr: { $eq: ["$PublicationId", "$$id"] } } },
+
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'UserId',
+                    foreignField: '_id',
+                    as: 'user'
+                },
+            },
+            { $unwind: "$user" },
+
+        ],
+        as: 'comments',
+
+    }
+}
 
 const UserController = {
     async register(req, res) {
@@ -162,25 +220,40 @@ const UserController = {
         getUserWithPublications(req.user._id)
             .then(user => res.send(user))
             .catch(console.error);
-    }
-    // async logout(req, res) {
-    //     try {
-    //         await Token.destroy({
-    //             where: {
-    //                 [Op.and]: [
-    //                     { UserId: req.user.id },
-    //                     { token: req.headers.authorization }
-    //                 ]
-    //             }
-    //         });
-    //         res.send({ message: 'Desconectado con éxito' })
-    //     } catch (error) {
-    //         console.log(error)
-    //         res.status(500).send({ message: 'hubo un problema al tratar de desconectarte' })
-    //     }
-    // }
+    },
 
+    getAll(req, res) {
+        User.find({})
+            .then(users => res.send(users))
+            .catch(console.error)
+
+    },
+    getInfoId(req, res) {
+        getUserWithPublicationsName(req.params.search)
+            .then(users => res.send(users))
+            .catch(console.error)
+
+    }
 }
+
+// async logout(req, res) {
+//     try {
+//         await Token.destroy({
+//             where: {
+//                 [Op.and]: [
+//                     { UserId: req.user.id },
+//                     { token: req.headers.authorization }
+//                 ]
+//             }
+//         });
+//         res.send({ message: 'Desconectado con éxito' })
+//     } catch (error) {
+//         console.log(error)
+//         res.status(500).send({ message: 'hubo un problema al tratar de desconectarte' })
+//     }
+// }
+
+
 
 
 module.exports = UserController

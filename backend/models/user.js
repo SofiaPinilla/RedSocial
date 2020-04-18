@@ -20,7 +20,11 @@ const UserSchema = new mongoose.Schema({
 
     confirmed: false,
 
-    agree: false,
+    agree: {
+        type: Boolean,
+        required: true
+    },
+
 
     userInfo: String,
 
@@ -35,6 +39,10 @@ const UserSchema = new mongoose.Schema({
     tokens: [],
 
 }, { timestamps: true });
+UserSchema.index({
+    name: 'text'
+
+});
 UserSchema.methods.toJSON = function() {
     const user = this._doc;
     delete user.tokens;

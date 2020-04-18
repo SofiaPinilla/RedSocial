@@ -10,6 +10,7 @@ import { BtaComponent } from './containers/bta/bta.component';
 import { ConfimedComponent } from './containers/user/confimed/confimed.component';
 import { PublicationComponent } from './components/publications/publication/publication.component';
 import { SearchComponent } from './components/search/search.component';
+import { ProfilesComponent } from './containers/profile/profiles/profiles.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path:'user/confirmado/:token',component:ConfimedComponent},
   {path:'publication/:id',component: PublicationComponent},
   {path: 'search/:search', component: SearchComponent},
+  {path:'profiles',component:ProfilesComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

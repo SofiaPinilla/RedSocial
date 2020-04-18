@@ -4,6 +4,15 @@
         <div class="list">
             <ul>
                 <div class="texto">
+
+                    <nz-input-group style="background: #DDC8F8;" [nzSuffix]="suffixIconSearch">
+                        <input type="text" [(ngModel)]="inputSearch" nz-input placeholder="search profiles" />
+                    </nz-input-group>
+                    <ng-template #suffixIconSearch>
+                        <i nz-icon nzType="search" routerLink="/profiles/{{inputSearch}}" routerLinkActive="router-link-active"></i>
+                    </ng-template>
+                </div>
+                <div class="texto">
                     <li nzIcon="home" nz-menu-item [routerLink]="['/home']" routerLinkActive="router-link-active"><i nz-icon nzType="home" nzTheme="outline"></i>Home</li>
                 </div>
                 <div class="texto">

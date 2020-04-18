@@ -27,10 +27,10 @@ export class PublicationsService {
   getAll(): Observable<any> {
     return this.httpClient.get('http://localhost:3000/publications');
   }
+
   getAll2(): Observable<any> {
     return this.httpClient.get('http://localhost:3000/publications');
   }
-
 
   getPubliId(id: string): Observable<any> {
     return this.httpClient.get(`http://localhost:3000/publications/${id}`);

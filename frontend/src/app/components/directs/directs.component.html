@@ -1,10 +1,10 @@
 <div class="directs">
 
     <nz-input-group style="background: #DDC8F8;" [nzSuffix]="suffixIconSearch">
-        <input type="text" [(ngModel)]="inputSearch" nz-input placeholder="search" />
+        <input type="text" [(ngModel)]="inputSearch" nz-input placeholder="search publications" />
     </nz-input-group>
     <ng-template #suffixIconSearch>
-        <i nz-icon nzType="search" routerLink="/search/{{inputSearch}}" routerLinkActive="router-link-active"></i>
+        <i nz-icon nzType="search" routerLink="/search/{{inputSearch}}" on-click="search(publications2)" routerLinkActive="router-link-active"></i>
     </ng-template>
     <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga saepe aperiam quos eligendi quam voluptatum deserunt, pariatur earum est animi laboriosam? Tenetur expedita nostrum minima provident optio adipisci, doloribus nulla!</p> -->
 </div>

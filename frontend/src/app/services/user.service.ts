@@ -10,6 +10,7 @@ export class UserService {
   public user: User = {
     name: ''
   };
+  public users
   constructor(public httpClient: HttpClient) { }
   public token: string = "";
   login(user: object): Observable<any> {
@@ -24,6 +25,10 @@ export class UserService {
         authorization: token
       }
     });
+  }
+
+  searchUser(search: string): Observable<any> {
+    return this.httpClient.get(`http://localhost:3000/users/search/${search}`);
   }
 
   signup(user:object):Observable<any>{

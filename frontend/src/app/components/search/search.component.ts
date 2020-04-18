@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit, OnChanges {
+export class SearchComponent implements OnInit {
 
   @Input() ActivatedRoute
   
@@ -20,30 +20,22 @@ public publications2;
   const search = this.route.snapshot.params.search;
   this.publicationsService.searchPubli(search)
            .subscribe(res => {
-             this.publicationsService.publications2 = res})  
+             this.publicationsService.publications2 = res
+        
+            })  
+
+const search2 = this.route.snapshot.params.search;
+this.userService.searchUser(search2)
+      .subscribe(res => {
+                       this.userService.users = res
+                  
+                      })  
 }
 
 
 
-ngOnChanges(changes: SimpleChanges): void {
-  console.log('holi')
-  const search = this.route.snapshot.params.search;
-  this.publicationsService.searchPubli(search)
-  .subscribe(res => {
-   
-    
-               this.publicationsService.publications2 = res})  
 
 
-
-}
-
-search(publication)  {
-  const search = this.route.snapshot.params.search;
-  this.publicationsService.searchPubli(search)
-  .subscribe(res => {
-    this.publicationsService.publications2 = res})  
-}
 
 GiveLike(publication){
     
@@ -60,8 +52,6 @@ GiveLike(publication){
   )
 
 }
-
-
 
 NoLike(publication) {  
 this.publicationsService.dislikes(publication)

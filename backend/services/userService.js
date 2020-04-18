@@ -1,4 +1,5 @@
 const User = require('../models/User.js');
+
 const lookupPublications = {
 
     $lookup: {
@@ -31,6 +32,20 @@ const UserService = {
             ])
             user.publications.reverse();
             return user;
+        } catch (error) {
+            console.error(error)
+        }
+    },
+
+    getUserWithPublicationsName: async(name) => {
+        try {
+            const users = await User.aggregate([
+                { $match: { name } },
+                lookupPublications,
+                { $unset: ["password", "tokens", "__v"] }
+            ])
+
+            return users;
         } catch (error) {
             console.error(error)
         }

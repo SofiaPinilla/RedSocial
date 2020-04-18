@@ -10,3 +10,5 @@ const MessageSchema = new.mongoose.Schema({
     sender_id: ObjectID,
     recipient_id: ObjectID,
 }, { timestamps: true });
+
+module.exports = mongoose.model('Message', MessageSchema);
