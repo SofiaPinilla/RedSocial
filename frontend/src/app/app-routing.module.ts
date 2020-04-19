@@ -11,6 +11,7 @@ import { ConfimedComponent } from './containers/user/confimed/confimed.component
 import { PublicationComponent } from './components/publications/publication/publication.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProfilesComponent } from './containers/profile/profiles/profiles.component';
+import { UsersProfileComponent } from './containers/profile/users-profile/users-profile.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path:'publication/:id',component: PublicationComponent},
   {path: 'search/:search', component: SearchComponent},
   {path:'profiles/:search',component:ProfilesComponent},
+  {path: 'profile/:email', component: UsersProfileComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

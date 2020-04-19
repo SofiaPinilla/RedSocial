@@ -26,6 +26,7 @@ import { ConfimedComponent } from './containers/user/confimed/confimed.component
 import { PublicationComponent } from './components/publications/publication/publication.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProfilesComponent } from './containers/profile/profiles/profiles.component';
+import { UsersProfileComponent } from './containers/profile/users-profile/users-profile.component';
 
 
 
@@ -50,7 +51,8 @@ registerLocaleData(en);
     ConfimedComponent,
     PublicationComponent,
     SearchComponent,
-    ProfilesComponent
+    ProfilesComponent,
+    UsersProfileComponent
    
   ],
   imports: [

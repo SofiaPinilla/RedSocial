@@ -31,6 +31,10 @@ export class UserService {
     return this.httpClient.get(`http://localhost:3000/users/profiles/${search}`);
   }
 
+  searchUserEmail(name:string): Observable<any> {
+    return this.httpClient.get(`http://localhost:3000/users/${name}`);
+  }
+
   signup(user:object):Observable<any>{
     return this.httpClient.post('http://localhost:3000/users/register',user);
   }

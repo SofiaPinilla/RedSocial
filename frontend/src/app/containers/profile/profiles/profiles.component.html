@@ -1,7 +1,23 @@
-<div class="container">
+<!-- <div class="container">
     <app-menu></app-menu>
     <app-modal></app-modal>
-    <p>hola</p>
-    <p>{{userService.users | json}}</p>
+
+
+    <nz-card *ngFor="let user of userService['users']" class="card" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+
+
+        <nz-card-meta routerLink="/profile/{{user.name}}" nzTitle="{{user['name']}}" nzDescription="{{user['userInfo']}}" [nzAvatar]="avatarTemplate"></nz-card-meta>
+
+        <ng-template #avatarTemplate>
+
+            <nz-avatar [nzSize]="100" nzSrc="http://localhost:3000/images/user/profile/{{user['profile_path']}}"></nz-avatar>
+        </ng-template>
+    </nz-card>
+
+
+
+
+
+
     <app-directs></app-directs>
-</div>
+</div> -->

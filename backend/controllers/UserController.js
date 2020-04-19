@@ -1,7 +1,7 @@
 const User = require('../models/User.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { getUserWithPublications, getUserWithPublicationsName } = require('../services/userService.js')
+const { getUserWithPublications, getUserWithPublicationsName, getUserWithPublicationsEmail } = require('../services/userService.js')
 const { jwt_secret, API_URL } = require('../config/keys.js');
 const transporter = require('../config/nodemailer')
 
@@ -233,7 +233,13 @@ const UserController = {
             .then(users => res.send(users))
             .catch(console.error)
 
-    }
+    },
+
+    // getProfile(req, res) {
+    //     getUserWithPublicationsName(req.params.name)
+    //         .then(user => res.send(user))
+    //         .catch(console.error);
+    // },
 }
 
 // async logout(req, res) {

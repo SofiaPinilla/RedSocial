@@ -49,6 +49,21 @@ const UserService = {
         } catch (error) {
             console.error(error)
         }
-    }
+    },
+
+    // getUserWithPublicationsEmail: async(email) => {
+    //     try {
+    //         const [user] = await User.aggregate([
+    //             { $match: { email } },
+    //             lookupPublications,
+    //             { $unset: ["password", "tokens", "__v"] }
+    //         ])
+    //         user.publications.reverse();
+    //         return user;
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // },
+
 }
 module.exports = UserService;

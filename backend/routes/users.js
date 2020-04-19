@@ -11,6 +11,7 @@ const { uploadUserProfileImages, uploadUserHeaderImages } = require('../middlewa
 router.get('/info', authentication, UserController.getInfo);
 router.get('/confirm/:emailToken', UserController.confirm);
 router.get('/profiles/:search', UserController.getInfoId);
+// router.get('/:name', UserController.getProfile);
 router.post('/register', UserController.register);
 router.put('/', authentication, uploadUserProfileImages.single('avatar'), UserController.update);
 router.put('/header', authentication, uploadUserHeaderImages.single('headerImage'), UserController.updateHeader);
