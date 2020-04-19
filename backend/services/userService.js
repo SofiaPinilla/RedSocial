@@ -11,8 +11,8 @@ const lookupPublications = {
             {
                 $lookup: {
                     from: 'comments',
-                    localField: 'PublicationId',
-                    foreignField: '_id',
+                    localField: '_id',
+                    foreignField: 'PublicationId',
                     as: 'comments'
                 },
             },

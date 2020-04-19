@@ -1,23 +1,26 @@
-<!-- <div class="container">
+<div class="container">
     <app-menu></app-menu>
     <app-modal></app-modal>
 
-
-    <nz-card *ngFor="let user of userService['users']" class="card" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-
-
-        <nz-card-meta routerLink="/profile/{{user.name}}" nzTitle="{{user['name']}}" nzDescription="{{user['userInfo']}}" [nzAvatar]="avatarTemplate"></nz-card-meta>
-
-        <ng-template #avatarTemplate>
-
-            <nz-avatar [nzSize]="100" nzSrc="http://localhost:3000/images/user/profile/{{user['profile_path']}}"></nz-avatar>
-        </ng-template>
-    </nz-card>
+    <div class="container2">
 
 
+        <nz-card *ngFor="let user of userService['users']" class="card" style="width:40vw;">
+            <div routerLink="/profile/{{user.name}}" class="container3">
+                <nz-avatar [nzSize]="100" nzSrc="http://localhost:3000/images/user/profile/{{user['profile_path']}}"></nz-avatar>
+                <div>
+                    <h3>{{user['name']}}</h3>
+                    <p>{{user['userInfo']}}</p>
+                </div>
+
+            </div>
+
+        </nz-card>
+
+    </div>
 
 
 
 
     <app-directs></app-directs>
-</div> -->
+</div>

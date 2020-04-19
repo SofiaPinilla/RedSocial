@@ -142,3 +142,11 @@ span:hover {
         font-size: small;
     }
 }
+
+.container2:hover {
+    cursor: pointer;
+    .ant-card {
+        transition: 1s;
+        background-color: rgba(236, 206, 255, 0.226)
+    }
+}

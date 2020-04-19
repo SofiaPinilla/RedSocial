@@ -5,63 +5,6 @@ const { getUserWithPublications, getUserWithPublicationsName, getUserWithPublica
 const { jwt_secret, API_URL } = require('../config/keys.js');
 const transporter = require('../config/nodemailer')
 
-const lookupPublications = {
-
-    $lookup: {
-        from: 'publications',
-        let: { id: "$_id" },
-        pipeline: [
-            { $match: { $expr: { $eq: ["$UserId", "$$id"] } } },
-
-            {
-                $lookup: {
-                    from: 'comments',
-                    localField: 'PublicationId',
-                    foreignField: '_id',
-                    as: 'comments'
-                },
-            },
-        ],
-        as: 'publications',
-    }
-}
-
-
-const lookupUsers = {
-    $lookup: {
-        //agregar datos de la colección users
-        from: 'users',
-        //el campo UserId de Publication
-        localField: 'UserId',
-        //debe coincidir con el _id de users
-        foreignField: '_id',
-        //creamos una propiedad llamada 'user' que contenga las coincidiencias
-        as: 'user'
-    }
-}
-
-const lookupProfile = {
-    $lookup: {
-        from: 'comments',
-        let: { id: "$_id" },
-        pipeline: [
-            { $match: { $expr: { $eq: ["$PublicationId", "$$id"] } } },
-
-            {
-                $lookup: {
-                    from: 'users',
-                    localField: 'UserId',
-                    foreignField: '_id',
-                    as: 'user'
-                },
-            },
-            { $unwind: "$user" },
-
-        ],
-        as: 'comments',
-
-    }
-}
 
 const UserController = {
     async register(req, res) {
@@ -208,14 +151,29 @@ const UserController = {
     },
     async follow(req, res) {
         try {
-            const user = await User.findByIdAndUpdate(req.user._id, { $push: { following: req.params.user_id } }, { new: true });
-            await User.findByIdAndUpdate(req.params.user_id, { $push: { followers: req.user._id } });
+            console.log(req.params._id)
+            const user = await User.findByIdAndUpdate(req.user._id, { $push: { following: req.params._id } }, { new: true });
+            await User.findByIdAndUpdate(req.params._id, { $push: { followers: req.user._id } }, { new: true });
             res.send(user);
         } catch (error) {
             console.error(error);
             res.status(500).send({ message: 'There was a problem trying to follow' })
         }
     },
+
+    async UnFollow(req, res) {
+        try {
+            const user = await User.findByIdAndUpdate(req.user._id, { $pull: { following: req.params._id } }, { new: true });
+            await User.findByIdAndUpdate(req.params._id, { $pull: { followers: req.user._id } });
+            res.send(user);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ message: 'There was a problem trying to unfollow' })
+        }
+    },
+
+
+
     getInfo(req, res) {
         getUserWithPublications(req.user._id)
             .then(user => res.send(user))
@@ -235,11 +193,11 @@ const UserController = {
 
     },
 
-    // getProfile(req, res) {
-    //     getUserWithPublicationsName(req.params.name)
-    //         .then(user => res.send(user))
-    //         .catch(console.error);
-    // },
+    getProfile(req, res) {
+        getUserWithPublicationsName(req.params.name)
+            .then(user => res.send(user))
+            .catch(console.error);
+    },
 }
 
 // async logout(req, res) {

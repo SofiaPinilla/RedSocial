@@ -23,13 +23,13 @@
 
 
         <ng-template #actionSetting>
-            <p>Followers</p> <i nz-icon nzType="team"></i>
+            <p>Followers</p> <i nz-icon nzType="team"></i>{{userService['user']['followers'].length}}
         </ng-template>
         <ng-template #actionEdit>
             <span (click)="showModal()"><p>Edit</p> <i nz-icon nzType="edit"></i></span>
         </ng-template>
         <ng-template #actionEllipsis>
-            <p>Likes</p> <i nz-icon nzType="heart"></i>
+            <p>Following</p> <i nz-icon nzType="team"></i>{{userService['user']['following'].length}}
         </ng-template>
         <nz-card style="width:45vw; margin:5px;text-align: center" *ngFor="let publication of userService['user']['publications']">
             <div class="delete">
@@ -71,7 +71,7 @@
             <div class="icons">
 
                 <div class="comments">
-                    <i nz-icon nzType="message" nzTheme="outline"></i>
+                    <i nz-icon nzType="message" nzTheme="outline" routerLink="/publication/{{publication['_id']}}"></i>
                     <p>{{(publication['comments']).length}}</p>
 
                 </div>

@@ -10,7 +10,7 @@ export class UserService {
   public user: User = {
     name: ''
   };
-  public users
+  public users;
   constructor(public httpClient: HttpClient) { }
   public token: string = "";
   login(user: object): Observable<any> {
@@ -31,7 +31,7 @@ export class UserService {
     return this.httpClient.get(`http://localhost:3000/users/profiles/${search}`);
   }
 
-  searchUserEmail(name:string): Observable<any> {
+  searchUserName(name:string): Observable<any> {
     return this.httpClient.get(`http://localhost:3000/users/${name}`);
   }
 
@@ -71,6 +71,25 @@ export class UserService {
   getToken(): string {
     return this.token;
   }
+  follow(user):Observable<any> {
+    const id =user._id
+    console.log(id)
+    return this.httpClient.put(`http://localhost:3000/users/follow/${id}`, user, {
+      headers: {
+        Authorization: localStorage.getItem('authToken') || ''
+      }
+    });
+  }
+
+  unfollow(user):Observable<any> {
+    const id =user._id
+    return this.httpClient.put(`http://localhost:3000/users/unfollow/${id}`, user, {
+      headers: {
+        Authorization: localStorage.getItem('authToken') || ''
+      }
+    });
+  }
+
   // post(user: FormData): Observable<any> {
   //   return this.httpClient.post('http://localhost:3000/users', user, {
   //     headers: {

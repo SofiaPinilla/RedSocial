@@ -1,0 +1,179 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ant-card {
+    padding: 12px;
+    background-color: #F5F8FD;
+}
+
+.container2 {
+    width: 35vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1em;
+}
+
+.container2:hover {
+    cursor: pointer;
+    .ant-card {
+        transition: 1s;
+        background-color: rgba(236, 206, 255, 0.226)
+    }
+}
+
+.container3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card {
+    width: 45vw;
+    img {
+        height: 20vh;
+    }
+}
+
+.imagenes {
+    width: 95%;
+    margin: auto;
+}
+
+.ant-card-bordered {
+    margin: 0.3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.ant-card {
+    padding: 12px;
+    background-color: #F5F8FD;
+}
+
+// ng-template {
+//     width: 100%;
+// }
+p {
+    text-align: center;
+    margin-left: 8%;
+}
+
+.delete {
+    text-align: end;
+}
+
+.ant-card {
+    padding: 12px;
+    background-color: #F5F8FD;
+    img {
+        display: block;
+        height: 35vh;
+    }
+}
+
+.div {
+    display: flex;
+    justify-content: space-between;
+    width: 35vw;
+    p {
+        color: rgb(136, 131, 131);
+        font-size: 12px;
+        max-width: 30vh;
+    }
+}
+
+.ant-card-actions>li>span:hover {
+    color: palevioletred
+}
+
+.div2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+h3 {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+[type="file"]+label {
+    margin: 5px;
+    color: #9A48E8;
+    font-weight: 400;
+    text-align: center;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: #F5F8FD;
+    border-color: #d9d9d9;
+}
+
+[type="file"]+label :hover {
+    transition: 1s;
+    color: #9A48E8;
+    background: #F5F8FD;
+}
+
+[type="file"] {
+    margin: 5px;
+    height: 0;
+    overflow: hidden;
+    width: 0;
+}
+
+.icono {
+    margin: bottom 10px;
+}
+
+span:hover {
+    color: #9A48E8;
+    cursor: pointer;
+}
+
+.icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 5vh;
+}
+
+.comments {
+    display: flex;
+    align-items: center;
+    p {
+        margin: 0.5em;
+        color: #9A48E8;
+        font-size: small;
+    }
+}
+
+.likes {
+    display: flex;
+    align-items: center;
+    p {
+        margin: 0.5em;
+        color: #9A48E8;
+        font-size: small;
+    }
+}
+
+.follows {
+    display: flex;
+    text-align: start;
+    p {
+        font-size: 12px;
+    }
+}

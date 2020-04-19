@@ -11,15 +11,15 @@ const { uploadUserProfileImages, uploadUserHeaderImages } = require('../middlewa
 router.get('/info', authentication, UserController.getInfo);
 router.get('/confirm/:emailToken', UserController.confirm);
 router.get('/profiles/:search', UserController.getInfoId);
-// router.get('/:name', UserController.getProfile);
+router.get('/:name', UserController.getProfile);
 router.post('/register', UserController.register);
+router.post('/login', UserController.login);
 router.put('/', authentication, uploadUserProfileImages.single('avatar'), UserController.update);
 router.put('/header', authentication, uploadUserHeaderImages.single('headerImage'), UserController.updateHeader);
+router.put('/follow/:_id', authentication, UserController.follow);
+router.put('/unFollow/:_id', authentication, UserController.UnFollow);
+// router.get('/follow/:user_id', authentication, UserController.follow)
 
-router.get('/follow/:user_id', authentication, UserController.follow)
-
-// Login
-router.post('/login', UserController.login);
 
 // Logout
 // router.get('/logout', (req, res) => {

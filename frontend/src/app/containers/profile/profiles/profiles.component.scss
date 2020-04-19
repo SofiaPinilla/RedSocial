@@ -2,3 +2,30 @@
     display: flex;
     justify-content: space-between;
 }
+
+.ant-card {
+    padding: 12px;
+    background-color: #F5F8FD;
+}
+
+.container2 {
+    width: 35vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1em;
+}
+
+.container2:hover {
+    cursor: pointer;
+    .ant-card {
+        transition: 1s;
+        background-color: rgba(236, 206, 255, 0.226)
+    }
+}
+
+.container3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

@@ -1,1 +1,101 @@
-<p>users-profile works!</p>
+<div class="container">
+    <app-modal></app-modal>
+    <div>
+        <app-menu></app-menu>
+    </div>
+    <div *ngFor="let user of userService['users']">
+
+
+
+        <nz-card class="card" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEllipsis]">
+            <nz-card-meta nzTitle="{{user['name']}}" nzDescription="{{user['userInfo']}}" [nzAvatar]="avatarTemplate">
+            </nz-card-meta>
+            <div class="follows">
+                <p> {{user['followers'].length}} followers </p>
+                <p>{{user['following'].length}} following</p>
+            </div>
+        </nz-card>
+        <ng-template #avatarTemplate>
+            <nz-avatar [nzSize]="100" nzSrc="http://localhost:3000/images/user/profile/{{user['profile_path']}}"></nz-avatar>
+        </ng-template>
+        <ng-template #coverTemplate>
+            <img alt="example" src="http://localhost:3000/images/user/header/{{user['header_path']}}" />
+
+        </ng-template>
+
+        <ng-template #actionSetting>
+
+
+
+            <div class="follow" *ngIf="!user.followers.includes(userService['user']['_id'])" on-click="follow(user)">
+                <p>Follow</p>
+                {{user['followers'].length}}
+                <i nz-icon nzType="team" nzTheme="outline"></i>
+            </div>
+            <div class="unfollow" *ngIf="user.followers.includes(userService[ 'user'][ '_id'])" on-click="unfollow(user)">
+                <p>Unfollow</p>
+
+                <i nz-icon nzType="close" nzTheme="outline"></i>
+            </div>
+
+
+
+        </ng-template>
+
+        <ng-template #actionEllipsis>
+            <p>Likes</p>
+            <i nz-icon nzType="heart" nzTheme="outline"></i>
+        </ng-template>
+
+        <nz-card style="width:45vw; margin:5px;text-align: center " *ngFor="let publication of user[ 'publications'] ">
+
+            <div class="container2 " routerLink="/publication/{{publication[ '_id']}} ">
+
+                <div class="div ">
+                    <div class="div2 ">
+
+                        <nz-avatar nzSize="large " nzSrc="http://localhost:3000/images/user/profile/{{user[ 'profile_path']}} "></nz-avatar>
+
+                        <h3>{{user['name']}}</h3>
+                    </div>
+                    <p>{{user.createdAt | date }}</p>
+
+                </div>
+
+                <p>{{user.publication}}</p>
+                <img class="imagenes " *ngIf="publication.image_path " src="http://localhost:3000/images/publications/{{publication.image_path}} " alt="imagen publicación ">
+
+            </div>
+
+            <div class="icons ">
+
+                <div class="comments ">
+
+                    <i nz-icon nzType="message" nzTheme="outline" routerLink="/publication/{{publication[ '_id']}} "></i>
+                    <p>{{(publication.comments).length}}</p>
+
+                </div>
+
+
+                <div class="likes ">
+                    <i *ngIf="!publication.likes.includes(userService['user']['_id'])" on-click="GiveLike(publication)" nz-icon nzType="heart" nzTheme="outline"></i>
+                    <i *ngIf="publication.likes.includes(userService['user']['_id'])" on-click="NoLike(publication)" nz-icon nzType="heart" nzTheme="fill"></i>
+
+
+                    <p *ngIf="publication.likes">{{(publication.likes).length}}</p>
+
+                </div>
+
+
+            </div>
+
+        </nz-card>
+    </div>
+
+    <div>
+        <app-directs></app-directs>
+    </div>
+
+
+
+</div>
