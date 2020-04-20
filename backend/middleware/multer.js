@@ -15,6 +15,8 @@ const uploadPublicationsImages = generateUploadImageMulter('./public/images/publ
 const uploadUserProfileImages = generateUploadImageMulter('./public/images/user/profile');
 const uploadUserHeaderImages = generateUploadImageMulter('./public/images/user/header');
 const uploadCommentImages = generateUploadImageMulter('./public/images/user/comments');
+const uploadMessageImages = generateUploadImageMulter('./public/images/user/messages');
 
 
-module.exports = { uploadUserProfileImages, uploadPublicationsImages, uploadUserHeaderImages, uploadCommentImages };
+
+module.exports = { uploadUserProfileImages, uploadPublicationsImages, uploadUserHeaderImages, uploadCommentImages, uploadMessageImages };

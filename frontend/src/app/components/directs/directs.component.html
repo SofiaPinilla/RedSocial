@@ -11,7 +11,7 @@
         <div *ngFor="let following of userService['user']['following']">
 
             <nz-card *ngIf="(following).length>1" style="width:20vw;">
-                <div class="follow" style="width:20vw;">
+                <div class="follow" style="width:20vw;" routerLink="/message/{{following}}">
 
                     <div>{{following }}</div>
                     <div><i nz-icon nzType="mail" nzTheme="fill"></i></div>

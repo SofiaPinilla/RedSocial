@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+}
+
+.send {
+    text-align: end;
+}
+
+.receive {
+    text-align: start;
+}

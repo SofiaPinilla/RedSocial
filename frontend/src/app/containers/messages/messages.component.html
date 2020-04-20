@@ -1,0 +1,36 @@
+<div class="container">
+    <app-menu></app-menu>
+    <app-modal></app-modal>
+    <div class="messages">
+
+        <div class="receive" *ngFor="let message of messageService.messages.recibidos">
+            <h3>{{message.sender_name}}</h3>
+            <p>{{message.messageBody}}</p>
+            <p>{{message.createdAt | date:'M/d/yy, h:mm a'}}</p>
+            <img *ngIf="message.image_path" src="http://localhost:3000/images/user/messages/{{message.image_path}}" alt="imagen publicación">
+
+        </div>
+
+        <div *ngFor="let message of messageService.messages.enviados">
+            <h3>{{message.sender_name}}</h3>
+            <p>{{message.messageBody}}</p>
+            <p>{{message.ima}}</p>
+            <p>{{message.createdAt | date:'M/d/yy, h:mm a'}}</p>
+            <img *ngIf="message.image_path" src="http://localhost:3000/images/user/messages/{{message.image_path}}" alt="imagen publicación">
+        </div>
+        <div class="input">
+            <form #messageForm="ngForm">
+
+                <textarea class="textarea" rows="4" nz-input [(ngModel)]="inputMessage" #messageBody="ngModel" name="messageBody"> </textarea>
+                <input type="file" #imageInput id="file5">
+
+                <label for="file5" class="btn-3"><span>Add Image</span></label>
+                <button nz-button [nzType]="'default'" type="submit" on-click="sendMessage(imageInput)"><span>Write</span></button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <app-directs></app-directs>
+</div>

@@ -30,19 +30,24 @@ const MessageController = {
             .then(messages => res.status(201).send(messages))
             .catch(console.error)
     },
-    getSenderMessage(req, res) {
+    // getSenderMessage(req, res) {
 
-        Message.find({ sender_name: req.params.recipient_name, recipient_name: req.user.name })
-            .then(messages => res.status(201).send(messages))
-            .catch(console.error)
-    },
+    //     Message.find({ sender_name: req.params.recipient_name, recipient_name: req.user.name })
+    //         .then(messages => res.status(201).send(messages))
+    //         .catch(console.error)
+    // },
 
+    async getSenderMessage(req, res) {
+        try {
+            const recibidos = await Message.find({ sender_name: req.params.recipient_name, recipient_name: req.user.name })
+            const enviados = await Message.find({ sender_name: req.user.name, recipient_name: req.params.recipient_name })
+            res.status(201).send({ recibidos, enviados })
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ message: 'There was a problem trying to get your messages' })
+        }
+    }
 }
-
-
-
-
-
 
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges,SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PublicationsService } from 'src/app/services/publications.service';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,8 +11,6 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SearchComponent implements OnInit {
 
-  @Input() ActivatedRoute
-  
 public publications2;
   constructor(public publicationsService: PublicationsService, public router: Router, public route: ActivatedRoute, public location: Location, public userService: UserService) { }
 

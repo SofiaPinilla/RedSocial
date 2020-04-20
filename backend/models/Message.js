@@ -4,8 +4,9 @@ const ObjectID = require('mongodb').ObjectID
 const MessageSchema = new mongoose.Schema({
     messageBody: {
         type: String,
-        required: true
     },
+
+    image_path: String,
 
     sender_name: String,
     recipient_name: String,

@@ -66,7 +66,7 @@ const PublicationController = {
 
                         $text: {
 
-                            $search: req.params.search
+                            $search: /req.params.search/
                         }
                     },
                 },

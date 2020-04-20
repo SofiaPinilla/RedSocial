@@ -12,6 +12,7 @@ import { PublicationComponent } from './components/publications/publication/publ
 import { SearchComponent } from './components/search/search.component';
 import { ProfilesComponent } from './containers/profile/profiles/profiles.component';
 import { UsersProfileComponent } from './containers/profile/users-profile/users-profile.component';
+import { MessagesComponent } from './containers/messages/messages.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'search/:search', component: SearchComponent},
   {path:'profiles/:search',component:ProfilesComponent},
   {path: 'profile/:email', component: UsersProfileComponent},
+  {path:'message/:name', component:MessagesComponent},
   {path: '**', component: NotFoundComponent}
 ];
 
