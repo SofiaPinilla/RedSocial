@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 export class DirectsComponent implements OnInit {
   inputSearch;
   publications2;
-  constructor(public publicationsService: PublicationsService, public router: Router, public route: ActivatedRoute, public location: Location) { }
+  constructor(public userService:UserService, public publicationsService: PublicationsService, public router: Router, public route: ActivatedRoute, public location: Location) { }
   
 
   ngOnInit(): void {

@@ -72,9 +72,9 @@ export class UserService {
     return this.token;
   }
   follow(user):Observable<any> {
-    const id =user._id
-    console.log(id)
-    return this.httpClient.put(`http://localhost:3000/users/follow/${id}`, user, {
+    const name =user.name
+    console.log(name)
+    return this.httpClient.put(`http://localhost:3000/users/follow/${name}`, user, {
       headers: {
         Authorization: localStorage.getItem('authToken') || ''
       }
@@ -82,8 +82,8 @@ export class UserService {
   }
 
   unfollow(user):Observable<any> {
-    const id =user._id
-    return this.httpClient.put(`http://localhost:3000/users/unfollow/${id}`, user, {
+    const name =user.name
+    return this.httpClient.put(`http://localhost:3000/users/unfollow/${name}`, user, {
       headers: {
         Authorization: localStorage.getItem('authToken') || ''
       }

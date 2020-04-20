@@ -36,10 +36,11 @@ img {
 
 .container:hover {
     cursor: pointer;
-    .ant-card {
-        transition: 1s;
-        background-color: rgba(236, 206, 255, 0.226)
-    }
+}
+
+.ant-card:hover {
+    transition: 1s;
+    background-color: rgba(236, 206, 255, 0.226)
 }
 
 .div {

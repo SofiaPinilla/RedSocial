@@ -156,6 +156,15 @@
         }
     }
     
+    .container:hover {
+        cursor: pointer;
+    }
+    
+    .ant-card:hover {
+        transition: 1s;
+        background-color: rgba(236, 206, 255, 0.226)
+    }
+    
     @media(max-width: 700px) {
         .texto[_ngcontent-hlu-c270] {
             display: flex;

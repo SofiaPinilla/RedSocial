@@ -6,5 +6,21 @@
     <ng-template #suffixIconSearch>
         <i nz-icon nzType="search" routerLink="/search/{{inputSearch}}" on-click="search(publications2)" routerLinkActive="router-link-active"></i>
     </ng-template>
-    <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga saepe aperiam quos eligendi quam voluptatum deserunt, pariatur earum est animi laboriosam? Tenetur expedita nostrum minima provident optio adipisci, doloribus nulla!</p> -->
+    <div class="following">
+        <h1>Following</h1>
+        <div *ngFor="let following of userService['user']['following']">
+
+            <nz-card *ngIf="(following).length>1" style="width:20vw;">
+                <div class="follow" style="width:20vw;">
+
+                    <div>{{following }}</div>
+                    <div><i nz-icon nzType="mail" nzTheme="fill"></i></div>
+
+                </div>
+            </nz-card>
+
+        </div>
+    </div>
+
+
 </div>

@@ -1,9 +1,22 @@
 .footer {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     padding: 10px;
     background-color: white;
     color: #9A48E8;
-    height: 9vh;
+    height: 10vh;
+}
+
+.logoTitulo {
+    display: flex;
+    align-items: flex-end;
+}
+
+img {
+    width: 15vw;
+}
+
+p {
+    font-size: 12px;
 }

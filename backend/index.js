@@ -34,6 +34,15 @@ app.use(express.static('./public'));
 app.use('/users', require('./routes/users.js'));
 app.use('/publications', require('./routes/publications.js'));
 app.use('/comments', require('./routes/comments.js'));
+app.use('/messages', require('./routes/messages.js'));
+
+//Socket
+// let http = require('http').Server(app);
+// let io = require('socket.io')(http);
+
+// io.on('connection', () => {
+//     console.log('a user is connected')
+// })
 
 const PORT = process.env.PORT || 3000;
 

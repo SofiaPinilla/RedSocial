@@ -124,7 +124,7 @@ const UserController = {
     async login(req, res) {
         try {
             const user = await User.findOne({
-                email: req.body.email,
+                name: req.body.name,
             })
 
             if (!user) {
@@ -153,7 +153,7 @@ const UserController = {
         try {
             console.log(req.params.name)
             const user = await User.findByIdAndUpdate(req.user._id, { $push: { following: req.params.name } }, { new: true });
-            await User.findOneAndUpdate({ name: req.params.name }, { $push: { followers: req.user._id } }, { new: true });
+            await User.findOneAndUpdate({ name: req.params.name }, { $push: { followers: req.user.name } }, { new: true });
             res.send(user);
         } catch (error) {
             console.error(error);
@@ -164,7 +164,7 @@ const UserController = {
     async UnFollow(req, res) {
         try {
             const user = await User.findByIdAndUpdate(req.user._id, { $pull: { following: req.params.name } }, { new: true });
-            await User.findOneAndUpdate({ name: req.params.name }, { $pull: { followers: req.user._id } }, { new: true });
+            await User.findOneAndUpdate({ name: req.params.name }, { $pull: { followers: req.user.name } }, { new: true });
             res.send(user);
         } catch (error) {
             console.error(error);

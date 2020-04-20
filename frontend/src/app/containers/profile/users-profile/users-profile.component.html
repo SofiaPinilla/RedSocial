@@ -27,12 +27,12 @@
 
 
 
-            <div class="follow" *ngIf="!user.followers.includes(userService['user']['_id'])" on-click="follow(user)">
+            <div class="follow" *ngIf="!user.followers.includes(userService['user']['name'])" on-click="follow(user)">
                 <p>Follow</p>
                 {{user['followers'].length}}
                 <i nz-icon nzType="team" nzTheme="outline"></i>
             </div>
-            <div class="unfollow" *ngIf="user.followers.includes(userService[ 'user'][ '_id'])" on-click="unfollow(user)">
+            <div class="unfollow" *ngIf="user.followers.includes(userService[ 'user'][ 'name'])" on-click="unfollow(user)">
                 <p>Unfollow</p>
 
                 <i nz-icon nzType="close" nzTheme="outline"></i>

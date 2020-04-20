@@ -18,10 +18,11 @@
 
 .container2:hover {
     cursor: pointer;
-    .ant-card {
-        transition: 1s;
-        background-color: rgba(236, 206, 255, 0.226)
-    }
+}
+
+.card:hover {
+    transition: 1s;
+    background-color: rgba(236, 206, 255, 0.226)
 }
 
 .container3 {
