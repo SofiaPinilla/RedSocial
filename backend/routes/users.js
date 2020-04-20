@@ -16,8 +16,8 @@ router.post('/register', UserController.register);
 router.post('/login', UserController.login);
 router.put('/', authentication, uploadUserProfileImages.single('avatar'), UserController.update);
 router.put('/header', authentication, uploadUserHeaderImages.single('headerImage'), UserController.updateHeader);
-router.put('/follow/:_id', authentication, UserController.follow);
-router.put('/unFollow/:_id', authentication, UserController.UnFollow);
+router.put('/follow/:name', authentication, UserController.follow);
+router.put('/unFollow/:name', authentication, UserController.UnFollow);
 // router.get('/follow/:user_id', authentication, UserController.follow)
 
 
