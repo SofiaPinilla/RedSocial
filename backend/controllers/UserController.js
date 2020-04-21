@@ -140,6 +140,7 @@ const UserController = {
                 return res.status(400).send({ message: 'You have to validate your email' });
             }
             token = jwt.sign({ id: user.id }, jwt_secret);
+            if (user.tokens.length > 4) user.tokens.shift();
             user.tokens.push(token);
             await user.save();
             const userWithPublications = await getUserWithPublications(user._id);

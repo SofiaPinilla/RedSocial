@@ -3,21 +3,18 @@
     <app-modal></app-modal>
     <div class="messages">
 
-        <div class="receive" *ngFor="let message of messageService.messages.recibidos">
+        <nz-card class="receive" style="width:30vw;" *ngFor="let message of messageService.messages.messages">
             <h3>{{message.sender_name}}</h3>
             <p>{{message.messageBody}}</p>
-            <p>{{message.createdAt | date:'M/d/yy, h:mm a'}}</p>
             <img *ngIf="message.image_path" src="http://localhost:3000/images/user/messages/{{message.image_path}}" alt="imagen publicación">
+            <p style="font-size: small;">{{message.createdAt | date:'M/d/yy, h:mm a'}}</p>
 
-        </div>
+        </nz-card>
 
-        <div *ngFor="let message of messageService.messages.enviados">
-            <h3>{{message.sender_name}}</h3>
-            <p>{{message.messageBody}}</p>
-            <p>{{message.ima}}</p>
-            <p>{{message.createdAt | date:'M/d/yy, h:mm a'}}</p>
-            <img *ngIf="message.image_path" src="http://localhost:3000/images/user/messages/{{message.image_path}}" alt="imagen publicación">
-        </div>
+
+
+
+
         <div class="input">
             <form #messageForm="ngForm">
 

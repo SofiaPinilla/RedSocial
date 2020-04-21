@@ -39,9 +39,11 @@ const MessageController = {
 
     async getSenderMessage(req, res) {
         try {
+
             const recibidos = await Message.find({ sender_name: req.params.recipient_name, recipient_name: req.user.name })
             const enviados = await Message.find({ sender_name: req.user.name, recipient_name: req.params.recipient_name })
-            res.status(201).send({ recibidos, enviados })
+            const messages = recibidos.concat(enviados).sort()
+            res.status(201).send({ messages })
         } catch (error) {
             console.error(error);
             res.status(500).send({ message: 'There was a problem trying to get your messages' })

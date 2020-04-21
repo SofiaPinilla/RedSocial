@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MessagesService } from 'src/app/services/messages.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Location } from '@angular/common';
 import { HttpResponse } from '@angular/common/http';
+
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
@@ -14,7 +15,11 @@ inputMessage
 messageBody
 imageInput
 
+
   constructor(public messageService : MessagesService,public router: Router, public route: ActivatedRoute, public location: Location, public userService: UserService) { }
+
+ 
+
 
   ngOnInit(): void {
     
@@ -23,9 +28,16 @@ imageInput
     this.messageService.getRecibe(recipient_name,token)
     .subscribe((res =>{
       this.messageService.messages=res
+      
     }))
    
   }
+
+  // @HostListener("scroll", ['$event'])
+  // doSomethingOnInternalScroll($event:Event){
+  //   let scrollOffset = $event.srcElement.scrollTop;
+  //   console.log("scroll: ", scrollOffset);
+  // }
 
   sendMessage(imageInput){
     const token: any = localStorage.getItem('authToken')
