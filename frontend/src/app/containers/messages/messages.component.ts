@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Location } from '@angular/common';
 import { HttpResponse } from '@angular/common/http';
+import { Directive, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-messages',
@@ -16,23 +17,38 @@ messageBody
 imageInput
 
 
-  constructor(public messageService : MessagesService,public router: Router, public route: ActivatedRoute, public location: Location, public userService: UserService) { }
+
+  constructor( public messageService : MessagesService,public router: Router, public route: ActivatedRoute, public location: Location, public userService: UserService, private _el: ElementRef) { }
 
  
 
 
   ngOnInit(): void {
+    // this.getAllPublications();
+    //
+    this.getMessages();
+    setInterval(this.getMessages,50000);
     
-    const token: any = localStorage.getItem('authToken')
-    const recipient_name =  this.route.snapshot.params.name;
-    this.messageService.getRecibe(recipient_name,token)
-    .subscribe((res =>{
-      this.messageService.messages=res
-      
-    }))
-   
+    
+  // setInterval(this.messageService.getRecibe,5000);
+
   }
 
+ 
+  public scrollToBottom() {
+    const el: HTMLDivElement = this._el.nativeElement;
+    el.scrollTop = Math.max(0, el.scrollHeight - el.offsetHeight);
+  }
+
+
+getMessages =() =>{
+  const token: any = localStorage.getItem('authToken')
+  const recipient_name =  this.route.snapshot.params.name;
+  this.messageService.getRecibe(recipient_name,token)
+  .subscribe((res =>{
+    this.messageService.messages=res
+  }))
+}
   // @HostListener("scroll", ['$event'])
   // doSomethingOnInternalScroll($event:Event){
   //   let scrollOffset = $event.srcElement.scrollTop;
@@ -64,5 +80,6 @@ imageInput
     err => console.error(err); 
          })
   }
-
+  
+  
 }

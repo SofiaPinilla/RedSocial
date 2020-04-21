@@ -1,9 +1,9 @@
 <div class="container">
     <app-menu></app-menu>
     <app-modal></app-modal>
-    <div class="messages">
+    <div class="messages" class="my-list" #scrollMe [scrollTop]="scrollMe.scrollHeight">
 
-        <nz-card class="receive" style="width:30vw;" *ngFor="let message of messageService.messages.messages">
+        <nz-card class="receive" style="width:30vw;" *ngFor="let message of messageService.messages.messages" id="anchor" [ngStyle]="{'text-align': message.sender_name == userService.user.name ? 'right' : 'left' }">
             <h3>{{message.sender_name}}</h3>
             <p>{{message.messageBody}}</p>
             <img *ngIf="message.image_path" src="http://localhost:3000/images/user/messages/{{message.image_path}}" alt="imagen publicación">
