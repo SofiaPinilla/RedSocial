@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'http://miapimolona.herokuapp.com',
+  API_URL: 'https://apibta.herokuapp.com',
 };

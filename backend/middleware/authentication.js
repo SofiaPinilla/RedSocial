@@ -49,5 +49,17 @@ const isCommentAuthor = async(req, res, next) => {
         console.error(error)
         return res.status(500).send({ error, message: 'Ha habido un problema al comprobar la autoría del comentario' })
     }
+
+
+
 }
-module.exports = { authentication, isAuthor, isCommentAuthor }
+const isAdmin = async(req, res, next) => {
+    const admins = ['superAdmin', 'admin'];
+    if (!admins.includes(req.user.role)) {
+        return res.status(403).send({
+            message: 'You do not have permission to view this section'
+        });
+    }
+    next();
+}
+module.exports = { authentication, isAuthor, isCommentAuthor, isAdmin }

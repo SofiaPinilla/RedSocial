@@ -58,7 +58,7 @@ const UserController = {
                             user,
                             message: 'We send you a confirmation email'
                         }));
-                        newUser = new User({...req.body });
+                        newUser = new User({...req.body, role: 'user' });
                         bcrypt.hash(newUser.password, 10)
                             .then(hash => {
                                 newUser.password = hash;

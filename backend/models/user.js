@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
 
-
+    role: String,
     userInfo: String,
 
     profile_path: String,
