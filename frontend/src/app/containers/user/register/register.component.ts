@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
 
   updateConfirmValidator(): void {
     /** wait for refresh value */
-    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
+    Promise.resolve().then(() => this.validateForm.controls.password2.updateValueAndValidity());
   }
 
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
@@ -56,6 +56,13 @@ export class RegisterComponent implements OnInit {
     });
   }
   register(){
+    console.log(this.validateForm.controls)
+    if (this.validateForm.controls.password.errors?.pattern) {
+      return this.notificationService.warning('Wrong password', 'Your password must contain at least a lowercase letter, a uppercase letter, a number, and must be between 8 and 40 characters')
+    }
+    if (!this.validateForm.controls.agree?.value) {
+      return this.notificationService.warning('Unregistered', 'You must accept the agreement')
+    }
     if(this.validateForm.valid){
       const user =this.validateForm.value;
       this.userService.signup(user)

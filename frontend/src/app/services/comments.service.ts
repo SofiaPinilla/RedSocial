@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class CommentsService {
   
   post(comment: FormData, id:any): Observable<any> {
 
-    return this.httpClient.post(`http://localhost:3000/comments/${id}`, comment, {
+    return this.httpClient.post(environment.API_URL +`/comments/${id}`, comment, {
       headers: {
         Authorization: localStorage.getItem('authToken') || ''
       }
@@ -25,7 +26,7 @@ export class CommentsService {
   }
 
   deleteOne(id: string): Observable<any> {
-    return this.httpClient.delete(`http://localhost:3000/comments/${id}`, {
+    return this.httpClient.delete(environment.API_URL +`/comments/${id}`, {
       headers: {
         Authorization: localStorage.getItem('authToken') || ''
       }

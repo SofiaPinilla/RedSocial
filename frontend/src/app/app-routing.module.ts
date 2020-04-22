@@ -13,6 +13,7 @@ import { SearchComponent } from './components/search/search.component';
 import { ProfilesComponent } from './containers/profile/profiles/profiles.component';
 import { UsersProfileComponent } from './containers/profile/users-profile/users-profile.component';
 import { MessagesComponent } from './containers/messages/messages.component';
+import { AgreementComponent } from './containers/agreement/agreement.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path:'profiles/:search',component:ProfilesComponent},
   {path: 'profile/:email', component: UsersProfileComponent},
   {path:'message/:name', component:MessagesComponent},
+  {path:'agreement', component:AgreementComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

@@ -31,7 +31,7 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
-                    <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()" />
+                    <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,40}$" />
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
@@ -50,9 +50,10 @@
             </nz-form-item>
             <nz-form-item nz-row class="register-area">
                 <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                    <label nz-checkbox formControlName="agree">
-                  <span>I have read the <a>agreement</a></span>
-                </label>
+                    <label nz-checkbox formControlName="agree" required>
+                        <span>I have read the </span>
+                    </label>
+                    <a href="https://www.termsandconditionsgenerator.com/live.php?token=XN8S5rvoXb5DQO6Ahe5Qs28yaFY7kQT0">agreement</a>
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item nz-row class="register-area">

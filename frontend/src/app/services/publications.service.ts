@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Publication } from '../models/publication.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class PublicationsService {
   constructor(public httpClient: HttpClient) { }
 
   post(publication: FormData): Observable<any> {
-    return this.httpClient.post('http://localhost:3000/publications', publication, {
+    return this.httpClient.post(environment.API_URL +'/publications', publication, {
       headers: {
         Authorization: localStorage.getItem('authToken') || ''
       }
@@ -25,23 +26,23 @@ export class PublicationsService {
   }
 
   getAll(): Observable<any> {
-    return this.httpClient.get('http://localhost:3000/publications');
+    return this.httpClient.get(environment.API_URL +'/publications');
   }
 
   getAll2(): Observable<any> {
-    return this.httpClient.get('http://localhost:3000/publications');
+    return this.httpClient.get(environment.API_URL +'/publications');
   }
 
   getPubliId(id: string): Observable<any> {
-    return this.httpClient.get(`http://localhost:3000/publications/${id}`);
+    return this.httpClient.get(environment.API_URL +`/publications/${id}`);
   }
 
   searchPubli(search: string): Observable<any> {
-    return this.httpClient.get(`http://localhost:3000/publications/search/${search}`);
+    return this.httpClient.get(environment.API_URL +`/publications/search/${search}`);
   }
 
   deleteOne(id: string): Observable<any> {
-    return this.httpClient.delete(`http://localhost:3000/publications/${id}`, {
+    return this.httpClient.delete(environment.API_URL +`/publications/${id}`, {
       headers: {
         Authorization: localStorage.getItem('authToken') || ''
       }
@@ -50,7 +51,7 @@ export class PublicationsService {
 
   editOne(publication: FormData): Observable<any> {
     const id =publication.get('_id')
-    return this.httpClient.put(`http://localhost:3000/publications/${id}`,publication, {
+    return this.httpClient.put(environment.API_URL +`/publications/${id}`,publication, {
       headers: {
         Authorization: localStorage.getItem('authToken') || ''
       }
@@ -60,7 +61,7 @@ export class PublicationsService {
   likes(publication):Observable<any> {
     const id =publication._id
     console.log(id)
-    return this.httpClient.put(`http://localhost:3000/publications/likes/${id}`, publication, {
+    return this.httpClient.put(environment.API_URL +`/publications/likes/${id}`, publication, {
       headers: {
         Authorization: localStorage.getItem('authToken') || ''
       }
@@ -69,7 +70,7 @@ export class PublicationsService {
 
   dislikes(publication):Observable<any> {
     const id =publication._id
-    return this.httpClient.put(`http://localhost:3000/publications/dislikes/${id}`, publication, {
+    return this.httpClient.put(environment.API_URL +`/publications/dislikes/${id}`, publication, {
       headers: {
         Authorization: localStorage.getItem('authToken') || ''
       }
