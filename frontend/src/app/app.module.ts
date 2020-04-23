@@ -29,6 +29,8 @@ import { ProfilesComponent } from './containers/profile/profiles/profiles.compon
 import { UsersProfileComponent } from './containers/profile/users-profile/users-profile.component';
 import { MessagesComponent } from './containers/messages/messages.component';
 import { AgreementComponent } from './containers/agreement/agreement.component';
+import { FollowingComponent } from './containers/following/following.component';
+
 
 
 
@@ -56,7 +58,8 @@ registerLocaleData(en);
     ProfilesComponent,
     UsersProfileComponent,
     MessagesComponent,
-    AgreementComponent
+    AgreementComponent,
+    FollowingComponent
    
   ],
   imports: [

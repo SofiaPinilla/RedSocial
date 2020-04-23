@@ -40,8 +40,9 @@
                 <nz-dropdown-menu #menu="nzDropdownMenu">
                     <ul nz-menu>
                         <li nz-menu-item on-click="showUpdatePublicationModal(publication)"><i nz-icon nzType="edit" nzTheme="fill"> </i>Edit</li>
-                        <li nz-menu-item on-click="deletePublic2(publication)"><i nz-icon nzType="delete" nzTheme="fill">
-                            </i>Delete</li>
+                        <li nz-menu-item><i nz-icon nzType="delete" nzTheme="fill">
+                        </i> <a nz-popconfirm nzPopconfirmTitle="Are you sure delete this publication?" nzOkText="ok" nzCancelText="cancel" (nzOnConfirm)="deletePublic2(publication)" (nzOnCancel)="cancel()">Delete</a></li>
+
                         <li nz-menu-divider></li>
 
                     </ul>

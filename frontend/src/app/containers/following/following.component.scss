@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    background-image: url("../../../assets/images/fondoflecha.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.following {
+    display: flex;
+    justify-content: space-between;
+    width: 25vw;
+    text-align: center;
+    height: 75vh;
+    background-image: url("../../../assets/images/fondoo.png");
+}
+
+.follow {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+}
+
+.ant-card:hover {
+    transition: 1s;
+    background-color: rgba(236, 206, 255, 0.226)
+}
+
+img {
+    padding: 0.5em;
+    width: 30vw;
+}
+
+.chat {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    bottom: 0;
+    height: 75vh;
+    width: 40vw;
+}
+
+p {
+    text-align: center;
+}

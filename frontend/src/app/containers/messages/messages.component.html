@@ -1,33 +1,35 @@
 <div class="container">
-    <app-menu></app-menu>
-    <app-modal></app-modal>
-    <div class="messages" class="my-list" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+    <div class="divFollow">
+        <app-following></app-following>
 
-        <nz-card class="receive" style="width:30vw;" *ngFor="let message of messageService.messages.messages" id="anchor" [ngStyle]="{'text-align': message.sender_name == userService.user.name ? 'right' : 'left' }">
-            <h3>{{message.sender_name}}</h3>
-            <p>{{message.messageBody}}</p>
-            <img *ngIf="message.image_path" src="{{API_URL}}/images/user/messages/{{message.image_path}}" alt="imagen publicación">
-            <p style="font-size: small;">{{message.createdAt | date:'M/d/yy, h:mm a'}}</p>
+    </div>
 
-        </nz-card>
+    <div class="engloba">
+        <div class="messages" class="my-list" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+
+            <nz-card class="receive" style="width:30vw;" *ngFor="let message of messageService.messages.messages" id="anchor" [ngStyle]="{'text-align': message.sender_name == userService.user.name ? 'right' : 'left' }">
+                <h3>{{message.sender_name}}</h3>
+                <p>{{message.messageBody}}</p>
+                <img *ngIf="message.image_path" src="{{API_URL}}/images/user/messages/{{message.image_path}}" alt="imagen publicación">
+                <p style="font-size: small;">{{message.createdAt | date:'M/d/yy, h:mm a'}}</p>
+
+            </nz-card>
 
 
 
 
 
-        <div class="input">
-            <form #messageForm="ngForm">
+            <div class="input">
+                <form #messageForm="ngForm">
 
-                <textarea class="textarea" rows="4" nz-input [(ngModel)]="inputMessage" #messageBody="ngModel" name="messageBody"> </textarea>
-                <input type="file" #imageInput id="file5">
+                    <textarea class="textarea" rows="4" nz-input [(ngModel)]="inputMessage" #messageBody="ngModel" name="messageBody"> </textarea>
+                    <input type="file" #imageInput id="file5">
 
-                <label for="file5" class="btn-3"><span>Add Image</span></label>
-                <button nz-button [nzType]="'default'" type="submit" on-click="sendMessage(imageInput)"><span>Write</span></button>
-            </form>
+                    <label for="file5" class="btn-3"><span>Add Image</span></label>
+                    <button nz-button [nzType]="'default'" type="submit" on-click="sendMessage(imageInput)"><span>Write</span></button>
+                </form>
+            </div>
         </div>
     </div>
 
-
-
-    <app-directs></app-directs>
 </div>

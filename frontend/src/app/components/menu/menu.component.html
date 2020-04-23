@@ -20,7 +20,7 @@
                         <i nz-icon nzType="profile" nzTheme="outline"></i> Profile</li>
                 </div>
                 <div class="texto">
-                    <li nz-menu-item><i nz-icon nzType="notification" nzTheme="outline"></i>Notifications</li>
+                    <li nz-menu-item [routerLink]="['/following']"><i nz-icon nzType="mail" nzTheme="outline"></i>Messages</li>
                 </div>
                 <div class="texto">
                     <li nz-menu-item (click)="logout()"><i nz-icon [nzIconfont]="'icon-tuichu'"></i>Logout</li>
@@ -30,7 +30,9 @@
                     <button nz-button [nzType]="'default'" (click)="showModal()"><span>Write</span></button>
                 </div>
             </ul>
+            <div class="texto"> <img src="../../../assets/images/flor.png" alt=""></div>
         </div>
 
     </ul>
+
 </div>

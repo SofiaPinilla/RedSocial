@@ -150,3 +150,9 @@ span:hover {
         background-color: rgba(236, 206, 255, 0.226)
     }
 }
+
+.ant-dropdown-menu-item,
+.ant-dropdown-menu-submenu-title {
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,25 @@
+<div class="container">
+    <app-menu></app-menu>
+    <app-modal></app-modal>
+    <div class="following">
+
+        <div *ngFor="let following of userService['user']['following']">
+            <h1>Following</h1>
+            <nz-card *ngIf="(following).length>1" style="width:20vw;">
+                <div class="follow" style="width:20vw;" routerLink="/message/{{following}}">
+
+                    <div>{{following }}</div>
+                    <div><i nz-icon nzType="mail" nzTheme="fill"></i></div>
+
+                </div>
+            </nz-card>
+
+        </div>
+
+        <!-- <div class="chat">
+
+            <p>Send private photos and messages to a friend. </p>
+        </div> -->
+    </div>
+
+</div>

@@ -4,7 +4,7 @@ import { PublicationsService } from 'src/app/services/publications.service';
 import { HttpResponse } from '@angular/common/http';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { environment } from 'src/environments/environment';
-
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class ProfileComponent implements OnInit {
   API_URL: string = environment.API_URL;
   avatar:File;
-  constructor(public userService: UserService, public publicationsService: PublicationsService, private notificationService: NzNotificationService) { }
+  constructor(public userService: UserService, public publicationsService: PublicationsService, private notificationService: NzNotificationService,private nzMessageService: NzMessageService) { }
 
   ngOnInit(): void {
     const token: string = localStorage.getItem('authToken')
@@ -36,6 +36,14 @@ export class ProfileComponent implements OnInit {
         this.userService.setUser(res.user)
       }
       )
+      
+  }
+  cancel(): void {
+    this.nzMessageService.info('Canceled');
+  }
+  
+  confirm(): void {
+    this.nzMessageService.info('click confirm');
   }
   showUpdatePublicationModal(publication) {
     this.publicationsService.isModalVisible = true;
@@ -131,4 +139,5 @@ NoLike(publication) {
   )
 
 }
+
 }
