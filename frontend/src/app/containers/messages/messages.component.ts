@@ -5,7 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Location } from '@angular/common';
 import { HttpResponse } from '@angular/common/http';
 import { Directive, ElementRef } from '@angular/core';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
@@ -16,7 +16,7 @@ inputMessage
 messageBody
 imageInput
 
-
+API_URL: string = environment.API_URL;
 
   constructor( public messageService : MessagesService,public router: Router, public route: ActivatedRoute, public location: Location, public userService: UserService, private _el: ElementRef) { }
 

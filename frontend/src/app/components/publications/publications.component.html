@@ -3,7 +3,7 @@
     <div routerLink="/publication/{{publication['_id']}}" routerLinkActive="router-link-active" class="container">
         <div class="div">
             <div class="div2">
-                <nz-avatar *ngIf="userService.user as user" nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{publication.user?.profile_path}}"></nz-avatar>
+                <nz-avatar *ngIf="userService.user as user" nzSize="large" nzSrc="{{API_URL}}/images/user/profile/{{publication.user?.profile_path}}"></nz-avatar>
                 <h3 *ngIf="userService.user as user">{{publication.user?.name}}</h3>
             </div>
 
@@ -13,7 +13,7 @@
 
         <!-- <p>{{(publicationsService['publication']['comments']).length}}</p> -->
         <p *ngIf="publication.publication !== '' ">{{publication.publication}}</p>
-        <img *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
+        <img *ngIf="publication.image_path" src="{{API_URL}}/images/publications/{{publication.image_path}}" alt="imagen publicación">
     </div>
 
     <div class="icons">

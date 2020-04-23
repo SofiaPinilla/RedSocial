@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { MONGO_URI } = require('../backend/config/keys')
+const { MONGO_URI } = require('./config/keys')
     // const flash = require('connect-flash');
     // const session = require('express-session');
 

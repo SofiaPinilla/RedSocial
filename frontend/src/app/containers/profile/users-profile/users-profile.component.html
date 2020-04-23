@@ -16,10 +16,10 @@
             </div>
         </nz-card>
         <ng-template #avatarTemplate>
-            <nz-avatar [nzSize]="100" nzSrc="http://localhost:3000/images/user/profile/{{user['profile_path']}}"></nz-avatar>
+            <nz-avatar [nzSize]="100" nzSrc="{{API_URL}}/images/user/profile/{{user['profile_path']}}"></nz-avatar>
         </ng-template>
         <ng-template #coverTemplate>
-            <img alt="example" src="http://localhost:3000/images/user/header/{{user['header_path']}}" />
+            <img alt="example" src="{{API_URL}}/images/user/header/{{user['header_path']}}" />
 
         </ng-template>
 
@@ -54,7 +54,7 @@
                 <div class="div ">
                     <div class="div2 ">
 
-                        <nz-avatar nzSize="large " nzSrc="http://localhost:3000/images/user/profile/{{user[ 'profile_path']}} "></nz-avatar>
+                        <nz-avatar nzSize="large " nzSrc="{{API_URL}}/images/user/profile/{{user[ 'profile_path']}} "></nz-avatar>
 
                         <h3>{{user['name']}}</h3>
                     </div>
@@ -63,7 +63,7 @@
                 </div>
 
                 <p>{{user.publication}}</p>
-                <img class="imagenes " *ngIf="publication.image_path " src="http://localhost:3000/images/publications/{{publication.image_path}} " alt="imagen publicación ">
+                <img class="imagenes " *ngIf="publication.image_path " src="{{API_URL}}/images/publications/{{publication.image_path}} " alt="imagen publicación ">
 
             </div>
 

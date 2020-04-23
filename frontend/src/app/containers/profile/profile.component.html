@@ -13,10 +13,10 @@
         </nz-card>
 
         <ng-template #avatarTemplate>
-            <nz-avatar [nzSize]="100" nzSrc="http://localhost:3000/images/user/profile/{{userService['user']['profile_path']}}"></nz-avatar>
+            <nz-avatar [nzSize]="100" nzSrc="{{API_URL}}/images/user/profile/{{userService['user']['profile_path']}}"></nz-avatar>
         </ng-template>
         <ng-template #coverTemplate>
-            <img alt="example" src="http://localhost:3000/images/user/header/{{userService['user']['header_path']}}" />
+            <img alt="example" src="{{API_URL}}/images/user/header/{{userService['user']['header_path']}}" />
             <input type="file" (change)="editHead(headerInput)" #headerInput id="file3">
             <label for="file3" class="btn-3"><span>Edit header<i nz-icon nzType="highlight" nzTheme="outline"></i></span></label>
         </ng-template>
@@ -55,7 +55,7 @@
                 <div class="div">
                     <div class="div2">
 
-                        <nz-avatar nzSize="large" nzSrc="http://localhost:3000/images/user/profile/{{userService['user']['profile_path']}}"></nz-avatar>
+                        <nz-avatar nzSize="large" nzSrc="{{API_URL}}/images/user/profile/{{userService['user']['profile_path']}}"></nz-avatar>
 
                         <h3>{{userService['user']['name']}}</h3>
                     </div>
@@ -64,7 +64,7 @@
                 </div>
 
                 <p>{{publication.publication}}</p>
-                <img class="imagenes" *ngIf="publication.image_path" src="http://localhost:3000/images/publications/{{publication.image_path}}" alt="imagen publicación">
+                <img class="imagenes" *ngIf="publication.image_path" src="{{API_URL}}/images/publications/{{publication.image_path}}" alt="imagen publicación">
 
             </div>
 

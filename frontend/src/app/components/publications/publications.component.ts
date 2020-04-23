@@ -4,12 +4,14 @@ import { UserService } from 'src/app/services/user.service';
 import { HttpResponse } from '@angular/common/http';
 import * as moment from "moment";
 import { CommentsService } from 'src/app/services/comments.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-publications',
   templateUrl: './publications.component.html',
   styleUrls: ['./publications.component.scss']
 })
 export class PublicationsComponent implements OnInit {
+  API_URL: string = environment.API_URL;
   theme = true;
   isVisible = false;
   inputValue: any;

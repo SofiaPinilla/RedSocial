@@ -2,18 +2,15 @@ const User = require('../models/User.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { getUserWithPublications, getUserWithPublicationsName, getUserWithPublicationsEmail } = require('../services/userService.js')
-const { jwt_secret, API_URL } = require('../config/keys.js');
+const { jwt_secret, API_URL, FRONT_URL } = require('../config/keys.js');
 const transporter = require('../config/nodemailer')
 
 
 const UserController = {
     async register(req, res) {
         try {
-            const { name, email, password, password2, confirmed } = req.body;
+            const { name, email, password, password2 } = req.body;
             let errors = [];
-            // const emailToken = jwt.sign({ email }, jwt_secret, { expiresIn: '48h' });
-            // const url = API_URL + '/users/confirm/' + emailToken;
-
             if (!name || !email || !password || !password2) {
                 errors.push({ msg: 'Please enter all fields' });
             }
@@ -21,54 +18,38 @@ const UserController = {
                 errors.push({ msg: 'Passwords do not match' });
             }
             if (errors.length > 0) {
-                res.send({
+                return res.send({
                     errors,
                     name,
                     email,
                     password,
                     password2
                 })
-            } else {
-
-                User.findOne({ email: email }).then(user => {
-                    if (user) {
-                        res.status(400).send({ message: 'Email already exists' })
-                        res.render('register', {
-                            errors,
-                            name,
-                            email,
-                            password,
-                            password2
-                        });
-                    } else {
-                        const email = req.body.email
-                        const emailToken = jwt.sign({ email }, jwt_secret, { expiresIn: '48h' });
-                        const url = API_URL + 'users/confirm/' + emailToken;
-                        transporter.sendMail({
-                            to: email,
-                            subject: 'Validate your account in Beyond the Army',
-                            html: `
+            }
+            const user = await User.findOne({ email: email })
+            if (user) {
+                return res.status(400).send({ message: 'Email already exists' });
+            }
+            const emailToken = jwt.sign({ email }, jwt_secret, { expiresIn: '48h' });
+            const url = API_URL + 'users/confirm/' + emailToken;
+            await transporter.sendMail({
+                to: email,
+                subject: 'Validate your account in Beyond the Army',
+                html: `
                             <h3>Welcome ${req.body.name} to Beyond the Army, only one more step</h3>
+                            <img src="${FRONT_URL}assets/images/loveyourself2.png" alt="logo"/>
+                            <br/>
                             <a href="${url}">Click here and complete your register</a>
                             This link expire in 48 hours.
                             `
-                        })
-
-                        .then(res.status(201).send({
-                            user,
-                            message: 'We send you a confirmation email'
-                        }));
-                        newUser = new User({...req.body, role: 'user' });
-                        bcrypt.hash(newUser.password, 10)
-                            .then(hash => {
-                                newUser.password = hash;
-                                return newUser.save();
-                            })
-                            .then(user => res.send({ message: 'Registered ' + user.name }))
-                            .catch(console.error)
-                    }
-                });
-            }
+            })
+            const hash = await bcrypt.hash(req.body.password, 10)
+            const newUser = await User.create({...req.body, password: hash, role: 'user' });
+            res.status(201).send({
+                user,
+                message: 'We send you a confirmation email',
+                newUser
+            });
         } catch (error) {
             console.error(error);
             res.status(500).send({ error, message: 'There was a problem trying to register' })
@@ -88,7 +69,7 @@ const UserController = {
             await user.tokens.push(authToken);
             await user.save();
 
-            res.redirect('http://localhost:4200/user/confirmado/' + authToken);
+            res.redirect(FRONT_URL + 'user/confirmado/' + authToken);
 
         } catch (error) {
             console.error(error)

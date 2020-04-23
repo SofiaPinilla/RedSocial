@@ -5,5 +5,6 @@ module.exports = {
         user: "btabeyondthearmy@gmail.com",
         pass: "maitesofialovebts"
     },
-    API_URL: 'http://localhost:3000/'
+    API_URL: process.env.NODE_ENV === 'production' ? 'https://apibta.herokuapp.com/' : 'http://localhost:3000/',
+    FRONT_URL: process.env.NODE_ENV === 'production' ? 'https://beyondthearmy.herokuapp.com/' : 'http://localhost:4200/',
 }

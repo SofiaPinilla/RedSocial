@@ -4,12 +4,14 @@ import { CommentsService } from 'src/app/services/comments.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-users-profile',
   templateUrl: './users-profile.component.html',
   styleUrls: ['./users-profile.component.scss']
 })
 export class UsersProfileComponent implements OnInit {
+  API_URL: string = environment.API_URL;
 
   constructor( public publicationsService: PublicationsService, public commentsService:CommentsService, public userService: UserService, public router: Router, public route: ActivatedRoute, public location: Location) { }
 

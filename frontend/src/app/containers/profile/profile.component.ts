@@ -3,7 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { PublicationsService } from 'src/app/services/publications.service';
 import { HttpResponse } from '@angular/common/http';
 import { NzNotificationService } from 'ng-zorro-antd';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +11,7 @@ import { NzNotificationService } from 'ng-zorro-antd';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  API_URL: string = environment.API_URL;
   avatar:File;
   constructor(public userService: UserService, public publicationsService: PublicationsService, private notificationService: NzNotificationService) { }
 

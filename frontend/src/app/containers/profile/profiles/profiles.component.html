@@ -7,7 +7,7 @@
 
         <nz-card *ngFor="let user of userService['users']" class="card" style="width:40vw;">
             <div routerLink="/profile/{{user.name}}" class="container3">
-                <nz-avatar [nzSize]="100" nzSrc="http://localhost:3000/images/user/profile/{{user['profile_path']}}"></nz-avatar>
+                <nz-avatar [nzSize]="100" nzSrc="{{API_URL}}/images/user/profile/{{user['profile_path']}}"></nz-avatar>
                 <div>
                     <h3>{{user['name']}}</h3>
                     <p>{{user['userInfo']}}</p>

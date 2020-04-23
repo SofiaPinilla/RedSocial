@@ -6,7 +6,7 @@
         <nz-card class="receive" style="width:30vw;" *ngFor="let message of messageService.messages.messages" id="anchor" [ngStyle]="{'text-align': message.sender_name == userService.user.name ? 'right' : 'left' }">
             <h3>{{message.sender_name}}</h3>
             <p>{{message.messageBody}}</p>
-            <img *ngIf="message.image_path" src="http://localhost:3000/images/user/messages/{{message.image_path}}" alt="imagen publicación">
+            <img *ngIf="message.image_path" src="{{API_URL}}/images/user/messages/{{message.image_path}}" alt="imagen publicación">
             <p style="font-size: small;">{{message.createdAt | date:'M/d/yy, h:mm a'}}</p>
 
         </nz-card>
